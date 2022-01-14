@@ -13,4 +13,17 @@ You can download the .ZIP Power Platform solution file [here](./solutions/Reside
 ## Deployment Instructions
 1. Import the solution ZIP file that can be found above.
 2. The workflow that assesses risk levels for each letter identifies risk by searching for **Phrase Flags** within each letter. Therefore, the user should create multiple **Phrase Flag** records with phrases and key words that they deem risky. To save time, I am supplying 44 sample phrase flags that **you can import**. You can find the sample data [here](./sample-data/cr0d5_phraseflags.csv).
-3. 
+3. [Enable and Reroute The Risk Assessment Flows](#enable-and-reroute-the-risk-assessment-flows)
+
+
+## Enable and Reroute the Risk Assessment Flows
+This solution relies on two Power Automate flows to perform the risk assessment analysis. Both flows must be turned on and must be updated to perform as expected.  
+
+1. Open up the *Mail Category Risk Assessment* Power Automate flow. The trigger will be *When a HTTP request is received*. After opening this trigger, you should see the *HTTP POST URL*. Copy this value.
+![http-trigger](./images/http-trigger.png)
+2. Open up the *Resident Mail Analysis* flow. In the middle of the flow, you will find a series of HTTP request actions.
+![http-requests](./images/http-requests.png).
+3. In each of these HTTP request actions, replace the URI property with the *HTTP POST URL* you copied from the trigger of the *Mail Category Risk Assessment* flow in step 1.
+![replace-uri](./images/replace-uri.png).
+4. After replacing **all** of the HTTP request actions seen the in the screenshot in step 2, save your *Resident Mail Analysis*.
+5. Ensure both the *Resident Mail Analysis* and *Mail Category Risk Assessment* flows are **turned on**.
