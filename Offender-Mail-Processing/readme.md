@@ -14,6 +14,9 @@ You can download the .ZIP Power Platform solution file [here](./solutions/Reside
 1. Import the solution ZIP file that can be found above.
 2. The workflow that assesses risk levels for each letter identifies risk by searching for **Phrase Flags** within each letter. Therefore, the user should create multiple **Phrase Flag** records with phrases and key words that they deem risky. To save time, I am supplying 44 sample phrase flags that **you can import**. You can find the sample data [here](./sample-data/cr0d5_phraseflags.csv).
 3. [Enable and Reroute The Risk Assessment Flows](#enable-and-reroute-the-risk-assessment-flows)
+4. This solution also contains a canvas app titled *Resident Mail Admin Dashboard*. This app's purpose is only to provide access to a simple Power BI dashboard the illustrates the "art of the possible" for analytics. 
+![dashboard](./images/dashboard.png)
+If you wish to replicate this dashboard you will need to follow the instructions [here](#power-bi-dashboard-deployment).
 
 
 ## Enable and Reroute the Risk Assessment Flows
@@ -27,3 +30,9 @@ This solution relies on two Power Automate flows to perform the risk assessment 
 ![replace-uri](./images/replace-uri.png).
 4. After replacing **all** of the HTTP request actions seen the in the screenshot in step 2, save your *Resident Mail Analysis*.
 5. Ensure both the *Resident Mail Analysis* and *Mail Category Risk Assessment* flows are **turned on**.
+
+## Power BI Dashboard Deployment
+1. Open the [.pbix Power BI Dashboard file](./dashboard/dashboard.pbix) and publish this to Power BI Online.
+    1. If the references to data are broken, redirect the references to the data available in [this folder](./dashboard/data/).
+2. Open the *Resident Mail Admin Dashboard* canvas app in edit mode. Update the Power BI tile's reference to the Power BI online dashboard by updating the *TileUrl* property to the URL of your new online dashboard.
+![tile](./images/pbi-tile.png)
