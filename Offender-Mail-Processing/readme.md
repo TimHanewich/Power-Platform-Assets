@@ -6,3 +6,11 @@ A staff member with the Department of Corrections will "scan" incoming inmate ma
 
 ## Badge Generation
 Staff members can generate an inmates badge via the **Resident Badge Generation** canvas app. This app will generate a unique QR code that will be placed on the badge and uniquely identifies that inmate. Officers within the facility can later scan this badge, review and document employee behavior or infractions, and review basic information about the inmate, via the **Officer Badge Verifier** canvas mobile app (phone form factor).
+
+## Solutions
+You can download the .ZIP Power Platform solution file [here](./solutions/ResidentMailProcessing.zip).
+
+## Deployment Instructions
+1. Import the solution ZIP file that can be found above.
+2. The workflow that assesses risk levels for each letter identifies risk by searching for **Phrase Flags** within each letter. Therefore, the user should create multiple **Phrase Flag** records with phrases and key words that they deem risky. To save time, I am supplying 44 sample phrase flags that **you can import**. You can find the sample data [here](./sample-data/cr0d5_phraseflags.csv).
+3. 
