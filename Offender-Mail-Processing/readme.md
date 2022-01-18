@@ -14,7 +14,8 @@ You can download the .ZIP Power Platform solution file [here](./solutions/Reside
 1. Import the solution ZIP file that can be found above.
 2. The workflow that assesses risk levels for each letter identifies risk by searching for **Phrase Flags** within each letter. Therefore, the user should create multiple **Phrase Flag** records with phrases and key words that they deem risky. To save time, I am supplying 44 sample phrase flags that **you can import**. You can find the sample data [here](./sample-data/cr0d5_phraseflags.csv).
 3. [Enable and Reroute The Risk Assessment Flows](#enable-and-reroute-the-risk-assessment-flows)
-4. This solution also contains a canvas app titled *Resident Mail Admin Dashboard*. This app's purpose is only to provide access to a simple Power BI dashboard the illustrates the "art of the possible" for analytics. 
+4. [Enable and Reroute the Administrator Alert Flow](#enable-and-reroute-the-administrator-alert-flow)
+5. This solution also contains a canvas app titled *Resident Mail Admin Dashboard*. This app's purpose is only to provide access to a simple Power BI dashboard the illustrates the "art of the possible" for analytics. 
 ![dashboard](./images/dashboard.png)
 If you wish to replicate this dashboard you will need to follow the instructions [here](#power-bi-dashboard-deployment).
 
