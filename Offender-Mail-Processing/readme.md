@@ -40,6 +40,13 @@ If any of the inmate letters surprass a specified risk rating, administrators of
 2. At the bottom of the *Resident Mail Analysis* flow, open the condition action *If any rating is too high, alert the admins*. In the yes branch (true branch), open the *Trigger high alert email* action. Replace the **URI** property with the URL you copied in step 1:
 ![alert-trigger](./images/alert-trigger.png)
 3. Save the *Resident Mail Analysis* flow. And **be sure the *Alert administrator of high rating* flow is turned on**!
+4. Be sure to replace the **to** line of the *Send an email notification (V3)* action in the *Alert administrator of high rating* flow. Replace this with the email address which you would like the alert to be delivered to.
+5. The body of the alert email contains a hyperlink to the subject record in the Model-Driven app *Resident Mail Management* where the administrator can review the full content of the letter. You must replace a portion of the hyperlink with the Model-Driven app URL.
+    1. Open the Model-Driven app *Resident Mail Management*. Open a Resident Mail record. Copy this portion of the URL:
+    ![md-url](./images/md-url.png)
+    2. Replace this portion of the URL in the *Send an email notification (V3)* action in the *Alert administrator of high rating* flow with the URL you copied in step 1 above.
+    ![replace-md-url](./images/replace-md-url.png)
+
 
 ## Power BI Dashboard Deployment
 1. Open the [.pbix Power BI Dashboard file](./dashboard/dashboard.pbix) and publish this to Power BI Online.
