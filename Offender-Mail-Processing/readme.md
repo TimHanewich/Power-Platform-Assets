@@ -31,6 +31,15 @@ This solution relies on two Power Automate flows to perform the risk assessment 
 4. After replacing **all** of the HTTP request actions seen the in the screenshot in step 2, save your *Resident Mail Analysis*.
 5. Ensure both the *Resident Mail Analysis* and *Mail Category Risk Assessment* flows are **turned on**.
 
+## Enable and Reroute the Administrator Alert Flow
+If any of the inmate letters surprass a specified risk rating, administrators of the prison will be alerted via email. The Power Automate flow that performs this alert is trigger by an HTTP request. And flow that performs this trigger is the *Resident Mail Analysis* flow.
+
+1. Open the *Alert administrator of high rating* flow. The trigger is titled *When a HTTP request is received*. Open this trigger and copy the *HTTP POST URL*.
+![http-trigger](./images/alert-http-trigger.png)
+2. At the bottom of the *Resident Mail Analysis* flow, open the condition action *If any rating is too high, alert the admins*. In the yes branch (true branch), open the *Trigger high alert email* action. Replace the **URI** property with the URL you copied in step 1:
+![alert-trigger](./images/alert-trigger.png)
+3. Save the *Resident Mail Analysis* flow. And **be sure the *Alert administrator of high rating* flow is turned on**!
+
 ## Power BI Dashboard Deployment
 1. Open the [.pbix Power BI Dashboard file](./dashboard/dashboard.pbix) and publish this to Power BI Online.
     1. If the references to data are broken, redirect the references to the data available in [this folder](./dashboard/data/).
