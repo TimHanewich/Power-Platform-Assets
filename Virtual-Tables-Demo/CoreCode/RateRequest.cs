@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CoreCode
 {
@@ -128,6 +130,22 @@ namespace CoreCode
 
 
             return ToReturn.ToArray();
+        }
+    
+        public static string ToJson(RateRequest rr)
+        {
+            string ToReturn = JsonConvert.SerializeObject(rr);
+            return ToReturn;
+        }
+
+        public static string ToJson(RateRequest[] rrs)
+        {
+            List<JObject> ToReturn = new List<JObject>();
+            foreach (RateRequest rr in All())
+            {
+                ToReturn.Add(JObject.Parse(ToJson(rr)));
+            }
+            return JsonConvert.SerializeObject(ToReturn.ToArray());
         }
     }
 }

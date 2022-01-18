@@ -19,4 +19,7 @@
       <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoreCode\CoreCode.csproj" />
+  </ItemGroup>
 </Project>

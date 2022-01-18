@@ -3,6 +3,9 @@ using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using CoreCode;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace VirtualTablesDemo
 {
@@ -22,5 +25,23 @@ namespace VirtualTablesDemo
 
             return response;
         }
+
+        [Function("RateRequest")]
+        public static HttpResponseData RateRequest([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, FunctionContext context)
+        {
+            ILogger log = context.GetLogger("RateRequest");
+            log.LogInformation("RateRequest call received!");
+
+            
+            HttpResponseData ToReturn = req.CreateResponse();
+            ToReturn.StatusCode = HttpStatusCode.OK;
+            StreamWriter sw = new StreamWriter(ToReturn.Body);
+            sw.Write(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All()));
+            sw.Close();
+            sw.Dispose();
+            return ToReturn;
+        }
+
+
     }
 }
