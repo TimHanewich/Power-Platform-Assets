@@ -57,7 +57,7 @@ If any of the inmate letters surprass a specified risk rating, administrators of
 2. Open the *Resident Mail Admin Dashboard* canvas app in edit mode. Update the Power BI tile's reference to the Power BI online dashboard by updating the *TileUrl* property to the URL of your new online dashboard.
 ![tile](./images/pbi-tile.png)
 
-## Demo Samples
+## Demo Sample Content
 This repo also contains sample letters that can be used to demonstrate the solution.
 1. [Sample Letters PowerPoint Deck](./demo/SampleLetters.pptx)
 2. [Hand written Letter (in English)](./demo/HandWrittenEnglish.pdf)
