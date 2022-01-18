@@ -26,12 +26,18 @@ namespace VirtualTablesDemo
             log.LogInformation("RateRequest call received!");
 
             //Get fields param
-            NameValueCollection nvc = HttpUtility.ParseQueryString(req.Url.ToString());
+            log.LogInformation("The full URL: " + req.Url.ToString());
+            NameValueCollection nvc = HttpUtility.ParseQueryString(req.Url.Query);
             string ip_fields = nvc.Get("fields");
             string[] OnlyIncludeFields = null;
             if (ip_fields != null)
             {
+                log.LogInformation("Parameter 'fields' was not null: " + ip_fields);
                 OnlyIncludeFields = ip_fields.Split(new string[]{","}, StringSplitOptions.None);
+            }
+            else
+            {
+                log.LogInformation("Parameter 'fields' was NULL");
             }
 
             //Get the JSON string to return
