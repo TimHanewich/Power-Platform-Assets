@@ -11,21 +11,7 @@ namespace VirtualTablesDemo
 {
     public static class HttpTrigger1
     {
-        [Function("HttpTrigger1")]
-        public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-            FunctionContext executionContext)
-        {
-            var logger = executionContext.GetLogger("HttpTrigger1");
-            logger.LogInformation("C# HTTP trigger function processed a request.");
-
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-
-            response.WriteString("Welcome to Azure Functions!");
-
-            return response;
-        }
-
+        
         [Function("RateRequest")]
         public static HttpResponseData RateRequest([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req, FunctionContext context)
         {
@@ -35,11 +21,10 @@ namespace VirtualTablesDemo
             
             HttpResponseData ToReturn = req.CreateResponse();
             ToReturn.StatusCode = HttpStatusCode.OK;
-            StreamWriter sw = new StreamWriter(ToReturn.Body);
-            sw.Write(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All()));
-            sw.Close();
-            sw.Dispose();
+            ToReturn.WriteString(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All()));
+            ToReturn.Headers.Add("Content-Type", "application/json");
             return ToReturn;
+            
         }
 
 
