@@ -7,7 +7,7 @@ namespace CoreCode
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(RateRequest.All()));
+            Console.WriteLine(RateRequest.ToJson(RateRequest.All(), new string[] {"Id"}));
         }
     }
 }

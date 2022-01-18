@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace CoreCode
 {
@@ -144,6 +145,25 @@ namespace CoreCode
             foreach (RateRequest rr in All())
             {
                 ToReturn.Add(JObject.Parse(ToJson(rr)));
+            }
+            return JsonConvert.SerializeObject(ToReturn.ToArray());
+        }
+    
+        public static string ToJson(RateRequest[] rrs, string[] include_fields)
+        {
+            List<JObject> ToReturn = new List<JObject>();
+            foreach (RateRequest rr in rrs)
+            {
+                JObject ThisObj = JObject.Parse(JsonConvert.SerializeObject(rr));
+                JObject ToAdd = new JObject();
+                foreach (JProperty prop in ThisObj.Properties())
+                {
+                    if (include_fields.Contains(prop.Name))
+                    {
+                        ToAdd.Add(prop);
+                    }
+                }
+                ToReturn.Add(ToAdd);
             }
             return JsonConvert.SerializeObject(ToReturn.ToArray());
         }
