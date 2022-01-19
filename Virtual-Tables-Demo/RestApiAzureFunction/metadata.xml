@@ -6,8 +6,8 @@
             <Key>
                <PropertyRef Name="Id"/>
             </Key>
-            <Property Name="Id" Type="Edm.Guid" Nullable="false" />
-            <Property Name="CompanyName" Type="Edm.String"/>
+            <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
+            <Property Name="CompanyName" Type="Edm.String"  Nullable="false"/>
             <Property Name="FilingDate" Type="Edm.DateTime"/>
             <Property Name="FilingType" Type="Edm.Int32"/>
             <Property Name="SerffTrNumber" Type="Edm.String"/>
