@@ -170,7 +170,7 @@ namespace CoreCode
         public static JObject PrepareODataResponseBody(JArray to_return)
         {
             JObject BodyObj = new JObject();
-            BodyObj.Add("@odata.context", "https://bing.com");
+            BodyObj.Add("@odata.context", "https://nmosi.blob.core.windows.net/general/metadata.xml?sp=r&st=2022-01-19T16:05:02Z&se=2023-06-15T23:05:02Z&sv=2020-08-04&sr=b&sig=hVrJs0%2F0SWIbk2FXoqlRgPEErC9ZT4DiZyKwoNKloyc%3D");
             BodyObj.Add("value", to_return);
             return BodyObj;
         }
