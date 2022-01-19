@@ -44,11 +44,11 @@ namespace VirtualTablesDemo
             string JsonToReturn = null;
             if (OnlyIncludeFields == null)
             {
-                JsonToReturn = CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All());
+                JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All())).ToString();
             }
             else
             {
-                JsonToReturn = CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All(), OnlyIncludeFields);
+                JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All(), OnlyIncludeFields)).ToString();
             }
             
             HttpResponseData ToReturn = req.CreateResponse();
