@@ -133,23 +133,22 @@ namespace CoreCode
             return ToReturn.ToArray();
         }
     
-        public static string ToJson(RateRequest rr)
+        public static JObject ToJson(RateRequest rr)
         {
-            string ToReturn = JsonConvert.SerializeObject(rr);
-            return ToReturn;
+            return JObject.Parse(JsonConvert.SerializeObject(rr));
         }
 
-        public static string ToJson(RateRequest[] rrs)
+        public static JArray ToJson(RateRequest[] rrs)
         {
             List<JObject> ToReturn = new List<JObject>();
             foreach (RateRequest rr in All())
             {
-                ToReturn.Add(JObject.Parse(ToJson(rr)));
+                ToReturn.Add(ToJson(rr));
             }
-            return JsonConvert.SerializeObject(ToReturn.ToArray());
+            return JArray.Parse(JsonConvert.SerializeObject(ToReturn.ToArray()));
         }
     
-        public static string ToJson(RateRequest[] rrs, string[] include_fields)
+        public static JArray ToJson(RateRequest[] rrs, string[] include_fields)
         {
             List<JObject> ToReturn = new List<JObject>();
             foreach (RateRequest rr in rrs)
@@ -165,7 +164,7 @@ namespace CoreCode
                 }
                 ToReturn.Add(ToAdd);
             }
-            return JsonConvert.SerializeObject(ToReturn.ToArray());
+            return JArray.Parse(JsonConvert.SerializeObject(ToReturn.ToArray()));
         }
     }
 }
