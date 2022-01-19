@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+   <edmx:DataServices>
+      <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Default">
+         <EntityType Name="RateRequest">
+            <Key>
+               <PropertyRef Name="Id"/>
+            </Key>
+            <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+            <Property Name="CompanyName" Type="Edm.String"/>
+            <Property Name="FilingDate" Type="Edm.DateTime"/>
+            <Property Name="FilingType" Type="Edm.Int32"/>
+            <Property Name="SerffTrNumber" Type="Edm.String"/>
+            <Property Name="StateStatus" Type="Edm.Int32"/>
+            <Property Name="IncreaseFiled" Type="Edm.Double"/>
+            <Property Name="IncreaseApproved" Type="Edm.Double"/>
+         </EntityType>
+      </Schema>
+   </edmx:DataServices>
+</edmx:Edmx>
