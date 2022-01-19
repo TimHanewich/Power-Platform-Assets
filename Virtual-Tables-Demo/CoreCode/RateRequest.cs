@@ -166,5 +166,13 @@ namespace CoreCode
             }
             return JArray.Parse(JsonConvert.SerializeObject(ToReturn.ToArray()));
         }
+    
+        public JObject PrepareODataResponseBody(JArray to_return)
+        {
+            JObject BodyObj = new JObject();
+            BodyObj.Add("@odata.context", "https://bing.com");
+            BodyObj.Add("value", to_return);
+            return BodyObj;
+        }
     }
 }
