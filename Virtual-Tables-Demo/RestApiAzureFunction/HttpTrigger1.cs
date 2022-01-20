@@ -160,7 +160,7 @@ namespace VirtualTablesDemo
                 HttpResponseData data = req.CreateResponse();
                 data.StatusCode = HttpStatusCode.OK;
                 data.WriteString(ToReturn.ToString());
-                data.Headers.Add("Content-Type", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8");
+                data.Headers.Add("Content-Type", "application/json");
                 return data;
             }
             else if (table == "$metadata" || table == "$metadata#Advertisements")
@@ -201,7 +201,7 @@ namespace VirtualTablesDemo
                 HttpResponseData resp = req.CreateResponse();
                 resp.StatusCode = HttpStatusCode.OK;
                 resp.WriteString(ToReturn.ToString());
-                resp.Headers.Add("Content-Type", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8");
+                resp.Headers.Add("Content-Type", "application/json");
                 return resp; 
             }
             else
