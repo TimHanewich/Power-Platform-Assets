@@ -101,7 +101,7 @@ namespace VirtualTablesDemo
             {
                 log.LogInformation("RateRequests table was asked for.");
 
-                string JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All(), new string[] {"Id", "CompanyName"})).ToString();
+                string JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All())).ToString();
 
                 HttpResponseData ToReturn = req.CreateResponse();
                 ToReturn.StatusCode = HttpStatusCode.OK;
