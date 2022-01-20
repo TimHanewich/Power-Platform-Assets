@@ -159,10 +159,10 @@ namespace VirtualTablesDemo
                 HttpResponseData data = req.CreateResponse();
                 data.StatusCode = HttpStatusCode.OK;
                 data.WriteString(ToReturn.ToString());
-                data.Headers.Add("Content-Type", "application/json");
+                data.Headers.Add("Content-Type", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8");
                 return data;
             }
-            else if (table == "$metadata")
+            else if (table == "$metadata" || table == "$metadata#Advertisements")
             {
                 log.LogInformation("Metadata was requested.");
                 HttpClient hc = new HttpClient();
@@ -194,13 +194,13 @@ namespace VirtualTablesDemo
                 jo2.Add("AirDate", new DateTime(2000, 2, 29));
 
                 JObject ToReturn = new JObject();
-                ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/sample/$metadata");
+                ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/sample/$metadata#Advertisements");
                 ToReturn.Add("value", JArray.Parse(JsonConvert.SerializeObject(new JObject[]{jo1, jo2})));
 
                 HttpResponseData resp = req.CreateResponse();
                 resp.StatusCode = HttpStatusCode.OK;
                 resp.WriteString(ToReturn.ToString());
-                resp.Headers.Add("Content-Type", "application/json");
+                resp.Headers.Add("Content-Type", "application/json;odata.metadata=minimal;odata.streaming=true;IEEE754Compatible=false;charset=utf-8");
                 return resp; 
             }
             else
