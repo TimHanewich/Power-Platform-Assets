@@ -129,11 +129,11 @@ namespace VirtualTablesDemo
             }
             
 
-            //Working on it message
-            HttpResponseData WorkingOnIt = req.CreateResponse();
-            WorkingOnIt.StatusCode = HttpStatusCode.Locked;
-            WorkingOnIt.WriteString("Working on this...");
-            return WorkingOnIt;
+            // //Working on it message
+            // HttpResponseData WorkingOnIt = req.CreateResponse();
+            // WorkingOnIt.StatusCode = HttpStatusCode.Locked;
+            // WorkingOnIt.WriteString("Working on this...");
+            // return WorkingOnIt;
 
 
         }
