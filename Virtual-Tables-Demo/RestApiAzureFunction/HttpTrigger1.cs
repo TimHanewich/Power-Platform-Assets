@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using Newtonsoft.Json.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace VirtualTablesDemo
 {
@@ -183,7 +184,7 @@ namespace VirtualTablesDemo
                 jo1.Add("@odata.mediaEtag", "\"8zOOKKvgOtptr4gt8IrnapX3jds=\"");
                 jo1.Add("ID", Guid.Parse("f89dee73-af9f-4cd4-b330-db93c25ff3c7"));
                 jo1.Add("Name", "Old School Lemonade Store, Retro Style");
-                jo1.Add("AirDate", new DateTime(2012, 11, 7));
+                jo1.Add("AirDate", DateTimeOffset.UtcNow);
 
                 //Item 1
                 JObject jo2 = new JObject();
@@ -191,7 +192,7 @@ namespace VirtualTablesDemo
                 jo2.Add("@odata.mediaContentType", "*/*");
                 jo2.Add("ID", Guid.Parse("db2d2186-1c29-4d1e-88ef-a127f521b9c6"));
                 jo2.Add("Name", "Early morning start, need coffee");
-                jo2.Add("AirDate", new DateTime(2000, 2, 29));
+                jo2.Add("AirDate", DateTimeOffset.UtcNow);
 
                 JObject ToReturn = new JObject();
                 ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/sample/$metadata#Advertisements");
