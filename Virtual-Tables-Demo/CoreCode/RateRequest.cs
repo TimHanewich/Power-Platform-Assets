@@ -10,7 +10,7 @@ namespace CoreCode
     {
         public Guid Id {get; set;} //Primary key
         public string CompanyName {get; set;}
-        public DateTime FilingDate {get; set;}
+        public DateTimeOffset FilingDate {get; set;}
         public FilingType FilingType {get; set;}
         public string SerffTrNumber {get; set;}
         public RateRequestStatus StateStatus {get; set;}
