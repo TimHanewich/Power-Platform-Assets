@@ -179,17 +179,17 @@ namespace VirtualTablesDemo
                 
                 //Item 1
                 JObject jo1 = new JObject();
-                jo1.Add("@odata.mediaReadLink", "Advertisements(f89dee73-af9f-4cd4-b330-db93c25ff3c7)/$value");
-                jo1.Add("@odata.mediaContentType", "*/*");
-                jo1.Add("@odata.mediaEtag", "\"8zOOKKvgOtptr4gt8IrnapX3jds=\"");
+                //jo1.Add("@odata.mediaReadLink", "Advertisements(f89dee73-af9f-4cd4-b330-db93c25ff3c7)/$value");
+                //jo1.Add("@odata.mediaContentType", "*/*");
+                //jo1.Add("@odata.mediaEtag", "\"8zOOKKvgOtptr4gt8IrnapX3jds=\"");
                 jo1.Add("ID", Guid.Parse("f89dee73-af9f-4cd4-b330-db93c25ff3c7"));
                 jo1.Add("Name", "Old School Lemonade Store, Retro Style");
                 jo1.Add("AirDate", DateTimeOffset.UtcNow);
 
                 //Item 1
                 JObject jo2 = new JObject();
-                jo2.Add("@odata.mediaReadLink", "Advertisements(db2d2186-1c29-4d1e-88ef-a127f521b9c6)/$value");
-                jo2.Add("@odata.mediaContentType", "*/*");
+                //jo2.Add("@odata.mediaReadLink", "Advertisements(db2d2186-1c29-4d1e-88ef-a127f521b9c6)/$value");
+                //jo2.Add("@odata.mediaContentType", "*/*");
                 jo2.Add("ID", Guid.Parse("db2d2186-1c29-4d1e-88ef-a127f521b9c6"));
                 jo2.Add("Name", "Early morning start, need coffee");
                 jo2.Add("AirDate", DateTimeOffset.UtcNow);
