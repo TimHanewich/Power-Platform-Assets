@@ -12,6 +12,13 @@ There are no guarentees these resources will exist/work in the future.
         - https://nmosi2.azurewebsites.net/nmosi/RateRequests
     - Metadata
         - https://nmosi2.azurewebsites.net/nmosi/$metadata
+- "sample" endpoint - a reconstruction of a functional OData V4 API
+    - Directory
+        - https://nmosi2.azurewebsites.net/sample
+    -Advertisements table content:
+        - https://nmosi2.azurewebsites.net/sample/Advertisements
+    - Metadata
+        - https://nmosi2.azurewebsites.net/sample/$metadata
 
 
 ## Tutorials used for learning
