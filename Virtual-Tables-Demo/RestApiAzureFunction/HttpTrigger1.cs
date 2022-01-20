@@ -195,7 +195,7 @@ namespace VirtualTablesDemo
                 jo2.Add("AirDate", DateTimeOffset.UtcNow);
 
                 JObject ToReturn = new JObject();
-                ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/sample/$metadata");
+                ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/sample/$metadata#Advertisements");
                 ToReturn.Add("value", JArray.Parse(JsonConvert.SerializeObject(new JObject[]{jo1, jo2})));
 
                 HttpResponseData resp = req.CreateResponse();
