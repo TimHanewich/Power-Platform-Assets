@@ -9,17 +9,10 @@
                 <Property Name="ID" Type="Edm.Guid" Nullable="false" />
                 <Property Name="Name" Type="Edm.String" />
                 <Property Name="AirDate" Type="Edm.DateTimeOffset" Nullable="false" />
-                <NavigationProperty Name="FeaturedProduct" Type="ODataDemo.FeaturedProduct" Partner="Advertisement" />
             </EntityType>
             <EntityContainer Name="DemoService">
-                <EntitySet Name="Products" EntityType="ODataDemo.Product">
-                    <NavigationPropertyBinding Path="ODataDemo.FeaturedProduct/Advertisement" Target="Advertisements" />
-                    <NavigationPropertyBinding Path="Categories" Target="Categories" />
-                    <NavigationPropertyBinding Path="Supplier" Target="Suppliers" />
-                    <NavigationPropertyBinding Path="ProductDetail" Target="ProductDetails" />
-                </EntitySet>
                 <EntitySet Name="Advertisements" EntityType="ODataDemo.Advertisement">
-                    <NavigationPropertyBinding Path="FeaturedProduct" Target="Products" />
+                    
                 </EntitySet>
             </EntityContainer>
         </Schema>
