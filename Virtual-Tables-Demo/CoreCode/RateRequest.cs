@@ -135,7 +135,16 @@ namespace CoreCode
     
         public static JObject ToJson(RateRequest rr)
         {
-            return JObject.Parse(JsonConvert.SerializeObject(rr));
+            JObject ToReturn = new JObject();
+            ToReturn.Add("Id", rr.Id);
+            ToReturn.Add("CompanyName", rr.CompanyName);
+            ToReturn.Add("FilingDate", rr.FilingDate);
+            ToReturn.Add("FilingType", rr.FilingType.ToString());
+            ToReturn.Add("SerffTrNumber", rr.SerffTrNumber);
+            ToReturn.Add("StateStatus", rr.StateStatus.ToString());
+            ToReturn.Add("IncreaseFiled", rr.IncreaseFiled);
+            ToReturn.Add("IncreaseApproved", rr.IncreaseApproved);
+            return ToReturn;
         }
 
         public static JArray ToJson(RateRequest[] rrs)
