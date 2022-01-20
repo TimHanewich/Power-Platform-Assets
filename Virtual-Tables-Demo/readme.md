@@ -12,3 +12,8 @@ There are no guarentees these resources will exist/work in the future.
         - https://nmosi2.azurewebsites.net/nmosi/RateRequests
     - Metadata
         - https://nmosi2.azurewebsites.net/nmosi/$metadata
+
+
+## Tutorials used for learning
+- https://dynamicsninja.blog/2018/09/30/virtual-entities-part-1-odata-v4/
+- https://docs.microsoft.com/en-us/powerapps/maker/data-platform/virtual-entity-walkthrough-using-odata-provider#create-the-virtual-table
