@@ -24,3 +24,6 @@ There are no guarentees these resources will exist/work in the future.
 ## Tutorials used for learning
 - https://dynamicsninja.blog/2018/09/30/virtual-entities-part-1-odata-v4/
 - https://docs.microsoft.com/en-us/powerapps/maker/data-platform/virtual-entity-walkthrough-using-odata-provider#create-the-virtual-table
+
+## Learnings from replication
+- The metadata link for each table must be unique. It can not be the same metadatalink that is provided in the directory.
