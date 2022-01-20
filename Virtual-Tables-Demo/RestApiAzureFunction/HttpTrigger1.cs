@@ -110,7 +110,7 @@ namespace VirtualTablesDemo
                 return ToReturn;
 
             }
-            else if (table == "$metadata")
+            else if (table == "$metadata" || table == "$metadata#RateRequests")
             {
                 log.LogInformation("Metadata was requested.");
                 HttpClient hc = new HttpClient();
