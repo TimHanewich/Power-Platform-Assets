@@ -4,16 +4,10 @@
       <Schema Namespace="NMOSI" xmlns="http://docs.oasis-open.org/odata/ns/edm">
          <EntityType Name="RateRequest" HasStream="true">
             <Key>
-               <PropertyRef Name="Id"/>
+               <PropertyRef Name="Id" />
             </Key>
-            <Property Name="Id" Type="Edm.Guid" Nullable="false"/>
-            <Property Name="CompanyName" Type="Edm.String"  Nullable="false"/>
-            <Property Name="FilingDate" Type="Edm.DateTime"/>
-            <Property Name="FilingType" Type="Edm.Int32"/>
-            <Property Name="SerffTrNumber" Type="Edm.String"/>
-            <Property Name="StateStatus" Type="Edm.Int32"/>
-            <Property Name="IncreaseFiled" Type="Edm.Double"/>
-            <Property Name="IncreaseApproved" Type="Edm.Double"/>
+            <Property Name="Id" Type="Edm.Guid" Nullable="false" />
+            <Property Name="CompanyName" Type="Edm.String" />
          </EntityType>
       </Schema>
    </edmx:DataServices>
