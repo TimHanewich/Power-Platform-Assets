@@ -8,6 +8,12 @@
             </Key>
             <Property Name="Id" Type="Edm.Guid" Nullable="false" />
             <Property Name="CompanyName" Type="Edm.String" />
+            <Property Name="FilingDate"  Type="Edm.DateTime" />
+            <Property Name="FilingType" Type="Edm.String" />
+            <Property Name="SerffTrNumber" Type="Edm.String" />
+            <Property Name="StateStatus" Type="Edm.String" />
+            <Property Name="IncreaseFiled" Type="Edm.Double" />
+            <Property Name="IncreaseApproved" Type="Edm.Double" />
          </EntityType>
          <EntityContainer Name="DemoService">
             <EntitySet Name="RateRequests" EntityType="ODataDemo.RateRequest">
