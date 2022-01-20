@@ -9,6 +9,11 @@
             <Property Name="Id" Type="Edm.Guid" Nullable="false" />
             <Property Name="CompanyName" Type="Edm.String" />
          </EntityType>
+         <EntityContainer Name="DemoService">
+            <EntitySet Name="RateRequests" EntityType="ODataDemo.RateRequest">
+               
+            </EntitySet>
+         </EntityContainer>
       </Schema>
    </edmx:DataServices>
 </edmx:Edmx>
