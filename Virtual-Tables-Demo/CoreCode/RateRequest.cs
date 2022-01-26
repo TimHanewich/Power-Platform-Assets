@@ -10,7 +10,7 @@ namespace CoreCode
     {
         public Guid Id {get; set;} //Primary key
         public string CompanyName {get; set;}
-        public DateTimeOffset FilingDate {get; set;}
+        public DateTime FilingDate {get; set;}
         public FilingType FilingType {get; set;}
         public string SerffTrNumber {get; set;}
         public RateRequestStatus StateStatus {get; set;}
@@ -138,7 +138,7 @@ namespace CoreCode
             JObject ToReturn = new JObject();
             ToReturn.Add("Id", rr.Id);
             ToReturn.Add("CompanyName", rr.CompanyName);
-            ToReturn.Add("FilingDate", rr.FilingDate);
+            ToReturn.Add("FilingDate", rr.FilingDate.ToLongDateString());
             ToReturn.Add("FilingType", rr.FilingType.ToString());
             ToReturn.Add("SerffTrNumber", rr.SerffTrNumber);
             ToReturn.Add("StateStatus", rr.StateStatus.ToString());
