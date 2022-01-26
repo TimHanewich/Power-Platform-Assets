@@ -8,7 +8,7 @@
             </Key>
             <Property Name="Id" Type="Edm.Guid" Nullable="false" />
             <Property Name="CompanyName" Type="Edm.String" />
-            <Property Name="FilingDate"  Type="Edm.DateTimeOffset" />
+            <Property Name="FilingDate"  Type="Edm.String" />
             <Property Name="FilingType" Type="Edm.String" />
             <Property Name="SerffTrNumber" Type="Edm.String" />
             <Property Name="StateStatus" Type="Edm.String" />
