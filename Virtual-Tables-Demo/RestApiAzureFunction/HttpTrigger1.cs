@@ -109,7 +109,55 @@ namespace VirtualTablesDemo
             {
                 log.LogInformation("RateRequests table was asked for.");
 
-                string JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(CoreCode.RateRequest.All())).ToString();
+                //Get the url
+                string RequestUrl = req.Url.ToString();
+                log.LogInformation("Full request URL: " + RequestUrl);
+
+                //Filtering?
+                bool FilteringOnCompanyName = false;
+                if (RequestUrl.Contains("filter=startswith(CompanyName,"))
+                {
+                    FilteringOnCompanyName = true;
+                    log.LogInformation("They are trying to filter on company");
+                }
+                else
+                {
+                    FilteringOnCompanyName = false;
+                    log.LogInformation("They are NOT filtering on company.");
+                }
+
+                //Get the RateRequests to include
+                List<RateRequest> RateRequestsToReturn = new List<RateRequest>();
+                RateRequest[] AllRateRequests = CoreCode.RateRequest.All();
+                foreach (RateRequest rr in AllRateRequests)
+                {
+                    if (FilteringOnCompanyName)
+                    {
+                        int loc1 = RequestUrl.IndexOf("filter=startswith(CompanyName,");
+                        loc1 = RequestUrl.IndexOf(",");
+                        int loc2 = RequestUrl.IndexOf(")", loc1 + 1);
+                        string CompanyNameSearchParam = RequestUrl.Substring(loc1 + 1, loc2 - loc1 - 1).Replace("'", "").Replace("%27", "");
+                        log.LogInformation("CompanyName they are searching for: " + CompanyNameSearchParam);
+
+                        if (rr.CompanyName.ToLower().Contains(CompanyNameSearchParam.ToLower()))
+                        {
+                            log.LogInformation("Including this one: " + rr.CompanyName);
+                            RateRequestsToReturn.Add(rr);
+                        }
+                        else
+                        {
+                            log.LogInformation("Not including this one: " + rr.CompanyName);
+                        }
+                    }   
+                    else
+                    {
+                        RateRequestsToReturn.Add(rr);
+                    }
+                }
+
+                log.LogInformation("Number of RateRequest records that will be returned: " + RateRequestsToReturn.Count.ToString());
+
+                string JsonToReturn = CoreCode.RateRequest.PrepareODataResponseBody(CoreCode.RateRequest.ToJson(RateRequestsToReturn.ToArray())).ToString();
 
                 HttpResponseData ToReturn = req.CreateResponse();
                 ToReturn.StatusCode = HttpStatusCode.OK;

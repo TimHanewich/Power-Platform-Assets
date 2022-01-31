@@ -8,7 +8,9 @@ namespace CoreCode
     {
         static void Main(string[] args)
         {
-            ApiCallLogToolkit.UploadApiCallLogAsync("Hiiii!").Wait();
+            RateRequest rr = new RateRequest();
+            string json = RateRequest.ToJson(new RateRequest[]{rr}).ToString();
+            Console.WriteLine(json);
         }
     }
 }

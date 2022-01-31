@@ -150,7 +150,7 @@ namespace CoreCode
         public static JArray ToJson(RateRequest[] rrs)
         {
             List<JObject> ToReturn = new List<JObject>();
-            foreach (RateRequest rr in All())
+            foreach (RateRequest rr in rrs)
             {
                 ToReturn.Add(ToJson(rr));
             }
