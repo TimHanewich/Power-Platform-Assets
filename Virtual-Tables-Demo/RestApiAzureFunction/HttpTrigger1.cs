@@ -68,6 +68,14 @@ namespace VirtualTablesDemo
         {
             ILogger log = context.GetLogger("nmosi");
 
+            //Say hi
+            log.LogInformation("NMOSI endpoint called!");
+
+            //Log the request URL
+            log.LogInformation("Logging the call...");
+            await ApiCallLogToolkit.UploadApiCallLogAsync(req.Url.ToString());
+            log.LogInformation("Call logged.");
+
             if (table == null)
             {
                 log.LogInformation("A table name was not provided.");
