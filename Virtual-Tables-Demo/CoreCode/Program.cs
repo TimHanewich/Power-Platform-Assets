@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace CoreCode
 {
@@ -7,7 +8,7 @@ namespace CoreCode
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(JsonConvert.SerializeObject(RateRequest.ToJson(RateRequest.All())));
+            ApiCallLogToolkit.UploadApiCallLogAsync("Hiiii!").Wait();
         }
     }
 }
