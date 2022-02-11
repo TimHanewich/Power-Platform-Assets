@@ -191,7 +191,7 @@ namespace VirtualTablesDemo
                 string[] SelectFields = new string[]{};
                 string url = req.Url.ToString();
                 Uri turi = new Uri(url);
-                string fselection = HttpUtility.ParseQueryString(turi.Query).Get("$fields");
+                string fselection = HttpUtility.ParseQueryString(turi.Query).Get("$select");
                 if (fselection != null)
                 {
                     SelectFields = fselection.Split(new string[]{","}, StringSplitOptions.RemoveEmptyEntries);
@@ -202,7 +202,7 @@ namespace VirtualTablesDemo
                 JObject ToReturn = CoreCode.RateRequest.Select(id, SelectFields);
                 HttpResponseData ToResp = req.CreateResponse();
                 ToResp.WriteString(JsonConvert.SerializeObject(ToReturn));
-                ToResp.Headers.Add("Content-Type", "application/xml");
+                ToResp.Headers.Add("Content-Type", "application/json");
                 return ToResp;
             }
             else
