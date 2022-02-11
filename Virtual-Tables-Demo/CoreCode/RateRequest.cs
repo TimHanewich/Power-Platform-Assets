@@ -133,6 +133,40 @@ namespace CoreCode
             return ToReturn.ToArray();
         }
     
+        public static JObject Select(Guid id, params string[] fields)
+        {
+            foreach (RateRequest rr in All())
+            {
+                if (rr.Id == id)
+                {
+                    JObject jo = JObject.Parse(JsonConvert.SerializeObject(rr));
+                    JObject ToReturn = new JObject();
+                    if (fields.Length == 0) //If they did not specify any fields, just include them all.
+                    {
+                        foreach (JProperty prop in jo.Properties())
+                        {
+                            ToReturn.Add(prop);
+                        }
+                    }
+                    else //If they did specify fields, only grab those
+                    {
+                        foreach (JProperty prop in jo.Properties())
+                        {
+                            foreach (string field in fields)
+                            {
+                                if (prop.Name == field)
+                                {
+                                    ToReturn.Add(prop);
+                                }
+                            }
+                        }
+                    }
+                    return ToReturn;
+                }
+            }
+            return null;
+        }
+
         public static JObject ToJson(RateRequest rr)
         {
             JObject ToReturn = new JObject();
