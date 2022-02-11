@@ -139,7 +139,7 @@ namespace CoreCode
             {
                 if (rr.Id == id)
                 {
-                    JObject jo = JObject.Parse(JsonConvert.SerializeObject(rr));
+                    JObject jo = ToJson(rr);
                     JObject ToReturn = new JObject();
                     if (fields.Length == 0) //If they did not specify any fields, just include them all.
                     {
