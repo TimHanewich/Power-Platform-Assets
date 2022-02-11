@@ -76,6 +76,9 @@ namespace VirtualTablesDemo
             await ApiCallLogToolkit.UploadApiCallLogAsync(req.Url.ToString());
             log.LogInformation("Call logged.");
 
+            //Write the table
+            log.LogInformation("Table provided: <" + table + ">");
+
             if (table == null)
             {
                 log.LogInformation("A table name was not provided.");
@@ -105,7 +108,7 @@ namespace VirtualTablesDemo
                 resp.Headers.Add("Content-Type", "application/json");
                 return resp;
             }
-            else if (table == "RateRequests")
+            else if (table == "RateRequests") //Requesting list of RateRequests
             {
                 log.LogInformation("RateRequests table was asked for.");
 
@@ -166,7 +169,7 @@ namespace VirtualTablesDemo
                 return ToReturn;
 
             }
-            else if (table == "$metadata" || table == "$metadata#RateRequests")
+            else if (table == "$metadata" || table == "$metadata#RateRequests") //Metadata
             {
                 log.LogInformation("Metadata was requested.");
                 HttpClient hc = new HttpClient();
@@ -177,6 +180,31 @@ namespace VirtualTablesDemo
                 ToResp.Headers.Add("Content-Type", "application/xml");
                 return ToResp;
             }
+            else if (table.ToLower().Contains("raterequests") && table.ToLower().Contains("(") && table.ToLower().Contains(")")) //selecting of a single record
+            {
+                //Get the ID of the record
+                int loc1 = table.IndexOf("(");
+                int loc2 = table.IndexOf(")");
+                Guid id = Guid.Parse(table.Substring(loc1 + 1, loc2 - loc1 - 1));
+
+                //Get the fields they are selecting
+                string[] SelectFields = new string[]{};
+                string url = req.Url.ToString();
+                Uri turi = new Uri(url);
+                string fselection = HttpUtility.ParseQueryString(turi.Query).Get("$fields");
+                if (fselection != null)
+                {
+                    SelectFields = fselection.Split(new string[]{","}, StringSplitOptions.RemoveEmptyEntries);
+                }
+
+
+                //Select it!
+                JObject ToReturn = CoreCode.RateRequest.Select(id, SelectFields);
+                HttpResponseData ToResp = req.CreateResponse();
+                ToResp.WriteString(JsonConvert.SerializeObject(ToReturn));
+                ToResp.Headers.Add("Content-Type", "application/xml");
+                return ToResp;
+            }
             else
             {
                 HttpResponseData resp = req.CreateResponse();
@@ -184,6 +212,7 @@ namespace VirtualTablesDemo
                 resp.WriteString("Table '" + table + "' is invalid.");
                 return resp;
             }
+            
             
 
             // //Working on it message
