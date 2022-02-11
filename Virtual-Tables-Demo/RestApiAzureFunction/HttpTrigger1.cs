@@ -169,7 +169,7 @@ namespace VirtualTablesDemo
                 return ToReturn;
 
             }
-            else if (table == "$metadata" || table == "$metadata#RateRequests") //Metadata
+            else if (table == "$metadata" || table == "$metadata#RateRequests" || table == "$metadata#RateRequests/$entity") //Metadata
             {
                 log.LogInformation("Metadata was requested.");
                 HttpClient hc = new HttpClient();
@@ -200,6 +200,12 @@ namespace VirtualTablesDemo
 
                 //Select it!
                 JObject ToReturn = CoreCode.RateRequest.Select(id, SelectFields);
+
+                //Add the odata context - the metadata
+                ToReturn.Add("@odata.context", "https://nmosi2.azurewebsites.net/nmosi/$metadata#RateRequests/$entity");
+
+
+                //Return it
                 HttpResponseData ToResp = req.CreateResponse();
                 ToResp.WriteString(JsonConvert.SerializeObject(ToReturn));
                 ToResp.Headers.Add("Content-Type", "application/json");
