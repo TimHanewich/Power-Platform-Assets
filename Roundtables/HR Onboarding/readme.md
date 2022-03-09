@@ -12,3 +12,6 @@ This is meant to be the introduction to the Power Platform for the audience. Thi
     - Direct deposit form
     - I9 Form
     - Wallpaper to be used in canvas app
+
+## Recorded Sessions
+- Tim Hanewich, New Mexico, October 2020: https://youtu.be/X_tkZ8Lw7Cw
