@@ -1,8 +1,8 @@
 .vscode/
-Virtual-Tables-Demo/RestApiAzureFunction/bin/
-Virtual-Tables-Demo/RestApiAzureFunction/obj/
-Virtual-Table-Demo/CoreCode/bin/
-Virtual-Table-Demo/CoreCode/obj/
+Demos/Virtual-Tables-Demo/RestApiAzureFunction/bin/
+Demos/Virtual-Tables-Demo/RestApiAzureFunction/obj/
+Demos/Virtual-Table-Demo/CoreCode/bin/
+Demos/Virtual-Table-Demo/CoreCode/obj/
 
 
 
