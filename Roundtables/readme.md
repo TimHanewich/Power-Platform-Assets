@@ -19,6 +19,10 @@ Below is my high-level structure. Each roundtable is a 2-hour time block.
 ## Content
 Below I have linked to all of the content involved in the roundtables I have conducted thus far. This includes a **presentation deck**, **solution package**, **script**, and **recording** of sessions I have conducted with that content. I will continue to update this repository as new content is developed.
 
+### Power Point deck:
+[This presentation deck](./Roundtable%20Deck.pptx) contains the Power Point content for *all* of the sessions below.
+
+### Click on a session below to view the associated content
 |Session|Topic|Targeted Agency|
 |-|-|-|
 |Session 1|Introduction to Power Apps - HR Onboarding Management||
