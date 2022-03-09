@@ -15,3 +15,4 @@ This is meant to be the introduction to the Power Platform for the audience. Thi
 
 ## Recorded Sessions
 - Tim Hanewich, New Mexico, October 2020: https://youtu.be/X_tkZ8Lw7Cw
+- Tim Hanewich, South Dakota, January 2022: https://youtu.be/H-VCXcFPRfQ
