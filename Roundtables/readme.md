@@ -31,3 +31,7 @@ Below I have linked to all of the content involved in the roundtables I have con
 |Session 4|[Bring your own API - Develop a custom connector](./Custom%20Connector/)|IT|
 |Session 5|[Automate the desktop with Robotic Process Automation](./Robotic%20Process%20Automation/)||
 |Session 6|[Create an autonomous chatbot with Power Virtual Agents](./Permitting%20Chatbot%20Power%20Virtual%20Agent/)||
+
+## To-Do
+- Link to large repository of fish images in the AI builder fish species detection roundtable content.
+- Provide legacy application and PAD download link in the RPA roundtable content.
