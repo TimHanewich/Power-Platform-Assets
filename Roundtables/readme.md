@@ -25,9 +25,9 @@ Below I have linked to all of the content involved in the roundtables I have con
 ### Click on a session below to view the associated content
 |Session|Topic|Targeted Agency|
 |-|-|-|
-|Session 1|Introduction to Power Apps - HR Onboarding Management||
-|Session 2|Detecting Fish Species with AI Builder|Dept of Fish & Wildlife|
-|Session 3|Power Apps & Teams Integration||
-|Session 4|Bring your own API - Develop a custom connector|IT|
-|Session 5|Automate the desktop with Robotic Process Automation||
-|Session 6|Create an autonomous chatbot with Power Virtual Agents||
+|Session 1|[Introduction to Power Apps - HR Onboarding Management](./HR%20Onboarding/)||
+|Session 2|[Detecting Fish Species with AI Builder](./Fish%20Species%20Detection%20AI/)|Dept of Fish & Wildlife|
+|Session 3|[Power Apps & Teams Integration](./Teams%20Integration/)||
+|Session 4|[Bring your own API - Develop a custom connector](./Custom%20Connector/)|IT|
+|Session 5|[Automate the desktop with Robotic Process Automation](./Robotic%20Process%20Automation/)||
+|Session 6|[Create an autonomous chatbot with Power Virtual Agents](./Permitting%20Chatbot%20Power%20Virtual%20Agent/)||
