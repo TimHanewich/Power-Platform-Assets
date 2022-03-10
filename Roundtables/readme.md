@@ -34,4 +34,3 @@ Below I have linked to all of the content involved in the roundtables I have con
 
 ## To-Do
 - Link to large repository of fish images in the AI builder fish species detection roundtable content.
-- Provide legacy application and PAD download link in the RPA roundtable content.
