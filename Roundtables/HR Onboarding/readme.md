@@ -4,6 +4,12 @@ This is meant to be the introduction to the Power Platform for the audience. Thi
 - Model Driven App Development (HR onboarding management)
 - Canvas App Development (app for employee/HR staff to sign)
 
+The use case is HR onboarding. The solution that you will build in this session allows for the management of the HR onboarding process for employees. 
+- Onboarding checklists
+    - Team training
+    - Hardware received: laptop, phone, badge, etc
+    - Storage for necessary hiring documents: I9 Form, Direct Deposit Form, etc.
+
 ## Content
 - [Pre-built flyer template](./Flyer.pptx)
 - ["End state" solution](./Build%201_0_0_1.zip)
