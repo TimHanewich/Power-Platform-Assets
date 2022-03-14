@@ -17,7 +17,11 @@ Below is my high-level structure. Each roundtable is a 2-hour time block.
 - Q&A (30 mins)
 
 ## Content
-Below I have linked to all of the content involved in the roundtables I have conducted thus far. This includes a **presentation deck**, **solution package**, **script**, and **recording** of sessions I have conducted with that content. I will continue to update this repository as new content is developed.
+Below I have linked to all of the content involved in the roundtables I have conducted thus far. This includes a **promotional flyer**, **presentation deck**, **solution package**, **script**, and **recording** of sessions I have conducted with that content. I will continue to update this repository as new content is developed.
+
+### Marketing Material
+Session-specific marketing material can be found in each sessions folder below. We also have session-generic marketing material:
+- ["Dark Theme" Roundtable Flyer with components](./Roundtable-Flyer-Bandler.pptx) - By David Bandler
 
 ### Power Point deck:
 [This presentation deck](./Roundtable%20Deck.pptx) contains the Power Point content for *all* of the sessions below.
