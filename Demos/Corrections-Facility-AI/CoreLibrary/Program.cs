@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using ConsoleVisuals;
+using Newtonsoft.Json;
 
 namespace CoreLibrary
 {
@@ -14,8 +15,21 @@ namespace CoreLibrary
     {
         static void Main(string[] args)
         {
-            DeleteAllAsync().Wait();
-            DeployAsync().Wait();
+            //DeleteAllAsync().Wait();
+            //DeployAsync().Wait();
+            
+            //TrainAsync().Wait();
+
+            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\test.png");
+            IdentifyResult[] results = IdentifyAsync(s).Result;
+            foreach (IdentifyResult result in results)
+            {
+                foreach (IdentifyCandidate candidate in result.Candidates)
+                {
+                    Person p = GetPersonAsync(candidate.PersonId).Result;
+                    Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
+                }
+            }
             
         }
 
@@ -92,6 +106,53 @@ namespace CoreLibrary
         }
 
         #endregion
+
+        #region "Training"
+
+        public static async Task TrainAsync()
+        {
+            IFaceClient client = FaceAuthenticator.Authenticate();
+            await client.PersonGroup.TrainAsync("residents");
+            Console.WriteLine("Training initiated! You may want to give it some time though?");
+        }
+
+        #endregion
+
+        #region "Identification"
+
+        public static async Task<IdentifyResult[]> IdentifyAsync(Stream s)
+        {
+            IFaceClient client = FaceAuthenticator.Authenticate();
+            IList<DetectedFace> DetectedFaces = await client.Face.DetectWithStreamAsync(s, true, false, null, "recognition_04", false, null);
+
+            //Assemble a list of detected faces to pass to the identification endpoint
+            List<Guid> ToIdentifyDetection = new List<Guid>();
+            foreach (DetectedFace df in DetectedFaces)
+            {
+                ToIdentifyDetection.Add(df.FaceId.Value);
+            }
+            
+            //Identify each
+            IList<IdentifyResult> IdentifyResults = await client.Face.IdentifyAsync(ToIdentifyDetection, "residents");
+
+            //Prepare and return
+            List<IdentifyResult> ToReturn = new List<IdentifyResult>();
+            foreach (IdentifyResult res in IdentifyResults)
+            {
+                ToReturn.Add(res);
+            }
+            return ToReturn.ToArray();
+        }
+
+        public static async Task<Person> GetPersonAsync(Guid id)
+        {
+            IFaceClient client = FaceAuthenticator.Authenticate();
+            Person pgp = await client.PersonGroupPerson.GetAsync("residents", id);
+            return pgp;
+        }
+
+        #endregion
+
 
     }
 }
