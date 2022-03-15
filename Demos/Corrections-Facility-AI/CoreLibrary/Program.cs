@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
+using ConsoleVisuals;
 
 namespace CoreLibrary
 {
@@ -13,11 +14,26 @@ namespace CoreLibrary
     {
         static void Main(string[] args)
         {
+            DeleteAll().Wait();
             DeployAsync().Wait();
             
         }
 
         #region "Deployment - creating the necessary resources in the face API"
+
+        public static async Task DeleteAll()
+        {
+            IFaceClient client = FaceAuthenticator.Authenticate();
+            Console.Write("Getting all PersonGroups... ");
+            IList<PersonGroup> PersonGroups = await client.PersonGroup.ListAsync();
+            Console.WriteLine(PersonGroups.Count.ToString("#,##0") + " person group found.");
+            foreach (PersonGroup pg in PersonGroups)
+            {
+                Console.Write("Deleting PersonGroup '" + pg.PersonGroupId + "'... ");
+                await client.PersonGroup.DeleteAsync(pg.PersonGroupId);
+                Console.WriteLine("Deleted!");
+            }
+        }
 
         public static async Task DeployAsync()
         {
@@ -37,12 +53,14 @@ namespace CoreLibrary
             // await client.PersonGroup.CreateAsync(pg.PersonGroupId, pg.Name, pg.UserData, pg.RecognitionModel);
 
             //Create the "residents" person group
+            Console.Write("Creating group 'residents'... ");
             PersonGroup pg2 = new PersonGroup();
             pg2.PersonGroupId = "residents";
             pg2.Name = "Residents";
             pg2.RecognitionModel = "recognition_04";
             pg2.UserData = "The offenders that live in the facility.";
             await client.PersonGroup.CreateAsync(pg2.PersonGroupId, pg2.Name, pg2.UserData, pg2.RecognitionModel);
+            Console.WriteLine("Created!");
 
 
             //Create people
@@ -58,8 +76,16 @@ namespace CoreLibrary
                 {
                     Console.Write("Adding '" + iPath + "'... ");
                     Stream s = System.IO.File.OpenRead(iPath);
-                    PersistedFace pf = await client.PersonGroupPerson.AddFaceFromStreamAsync("residents", p.PersonId, s);
-                    Console.WriteLine("Face added with ID " + pf.PersistedFaceId.ToString());
+                    try
+                    {
+                        PersistedFace pf = await client.PersonGroupPerson.AddFaceFromStreamAsync("residents", p.PersonId, s);
+                        ConsoleVisualsToolkit.WriteLine("Face added with ID " + pf.PersistedFaceId.ToString(), ConsoleColor.Green);
+                    }
+                    catch
+                    {
+                        ConsoleVisualsToolkit.WriteLine("FAILED!", ConsoleColor.Red);
+                    }
+                    
                 }
             }
 
