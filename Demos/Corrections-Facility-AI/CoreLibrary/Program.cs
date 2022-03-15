@@ -17,21 +17,21 @@ namespace CoreLibrary
         {
 
             //FULL DEPLOYMENT!!!
-            DeleteAllAsync().Wait(); //Delete all (clear)
-            DeployAsync().Wait(); //Upload all data
-            TrainAsync().Wait(); //Train
+            //DeleteAllAsync().Wait(); //Delete all (clear)
+            //DeployAsync().Wait(); //Upload all data
+            //TrainAsync().Wait(); //Train
 
 
-            // Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\test.png");
-            // IdentifyResult[] results = IdentifyAsync(s).Result;
-            // foreach (IdentifyResult result in results)
-            // {
-            //     foreach (IdentifyCandidate candidate in result.Candidates)
-            //     {
-            //         Person p = GetPersonAsync(candidate.PersonId).Result;
-            //         Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
-            //     }
-            // }
+            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\Face API\Training Headshots\Chief\1.png");
+            IdentifyResult[] results = IdentifyAsync(s).Result;
+            foreach (IdentifyResult result in results)
+            {
+                foreach (IdentifyCandidate candidate in result.Candidates)
+                {
+                    Person p = GetPersonAsync(candidate.PersonId).Result;
+                    Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
+                }
+            }
             
         }
 
