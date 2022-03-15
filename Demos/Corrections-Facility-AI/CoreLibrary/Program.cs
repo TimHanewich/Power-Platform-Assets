@@ -15,21 +15,23 @@ namespace CoreLibrary
     {
         static void Main(string[] args)
         {
-            //DeleteAllAsync().Wait();
-            //DeployAsync().Wait();
-            
-            //TrainAsync().Wait();
 
-            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\test.png");
-            IdentifyResult[] results = IdentifyAsync(s).Result;
-            foreach (IdentifyResult result in results)
-            {
-                foreach (IdentifyCandidate candidate in result.Candidates)
-                {
-                    Person p = GetPersonAsync(candidate.PersonId).Result;
-                    Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
-                }
-            }
+            //FULL DEPLOYMENT!!!
+            DeleteAllAsync().Wait(); //Delete all (clear)
+            DeployAsync().Wait(); //Upload all data
+            TrainAsync().Wait(); //Train
+
+
+            // Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\test.png");
+            // IdentifyResult[] results = IdentifyAsync(s).Result;
+            // foreach (IdentifyResult result in results)
+            // {
+            //     foreach (IdentifyCandidate candidate in result.Candidates)
+            //     {
+            //         Person p = GetPersonAsync(candidate.PersonId).Result;
+            //         Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
+            //     }
+            // }
             
         }
 
@@ -80,7 +82,7 @@ namespace CoreLibrary
             //Create people
             foreach (string dirPath in System.IO.Directory.GetDirectories(PersistentFaceDirectory))
             {
-                string Name = System.IO.Path.GetDirectoryName(dirPath);
+                string Name = System.IO.Path.GetFileName(dirPath);
                 Console.Write("Creating person '" + Name + "'");
                 Person p = await client.PersonGroupPerson.CreateAsync("residents", Name, "Automatically added.");
                 Console.WriteLine("Person added! ID: " + p.PersonId.ToString());
