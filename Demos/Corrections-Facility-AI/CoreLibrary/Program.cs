@@ -14,14 +14,14 @@ namespace CoreLibrary
     {
         static void Main(string[] args)
         {
-            DeleteAll().Wait();
+            DeleteAllAsync().Wait();
             DeployAsync().Wait();
             
         }
 
         #region "Deployment - creating the necessary resources in the face API"
 
-        public static async Task DeleteAll()
+        public static async Task DeleteAllAsync()
         {
             IFaceClient client = FaceAuthenticator.Authenticate();
             Console.Write("Getting all PersonGroups... ");
