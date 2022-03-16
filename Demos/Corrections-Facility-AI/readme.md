@@ -14,3 +14,7 @@ Steps:
 5. Identify a face
     - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239
     - The recognitionModel you are using (a parameter) must MATCH the recognitionModel you specified in the step before this, the **Detection** step.
+
+
+## Research
+- [Architecture design of El Dorado](https://htkarchitects.net/projects/el-dorado-correctional-facility/)
