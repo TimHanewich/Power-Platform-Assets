@@ -17,12 +17,12 @@ namespace CoreLibrary
         {
 
             //FULL DEPLOYMENT!!!
-            //DeleteAllAsync().Wait(); //Delete all (clear)
-            //DeployAsync().Wait(); //Upload all data
-            //TrainAsync().Wait(); //Train
+            // DeleteAllAsync().Wait(); //Delete all (clear)
+            // DeployAsync().Wait(); //Upload all data
+            // TrainAsync().Wait(); //Train
 
 
-            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\Face API\Training Headshots\Chief\1.png");
+            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\Face API\Scenes\Jaclin Transportation\Entering Cell.png");
             IdentifyResult[] results = IdentifyAsync(s).Result;
             foreach (IdentifyResult result in results)
             {
@@ -33,7 +33,7 @@ namespace CoreLibrary
                 }
             }
             
-            
+            //PrintAllPeopleAsync().Wait();
 
 
         }
@@ -158,6 +158,19 @@ namespace CoreLibrary
 
         #endregion
 
+        #region "Printing of all people"
+
+        public static async Task PrintAllPeopleAsync()
+        {
+            IFaceClient client = FaceAuthenticator.Authenticate();
+            IList<Person> people = await client.PersonGroupPerson.ListAsync("residents");
+            foreach (Person p in people)
+            {
+                Console.WriteLine(p.Name + " = " + p.PersonId.ToString());
+            }
+        }
+
+        #endregion
 
     }
 }
