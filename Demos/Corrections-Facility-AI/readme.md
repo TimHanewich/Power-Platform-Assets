@@ -19,3 +19,12 @@ Steps:
 ## Research
 - [Architecture design of El Dorado](https://htkarchitects.net/projects/el-dorado-correctional-facility/)
     - The El Dorado Correctional Facility consists of two general purpose housing units which are designed to accommodate minimum to maximum custody levels. Each unit is designed for a double bunk capacity of 256. The El Dorado Correctional Facility is divided into quadrants, each consisting of 31 or 33 cells with a common two level day room. The control room is centrally located with visibility into each quadrant. The inmates are housed along the exterior perimeter wall with cells constructed of masonry block. Precast hollow core slabs provide the floor system of the upper level mezzanine and the ceiling for the lower level. Colored, precast concrete sandwich panels comprise the exterior bearing walls. The roof is structural steel and bar joists while the foundation is concrete spread footings.
+
+## Notable Scenes in Show
+- Episode 6: 
+    - 19:43 jaclin entering basketball court.
+    - 39:23 Jacline re-entering pod
+    - 39:37 Jaclin re-entering cell
+    - 29:33 Matt sitting at table talking
+    - 34:23 fight breaks out (no one in it)
+    
