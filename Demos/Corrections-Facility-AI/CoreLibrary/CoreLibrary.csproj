@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="ConsoleVisuals" Version="0.4.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.7.0-preview.1" />
+    <PackageReference Include="TimHanewich.Cds" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
