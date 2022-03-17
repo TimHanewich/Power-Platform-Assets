@@ -31,7 +31,7 @@ namespace CoreLibrary
             Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
             Console.WriteLine(resID.Value.ToString());
             
-
+            CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
 
         }
 
@@ -192,6 +192,31 @@ namespace CoreLibrary
             {
                 return Guid.Parse(objects[0].Property("doc_facilityparticipantid").Value.ToString());
             }
+        }
+
+        public static async Task CreateLocationDetectionAsync(CdsService service, Guid person, Guid? pod, Guid? cell, float confidence)
+        {
+            JObject jo = new JObject();
+            jo.Add("doc_PersonDetected@odata.bind", "doc_facilityparticipants(" + person.ToString() + ")");
+
+            //Pod?
+            if (pod.HasValue)
+            {
+                jo.Add("doc_DetectedinPod@odata.bind", "doc_pods(" + pod.Value.ToString() + ")");
+            }
+
+            //Cell
+            if (cell.HasValue)
+            {
+                jo.Add("doc_DetectedinCell@odata.bind", "doc_cells(" + cell.Value.ToString() + ")");
+            }
+
+            //Confidence
+            jo.Add("doc_facialrecognitionconfidence", confidence);
+
+
+            //Upload
+            await service.CreateRecordAsync("doc_locationdetections", jo.ToString());
         }
 
         #endregion
