@@ -28,3 +28,11 @@ Steps:
     - 29:33 Matt sitting at table talking
     - 34:23 fight breaks out (no one in it)
     
+
+## Intended Demo "Scenes"
+1. Show simple "movement" of a resident
+    - Matt inside his cell. Now Matt in the pod common area talking to others.
+2. Show movement of a resident across facility
+    - Jaclin going from gym (basketball court) to pod to cell
+3. Show risk rating for a particular cell or pod.
+    - Two residents of rivaling gangs get together in a pod - that sets off an alert.
