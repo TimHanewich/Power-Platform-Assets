@@ -171,6 +171,7 @@ namespace CoreLibrary
 
         #region "Toolkit"
 
+        //Finds the GUID of a facility participant in CDS by their Face API ID (the Face API ID that is stored in CDS)
         public static async Task<Guid?> FindFacilityParticipantByFaceApiIdAsync(CdsService service, Guid id)
         {
             //Find the Faciliy Participant in CDS according to GUID
