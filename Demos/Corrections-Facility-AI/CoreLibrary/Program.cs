@@ -8,6 +8,10 @@ using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using ConsoleVisuals;
 using Newtonsoft.Json;
+using TimHanewich.Cds.Helpers;
+using TimHanewich.Cds.AdvancedRead;
+using TimHanewich.Cds;
+using Newtonsoft.Json.Linq;
 
 namespace CoreLibrary
 {
@@ -22,18 +26,11 @@ namespace CoreLibrary
             // TrainAsync().Wait(); //Train
 
 
-            Stream s = System.IO.File.OpenRead(@"C:\Users\tahan\Downloads\Face API\Scenes\Jaclin Transportation\Entering Cell.png");
-            IdentifyResult[] results = IdentifyAsync(s).Result;
-            foreach (IdentifyResult result in results)
-            {
-                foreach (IdentifyCandidate candidate in result.Candidates)
-                {
-                    Person p = GetPersonAsync(candidate.PersonId).Result;
-                    Console.WriteLine(p.Name + " at " + candidate.Confidence.ToString("#,##0.00%"));
-                }
-            }
             
-            //PrintAllPeopleAsync().Wait();
+            CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+            Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
+            Console.WriteLine(resID.Value.ToString());
+            
 
 
         }
@@ -171,6 +168,33 @@ namespace CoreLibrary
         }
 
         #endregion
+
+        #region "Toolkit"
+
+        public static async Task<Guid?> FindFacilityParticipantByFaceApiIdAsync(CdsService service, Guid id)
+        {
+            //Find the Faciliy Participant in CDS according to GUID
+            CdsReadOperation read = new CdsReadOperation();
+            read.TableIdentifier = "doc_facilityparticipants";
+            CdsReadFilter filter = new CdsReadFilter();
+            filter.ColumnName = "doc_faceid";
+            filter.Operator = ComparisonOperator.Equals;
+            filter.SetValue(id.ToString());
+            read.AddFilter(filter);
+            read.AddColumn("doc_facilityparticipantid");
+            JObject[] objects = await service.ExecuteCdsReadOperationAsync(read);
+            if (objects.Length == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return Guid.Parse(objects[0].Property("doc_facilityparticipantid").Value.ToString());
+            }
+        }
+
+        #endregion
+
 
     }
 }
