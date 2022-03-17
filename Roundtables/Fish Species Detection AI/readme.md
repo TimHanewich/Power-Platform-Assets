@@ -14,3 +14,4 @@ In this session we build and train an AI model to automatically detect a species
 
 ## Recorded Sessions
 - Tim Hanewich, New Mexico, January 2021: https://youtu.be/q0dV0Tr_Dm4
+- Tim Hanewich, Kansas, March 2022: https://youtu.be/-yP875I1RgU
