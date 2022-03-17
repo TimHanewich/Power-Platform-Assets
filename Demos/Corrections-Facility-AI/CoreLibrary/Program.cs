@@ -214,6 +214,9 @@ namespace CoreLibrary
             //Confidence
             jo.Add("doc_facialrecognitionconfidence", confidence);
 
+            //Detected At
+            jo.Add("doc_detectedat", DateTime.UtcNow);
+
 
             //Upload
             await service.CreateRecordAsync("doc_locationdetections", jo.ToString());
