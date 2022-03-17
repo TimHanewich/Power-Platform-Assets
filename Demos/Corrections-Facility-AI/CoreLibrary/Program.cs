@@ -27,13 +27,14 @@ namespace CoreLibrary
 
 
             
-            //CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+            CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
             //Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
             //Console.WriteLine(resID.Value.ToString());
             //CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
 
             scene().Wait();
 
+            
         }
 
         #region "Deployment - creating the necessary resources in the face API"
@@ -217,6 +218,50 @@ namespace CoreLibrary
                 await CreateLocationDetectionAsync(service, MattId, MattInPodId, null, null, 0.9732f);
                 ConsoleVisualsToolkit.WriteLine("Success!", ConsoleColor.Green);
 
+                Console.WriteLine();
+                ConsoleVisualsToolkit.WriteLine("Scene complete!", ConsoleColor.Green);
+            }
+            else if (sceneID == "2")
+            {
+                Console.WriteLine("You have selected scene 2: Jaclin walks from gym to pod to cell.");
+
+                //Authenticate CDS
+                Console.Write("Authenticating CDS... ");
+                CdsService service = await FaceAuthenticator.AuthenticateCDSAsync();
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                //Vars needed for this scene
+                Guid jaclinId = Guid.Parse("dd84065f-68a5-ec11-983f-0022480b18d9");
+                Guid gymId = Guid.Parse("7cc626f3-0fa6-ec11-983f-0022480b18d9"); //A recreational area record
+                Guid podId = Guid.Parse("e905ec26-b5a4-ec11-983f-0022480b18d9"); //pod 1A
+                Guid cellId = Guid.Parse("98212c95-f9a5-ec11-983f-0022480b18d9"); //Cell C9
+
+                //Part 1: Jaclin in basketball court
+                Console.Write("Logging Jaclin in gym... ");
+                await CreateLocationDetectionAsync(service, jaclinId, null, null, gymId, 0.8793f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+                
+                //Wait
+                Console.WriteLine();
+                Console.Write("Press enter to proceed to next scene: Jaclin walks into pod.");
+                Console.ReadLine();
+                Console.WriteLine();
+
+                //Part 2: Jaclin in pod
+                Console.Write("Logging Jaclin in pod... ");
+                await CreateLocationDetectionAsync(service, jaclinId, podId, null, null, 0.9543f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                //Wait
+                Console.WriteLine();
+                Console.Write("Press enter to proceed to next scene: Jaclin walks into cell.");
+                Console.ReadLine();
+                Console.WriteLine();
+                
+                //Part 2: Jaclin in pod
+                Console.Write("Logging Jaclin in cell... ");
+                await CreateLocationDetectionAsync(service, jaclinId, null, cellId, null, 0.9543f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
             }
             else
             {
