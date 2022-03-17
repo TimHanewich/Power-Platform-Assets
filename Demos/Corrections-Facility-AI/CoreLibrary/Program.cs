@@ -201,7 +201,7 @@ namespace CoreLibrary
                 Guid MattId = Guid.Parse("fd33b13a-68a5-ec11-983f-0022480b18d9");
                 Guid MattCellId = Guid.Parse("c2c07088-f9a5-ec11-983f-0022480b18d9"); //Cell C4 (there are 12 cells in pod 1A) in El Dorado)
                 Console.Write("Creating location detection for Matt in his cell... ");
-                await CreateLocationDetectionAsync(service, MattId, null, MattCellId, 0.932f);
+                await CreateLocationDetectionAsync(service, MattId, null, MattCellId, null, 0.932f);
                 ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
 
                 //Wait for next part
@@ -214,7 +214,7 @@ namespace CoreLibrary
                 //Save location history of Matt in the common area pod
                 Guid MattInPodId = Guid.Parse("e905ec26-b5a4-ec11-983f-0022480b18d9"); //The ID of the pod Matt's cell is in.
                 Console.Write("Creating location detection for Matt in the pod... ");
-                await CreateLocationDetectionAsync(service, MattId, MattInPodId, null, 0.9732f);
+                await CreateLocationDetectionAsync(service, MattId, MattInPodId, null, null, 0.9732f);
                 ConsoleVisualsToolkit.WriteLine("Success!", ConsoleColor.Green);
 
             }
@@ -252,7 +252,7 @@ namespace CoreLibrary
             }
         }
 
-        public static async Task CreateLocationDetectionAsync(CdsService service, Guid person, Guid? pod, Guid? cell, float confidence)
+        public static async Task CreateLocationDetectionAsync(CdsService service, Guid person, Guid? pod, Guid? cell, Guid? recreational_area, float confidence)
         {
             JObject jo = new JObject();
             jo.Add("doc_PersonDetected@odata.bind", "doc_facilityparticipants(" + person.ToString() + ")");
@@ -267,6 +267,12 @@ namespace CoreLibrary
             if (cell.HasValue)
             {
                 jo.Add("doc_DetectedinCell@odata.bind", "doc_cells(" + cell.Value.ToString() + ")");
+            }
+
+            //Recreational area?
+            if (recreational_area.HasValue)
+            {
+                jo.Add("doc_DetectedinRecreationalArea@odata.bind", "doc_recreationalareas(" + recreational_area.Value.ToString() + ")");
             }
 
             //Confidence
