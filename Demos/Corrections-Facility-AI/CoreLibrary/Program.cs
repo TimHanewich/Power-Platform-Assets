@@ -27,11 +27,12 @@ namespace CoreLibrary
 
 
             
-            CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-            Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
-            Console.WriteLine(resID.Value.ToString());
-            
-            CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
+            //CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+            //Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
+            //Console.WriteLine(resID.Value.ToString());
+            //CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
+
+            scene().Wait();
 
         }
 
@@ -168,6 +169,63 @@ namespace CoreLibrary
         }
 
         #endregion
+
+        #region "SCENES"
+
+        public static async Task scene()
+        {
+
+
+            Console.WriteLine("Script a scene:");
+            Console.WriteLine();
+            Console.WriteLine("1 - Matt Fellows is in his cells and then is found in the pod area.");
+            Console.WriteLine("2 - Cameras on entrances detect Jaclin Owens walks from the gym --> pod --> cell.");
+            Console.WriteLine("3 - A fight breaks out between two rivaling gang members in a pod.");
+            Console.WriteLine();
+            Console.Write("What scene do you want to play? >");
+            string sceneID = Console.ReadLine();
+            
+
+            if (sceneID == "1")
+            {
+                Console.WriteLine("You selected scene 1.");
+
+                //Authenticate CDS
+                Console.Write("Authenticating CDS... ");
+                CdsService service = await FaceAuthenticator.AuthenticateCDSAsync();
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                ConsoleVisualsToolkit.WriteLine("Part 1: Matt is in his cell.");
+
+                //Save location history that matt is in his cell
+                Guid MattId = Guid.Parse("fd33b13a-68a5-ec11-983f-0022480b18d9");
+                Guid MattCellId = Guid.Parse("c2c07088-f9a5-ec11-983f-0022480b18d9"); //Cell C4 (there are 12 cells in pod 1A) in El Dorado)
+                Console.Write("Creating location detection for Matt in his cell... ");
+                await CreateLocationDetectionAsync(service, MattId, null, MattCellId, 0.932f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                //Wait for next part
+                Console.WriteLine();
+                Console.WriteLine("The next part of this scene is Matt being seen in the common area.");
+                Console.Write("Press enter when you are ready to proceed to this scene.");
+                Console.ReadLine();
+                Console.WriteLine();
+
+                //Save location history of Matt in the common area pod
+                Guid MattInPodId = Guid.Parse("e905ec26-b5a4-ec11-983f-0022480b18d9"); //The ID of the pod Matt's cell is in.
+                Console.Write("Creating location detection for Matt in the pod... ");
+                await CreateLocationDetectionAsync(service, MattId, MattInPodId, null, 0.9732f);
+                ConsoleVisualsToolkit.WriteLine("Success!", ConsoleColor.Green);
+
+            }
+            else
+            {
+                Console.WriteLine("Scene '" + sceneID + "' not recognized or not available yet.");
+            }
+        }
+
+        #endregion
+
 
         #region "Toolkit"
 
