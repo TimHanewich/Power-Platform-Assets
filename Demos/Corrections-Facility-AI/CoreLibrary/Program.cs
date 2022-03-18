@@ -32,7 +32,16 @@ namespace CoreLibrary
             //Console.WriteLine(resID.Value.ToString());
             //CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
 
-            scene().Wait();
+            CdsReadOperation read = new CdsReadOperation();
+            read.TableIdentifier = "doc_facilityparticipants";
+            read.RecordId = Guid.Parse("dd84065f-68a5-ec11-983f-0022480b18d9");
+            read.AddColumn("doc_portraitimage_url");
+            
+
+            JObject[] jo = service.ReadAsync(read).Result;
+            Console.WriteLine(JsonConvert.SerializeObject(jo));
+
+            //scene().Wait();
 
             
         }
@@ -263,6 +272,11 @@ namespace CoreLibrary
                 await CreateLocationDetectionAsync(service, jaclinId, null, cellId, null, 0.9543f);
                 ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
             }
+            else if (sceneID == "3")
+            {
+                Console.WriteLine("You selected scene 3: fight scene");
+
+            }
             else
             {
                 Console.WriteLine("Scene '" + sceneID + "' not recognized or not available yet.");
@@ -286,7 +300,7 @@ namespace CoreLibrary
             filter.SetValue(id.ToString());
             read.AddFilter(filter);
             read.AddColumn("doc_facilityparticipantid");
-            JObject[] objects = await service.ExecuteCdsReadOperationAsync(read);
+            JObject[] objects = await service.ReadAsync(read);
             if (objects.Length == 0)
             {
                 return null;
