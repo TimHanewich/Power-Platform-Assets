@@ -31,8 +31,8 @@ namespace CoreLibrary
             
 
             
-            JObject last = GetMostRecentLocationDetectionForPersonAsync(service, Guid.Parse("dd84065f-68a5-ec11-983f-0022480b18d9")).Result;
-            Console.WriteLine(JsonConvert.SerializeObject(last));
+            JObject map = PrepareMapAsync(service).Result;
+            Console.WriteLine(map.ToString());
 
             
         }
@@ -276,7 +276,6 @@ namespace CoreLibrary
 
         #endregion
 
-
         #region "Toolkit"
 
         //Finds the GUID of a facility participant in CDS by their Face API ID (the Face API ID that is stored in CDS)
@@ -366,6 +365,148 @@ namespace CoreLibrary
             {
                 return null;
             }
+        }
+
+        #endregion
+
+        #region "For API - Preparation of 'where is everyone?' body"
+
+        public static async Task<JObject> PrepareMapAsync(CdsService service)
+        {
+            //Get a list of all participants
+            JObject[] AllParticipants = await service.GetRecordsAsync("doc_facilityparticipants");
+
+            //Get a list of all cells
+            JObject[] AllCells = await service.GetRecordsAsync("doc_cells");
+
+            //Get a list of all pods
+            JObject[] AllPods = await service.GetRecordsAsync("doc_pods");
+
+            //Get a list of all recreational facilities
+            JObject[] AllRecreationalAreas = await service.GetRecordsAsync("doc_recreationalareas");
+
+
+            //Construct the body to return
+            JObject ToReturn = new JObject();
+
+            //Construct the variables to return. Each of these is a LIST of objects that represent people
+            List<JObject> C1 = new List<JObject>();
+            List<JObject> C2 = new List<JObject>();
+            List<JObject> C3 = new List<JObject>();
+            List<JObject> C4 = new List<JObject>();
+            List<JObject> C5 = new List<JObject>();
+            List<JObject> C6 = new List<JObject>();
+            List<JObject> C7 = new List<JObject>();
+            List<JObject> C8 = new List<JObject>();
+            List<JObject> C9 = new List<JObject>();
+            List<JObject> C10 = new List<JObject>();
+            List<JObject> C11 = new List<JObject>();
+            List<JObject> C12 = new List<JObject>();
+            List<JObject> CommonArea = new List<JObject>();
+            List<JObject> Gym = new List<JObject>();
+
+            //Prepare a big list of last location detections
+            //This table will tell you who it is and where it was
+            List<JObject> AllLastLocationDetections = new List<JObject>();
+            foreach (JObject participant in AllParticipants)
+            {
+                Guid ParticipantId = Guid.Parse(participant.Property("doc_facilityparticipantid").Value.ToString());
+                //Get location detection history
+                JObject LastLocationDetection = await GetMostRecentLocationDetectionForPersonAsync(service, ParticipantId);
+                if (LastLocationDetection != null)
+                {
+                    AllLastLocationDetections.Add(LastLocationDetection);
+                }
+            }
+
+            //For each cell, prepare 
+            foreach (JObject cell in AllCells)
+            {
+                Guid cellId = Guid.Parse(cell.Property("doc_cellid").Value.ToString());
+                string cellName = cell.Property("doc_id").Value.ToString();
+
+                //Get a list of all current occupants ID's
+                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), cellId);
+
+                ToReturn.Add(cellName, OccupantIds.Length);
+            }
+
+            //For each pod, prepare
+            foreach (JObject pod in AllPods)
+            {
+                Guid podId = Guid.Parse(pod.Property("doc_podid").Value.ToString());
+                string podName = pod.Property("doc_name").Value.ToString();
+
+                //Get a list of all current occupants ID's
+                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), podId);
+
+                ToReturn.Add(podName, OccupantIds.Length);
+            }
+
+            //For each recreational area, prepare
+            foreach (JObject ra in AllRecreationalAreas)
+            {
+                Guid raId = Guid.Parse(ra.Property("doc_recreationalareaid").Value.ToString());
+                string raName = ra.Property("doc_name").Value.ToString();
+
+                //Get a list of all current occupants ID's
+                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), raId);
+
+                ToReturn.Add(raName, OccupantIds.Length);
+            }
+
+
+            return ToReturn;
+        }
+
+        //This will scan through a list of ALL last location detections and return the GUID's of people that are inside a specific room (room meaning cell, pod, or recreational area)
+        private static Guid[] PrepareRoomOccupants(JObject[] AllLastLocationDetections, Guid location_id)
+        {
+            List<Guid> ToReturn = new List<Guid>();
+
+            foreach (JObject LastLocationDetection in AllLastLocationDetections)
+            {
+                //Id of the person it belongs to
+                Guid DetectedPersonId = Guid.Parse(LastLocationDetection.Property("_doc_persondetected_value").Value.ToString());
+
+                //Get the value of the location that this corresponds to
+                JProperty diCell = LastLocationDetection.Property("_doc_detectedincell_value");
+                JProperty diRecreationalArea = LastLocationDetection.Property("_doc_detectedinrecreationalarea_value");
+                JProperty diPod = LastLocationDetection.Property("_doc_detectedinpod_value");
+
+                //Cell?
+                if (diCell.Value.Type != JTokenType.Null)
+                {
+                    Guid id = Guid.Parse(diCell.Value.ToString());
+                    if (id == location_id)
+                    {
+                        ToReturn.Add(DetectedPersonId);
+                    }
+                }
+
+                //Pod?
+                if (diPod.Value.Type != JTokenType.Null)
+                {
+                    Guid id = Guid.Parse(diPod.Value.ToString());
+                    if (id == location_id)
+                    {
+                        ToReturn.Add(DetectedPersonId);
+                    }
+                }
+
+                //Recreational Area?
+                if (diRecreationalArea.Value.Type != JTokenType.Null)
+                {
+                    Guid id = Guid.Parse(diRecreationalArea.Value.ToString());
+                    if (id == location_id)
+                    {
+                        ToReturn.Add(DetectedPersonId);
+                    }
+                }
+
+            }
+
+            return ToReturn.ToArray();
         }
 
         #endregion
