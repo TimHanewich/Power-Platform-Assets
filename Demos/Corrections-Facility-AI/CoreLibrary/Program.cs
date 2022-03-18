@@ -29,6 +29,9 @@ namespace CoreLibrary
             
             CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
             
+            //JObject[] people = service.GetRecordsAsync("doc_facilityparticipants").Result;
+            //Console.WriteLine(JsonConvert.SerializeObject(people[0]));
+            //Console.ReadLine();
 
             
             JObject map = PrepareMapAsync(service).Result;
@@ -524,6 +527,8 @@ namespace CoreLibrary
                     JObject ToAdd = new JObject();
                     ToAdd.Add("FirstName", participant.Property("doc_firstname").Value.ToString());
                     ToAdd.Add("LastName", participant.Property("doc_lastname").Value.ToString());
+                    ToAdd.Add("ProfileUrl", participant.Property("doc_profileimage_url").Value.ToString());
+                    ToAdd.Add("PortraitUrl", participant.Property("doc_portraitimage_url").Value.ToString());
                     ToReturn.Add(ToAdd);
                 }
             }
