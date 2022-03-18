@@ -419,48 +419,52 @@ namespace CoreLibrary
                 }
             }
 
-            //For each cell, prepare 
+            
+
+            //For each cell, collect
             foreach (JObject cell in AllCells)
             {
                 Guid cellId = Guid.Parse(cell.Property("doc_cellid").Value.ToString());
-                string cellName = cell.Property("doc_id").Value.ToString();
+                string cellName = cell.Property("doc_id").Value.ToString(); 
 
                 //Get a list of all current occupants ID's
-                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), cellId);
+                Guid[] OccupantIds = FindRoomOccupants(AllLastLocationDetections.ToArray(), cellId);
 
-                ToReturn.Add(cellName, OccupantIds.Length);
+                ToReturn.Add(cellName, PrepareRoomOccupants(AllParticipants, OccupantIds));
             }
-
-            //For each pod, prepare
+            
+            //For each pod, collect
             foreach (JObject pod in AllPods)
             {
                 Guid podId = Guid.Parse(pod.Property("doc_podid").Value.ToString());
                 string podName = pod.Property("doc_name").Value.ToString();
 
                 //Get a list of all current occupants ID's
-                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), podId);
+                Guid[] OccupantIds = FindRoomOccupants(AllLastLocationDetections.ToArray(), podId);
 
-                ToReturn.Add(podName, OccupantIds.Length);
+                ToReturn.Add(podName, PrepareRoomOccupants(AllParticipants, OccupantIds));
             }
 
-            //For each recreational area, prepare
+            //For each recreational area, collect
             foreach (JObject ra in AllRecreationalAreas)
             {
                 Guid raId = Guid.Parse(ra.Property("doc_recreationalareaid").Value.ToString());
                 string raName = ra.Property("doc_name").Value.ToString();
 
                 //Get a list of all current occupants ID's
-                Guid[] OccupantIds = PrepareRoomOccupants(AllLastLocationDetections.ToArray(), raId);
+                Guid[] OccupantIds = FindRoomOccupants(AllLastLocationDetections.ToArray(), raId);
 
-                ToReturn.Add(raName, OccupantIds.Length);
+                ToReturn.Add(raName, PrepareRoomOccupants(AllParticipants, OccupantIds));
             }
+
+
 
 
             return ToReturn;
         }
 
         //This will scan through a list of ALL last location detections and return the GUID's of people that are inside a specific room (room meaning cell, pod, or recreational area)
-        private static Guid[] PrepareRoomOccupants(JObject[] AllLastLocationDetections, Guid location_id)
+        private static Guid[] FindRoomOccupants(JObject[] AllLastLocationDetections, Guid location_id)
         {
             List<Guid> ToReturn = new List<Guid>();
 
@@ -507,6 +511,23 @@ namespace CoreLibrary
             }
 
             return ToReturn.ToArray();
+        }
+
+        private static JArray PrepareRoomOccupants(JObject[] AllParticipants, Guid[] select_people)
+        {
+            List<JObject> ToReturn = new List<JObject>();
+            foreach (JObject participant in AllParticipants)
+            {
+                Guid ParticipantId = Guid.Parse(participant.Property("doc_facilityparticipantid").Value.ToString());
+                if (select_people.Contains(ParticipantId))
+                {
+                    JObject ToAdd = new JObject();
+                    ToAdd.Add("FirstName", participant.Property("doc_firstname").Value.ToString());
+                    ToAdd.Add("LastName", participant.Property("doc_lastname").Value.ToString());
+                    ToReturn.Add(ToAdd);
+                }
+            }
+            return JArray.Parse(JsonConvert.SerializeObject(ToReturn.ToArray()));
         }
 
         #endregion
