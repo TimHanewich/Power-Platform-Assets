@@ -25,19 +25,25 @@ namespace CoreLibrary
             // DeployAsync().Wait(); //Upload all data
             // TrainAsync().Wait(); //Train
 
-
-            
-            CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-            
-            // JObject[] people = service.GetRecordsAsync("doc_facilityparticipants").Result;
-            // Console.WriteLine(JsonConvert.SerializeObject(people[0]));
-            // Console.ReadLine();
-
-            
-            JObject map = PrepareMapAsync(service).Result;
-            Console.WriteLine(map.ToString());
-
-            
+            if (args.Length == 0) //For testing
+            {
+                CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+                JObject map = PrepareMapAsync(service, new DateTime(2020, 1, 1)).Result;
+                Console.WriteLine(map.ToString());
+            }
+            else
+            {
+                if (args[0] == "scene")
+                {
+                    scene().Wait();
+                }
+                else if (args[0] == "map")
+                {
+                    CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+                    JObject map = PrepareMapAsync(service, null).Result;
+                    Console.WriteLine(map.ToString());
+                }
+            }
         }
 
         #region "Deployment - creating the necessary resources in the face API"
@@ -338,7 +344,7 @@ namespace CoreLibrary
             await service.CreateRecordAsync("doc_locationdetections", jo.ToString());
         }
 
-        public static async Task<JObject> GetMostRecentLocationDetectionForPersonAsync(CdsService service, Guid person)
+        public static async Task<JObject> GetMostRecentLocationDetectionForPersonAsync(CdsService service, Guid person, DateTime? before = null)
         {
             //Find the last location detection for a facility participant
             CdsReadOperation read = new CdsReadOperation();
@@ -347,8 +353,21 @@ namespace CoreLibrary
             //Filter - for that particular participant
             CdsReadFilter filter = new CdsReadFilter();
             filter.ColumnName = "_doc_persondetected_value";
+            filter.Operator = ComparisonOperator.Equals;
             filter.SetValue(person);
             read.AddFilter(filter);
+
+            //Filter - before a specific time
+            if (before.HasValue)
+            {
+                CdsReadFilter filter2 = new CdsReadFilter();
+                filter2.ColumnName = "doc_detectedat";
+                filter2.LogicalOperatorPrefix = LogicalOperator.And;
+                filter2.Operator = ComparisonOperator.LessThan;
+                filter2.SetValue(before.Value.ToString());
+                read.AddFilter(filter2);
+            }
+            
 
             //Ordering (sorting) - get most recent
             CdsReadOrder order = new CdsReadOrder();
@@ -372,9 +391,9 @@ namespace CoreLibrary
 
         #endregion
 
-        #region "For API - Preparation of 'where is everyone?' body"
+        #region "For API - Map"
 
-        public static async Task<JObject> PrepareMapAsync(CdsService service)
+        public static async Task<JObject> PrepareMapAsync(CdsService service, DateTime? before = null)
         {
             //Get a list of all participants
             JObject[] AllParticipants = await service.GetRecordsAsync("doc_facilityparticipants");
@@ -392,22 +411,6 @@ namespace CoreLibrary
             //Construct the body to return
             JObject ToReturn = new JObject();
 
-            //Construct the variables to return. Each of these is a LIST of objects that represent people
-            List<JObject> C1 = new List<JObject>();
-            List<JObject> C2 = new List<JObject>();
-            List<JObject> C3 = new List<JObject>();
-            List<JObject> C4 = new List<JObject>();
-            List<JObject> C5 = new List<JObject>();
-            List<JObject> C6 = new List<JObject>();
-            List<JObject> C7 = new List<JObject>();
-            List<JObject> C8 = new List<JObject>();
-            List<JObject> C9 = new List<JObject>();
-            List<JObject> C10 = new List<JObject>();
-            List<JObject> C11 = new List<JObject>();
-            List<JObject> C12 = new List<JObject>();
-            List<JObject> CommonArea = new List<JObject>();
-            List<JObject> Gym = new List<JObject>();
-
             //Prepare a big list of last location detections
             //This table will tell you who it is and where it was
             List<JObject> AllLastLocationDetections = new List<JObject>();
@@ -415,7 +418,7 @@ namespace CoreLibrary
             {
                 Guid ParticipantId = Guid.Parse(participant.Property("doc_facilityparticipantid").Value.ToString());
                 //Get location detection history
-                JObject LastLocationDetection = await GetMostRecentLocationDetectionForPersonAsync(service, ParticipantId);
+                JObject LastLocationDetection = await GetMostRecentLocationDetectionForPersonAsync(service, ParticipantId, before);
                 if (LastLocationDetection != null)
                 {
                     AllLastLocationDetections.Add(LastLocationDetection);
