@@ -28,20 +28,11 @@ namespace CoreLibrary
 
             
             CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-            //Guid? resID = FindFacilityParticipantByFaceApiIdAsync(service, Guid.Parse("53a197fa-b911-4784-ac36-6d706882c91e")).Result;
-            //Console.WriteLine(resID.Value.ToString());
-            //CreateLocationDetectionAsync(service, resID.Value, null, Guid.Parse("5ef3e043-b5a4-ec11-983f-0022480b18d9"), 0.9f).Wait();
-
-            CdsReadOperation read = new CdsReadOperation();
-            read.TableIdentifier = "doc_facilityparticipants";
-            read.RecordId = Guid.Parse("dd84065f-68a5-ec11-983f-0022480b18d9");
-            read.AddColumn("doc_portraitimage_url");
             
 
-            JObject[] jo = service.ReadAsync(read).Result;
-            Console.WriteLine(JsonConvert.SerializeObject(jo));
-
-            //scene().Wait();
+            
+            JObject last = GetMostRecentLocationDetectionForPersonAsync(service, Guid.Parse("dd84065f-68a5-ec11-983f-0022480b18d9")).Result;
+            Console.WriteLine(JsonConvert.SerializeObject(last));
 
             
         }
@@ -343,6 +334,38 @@ namespace CoreLibrary
 
             //Upload
             await service.CreateRecordAsync("doc_locationdetections", jo.ToString());
+        }
+
+        public static async Task<JObject> GetMostRecentLocationDetectionForPersonAsync(CdsService service, Guid person)
+        {
+            //Find the last location detection for a facility participant
+            CdsReadOperation read = new CdsReadOperation();
+            read.TableIdentifier = "doc_locationdetections";
+            
+            //Filter - for that particular participant
+            CdsReadFilter filter = new CdsReadFilter();
+            filter.ColumnName = "_doc_persondetected_value";
+            filter.SetValue(person);
+            read.AddFilter(filter);
+
+            //Ordering (sorting) - get most recent
+            CdsReadOrder order = new CdsReadOrder();
+            order.ColumnName = "doc_detectedat";
+            order.Direction = OrderDirection.Descending;
+            read.AddOrdering(order);
+
+            //Top - only get the top 1
+            read.Top = 1;
+
+            JObject[] records = await service.ReadAsync(read);
+            if (records.Length > 0)
+            {
+                return records[0];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         #endregion
