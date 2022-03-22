@@ -18,10 +18,14 @@ namespace CoreLibrary
         public static string CdsUsername = "";
         public static string CdsPassword = "";
 
+        //Azure cognitive speech services settings
+        public static string AzureSpeechServicesKey = "";
+        public static string AzureSpeehServicesRegion = "";
+
         public static IFaceClient Authenticate()
         {
-            IFaceClient client = new FaceClient(new ApiKeyServiceClientCredentials("b41d3e97004f4c78a30c79596187eb0e"));
-            client.Endpoint = "https://testfaceapi20220311.cognitiveservices.azure.com";
+            IFaceClient client = new FaceClient(new ApiKeyServiceClientCredentials(""));
+            client.Endpoint = "";
             return client;
         }
 
