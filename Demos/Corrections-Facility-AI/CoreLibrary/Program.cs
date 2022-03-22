@@ -12,6 +12,9 @@ using TimHanewich.Cds.Helpers;
 using TimHanewich.Cds.AdvancedRead;
 using TimHanewich.Cds;
 using Newtonsoft.Json.Linq;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+using TimHanewich.Toolkit;
 
 namespace CoreLibrary
 {
@@ -191,6 +194,7 @@ namespace CoreLibrary
             Console.WriteLine("1 - Matt Fellows is in his cells and then is found in the pod area.");
             Console.WriteLine("2 - Cameras on entrances detect Jaclin Owens walks from the gym --> pod --> cell.");
             Console.WriteLine("3 - A fight breaks out between two rivaling gang members in a pod.");
+            Console.WriteLine("4 - Two residents discussing getting drugs into facility.");
             Console.WriteLine();
             Console.Write("What scene do you want to play? >");
             string sceneID = Console.ReadLine();
@@ -276,6 +280,47 @@ namespace CoreLibrary
             {
                 Console.WriteLine("You selected scene 3: fight scene");
 
+            }
+            else if (sceneID == "4")
+            {
+                //// SETTINGS //////
+                string PathToAudioFile = @"C:\Users\tahan\Downloads\Face API\Scenes\Discussing sneaking in drugs\drugs.wav"; //Path to the audio file with the drug 
+                ////////////////////
+
+                Console.WriteLine("You selected scene 4: Two residents discussing getting drugs into the facility.");
+                
+
+                SpeechConfig sc = SpeechConfig.FromSubscription(FaceAuthenticator.AzureSpeechServicesKey, FaceAuthenticator.AzureSpeehServicesRegion);
+                sc.SpeechRecognitionLanguage = "en-US";
+                
+                AudioConfig audio = AudioConfig.FromWavFileInput(PathToAudioFile);
+                SpeechRecognizer sr = new SpeechRecognizer(sc, audio);
+
+                //EXTRACT ALL
+                Console.Write("Recognizing... ");
+                HanewichTimer ht = new HanewichTimer();
+                ht.StartTimer();
+                bool KeepGoing = true;
+                string FullRecognition = "";
+                while (KeepGoing)
+                {
+                    SpeechRecognitionResult result = await sr.RecognizeOnceAsync();
+                    if (result.Reason == ResultReason.RecognizedSpeech)
+                    {
+                        FullRecognition = FullRecognition + result.Text + Environment.NewLine;
+                    }
+                    else
+                    {
+                        KeepGoing = false;
+                    }
+                }
+                FullRecognition = FullRecognition.Substring(0, FullRecognition.Length - 1); //Remove the last new line.
+                ht.StopTimer();
+                Console.WriteLine("Recognized in " + ht.GetElapsedTime().TotalSeconds.ToString("#,##0.0") + " seconds");
+
+                //Print it
+                Console.WriteLine("Full recognition: ");
+                Console.WriteLine(FullRecognition);
             }
             else
             {
