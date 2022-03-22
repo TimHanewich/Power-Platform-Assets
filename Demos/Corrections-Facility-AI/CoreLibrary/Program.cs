@@ -15,7 +15,7 @@ using Newtonsoft.Json.Linq;
 
 namespace CoreLibrary
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
