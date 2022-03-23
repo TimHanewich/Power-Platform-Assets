@@ -296,27 +296,34 @@ namespace CoreLibrary
                 AudioConfig audio = AudioConfig.FromWavFileInput(PathToAudioFile);
                 SpeechRecognizer sr = new SpeechRecognizer(sc, audio);
 
-                //EXTRACT ALL
-                Console.Write("Recognizing... ");
-                HanewichTimer ht = new HanewichTimer();
-                ht.StartTimer();
-                bool KeepGoing = true;
-                string FullRecognition = "";
-                while (KeepGoing)
+                //Set up a variable for full recognition
+                string FullRecognition = null;
+                FullRecognition = "Then the door opened this morning bro, what's the matter? \nThey don't come in here and try to wake me up and try to give me to smoke this blunt with them. I would get my blunt. \nTrustee. \nSleep well, they light it. \nThey get a lighter and they just think that stuff in. \nAnd they have lighters in here. \nNo no yeah. \nHe's going to bring. \nThat's crazy.";
+
+                //Recognize all, only if it wasn't set above.
+                if (FullRecognition == null)
                 {
-                    SpeechRecognitionResult result = await sr.RecognizeOnceAsync();
-                    if (result.Reason == ResultReason.RecognizedSpeech)
+                    Console.Write("Recognizing... ");
+                    HanewichTimer ht = new HanewichTimer();
+                    ht.StartTimer();
+                    bool KeepGoing = true;
+                    while (KeepGoing)
                     {
-                        FullRecognition = FullRecognition + result.Text + Environment.NewLine;
+                        SpeechRecognitionResult result = await sr.RecognizeOnceAsync();
+                        if (result.Reason == ResultReason.RecognizedSpeech)
+                        {
+                            FullRecognition = FullRecognition + result.Text + Environment.NewLine;
+                        }
+                        else
+                        {
+                            KeepGoing = false;
+                        }
                     }
-                    else
-                    {
-                        KeepGoing = false;
-                    }
+                    FullRecognition = FullRecognition.Substring(0, FullRecognition.Length - 1); //Remove the last new line.
+                    ht.StopTimer();
+                    Console.WriteLine("Recognized in " + ht.GetElapsedTime().TotalSeconds.ToString("#,##0.0") + " seconds");
                 }
-                FullRecognition = FullRecognition.Substring(0, FullRecognition.Length - 1); //Remove the last new line.
-                ht.StopTimer();
-                Console.WriteLine("Recognized in " + ht.GetElapsedTime().TotalSeconds.ToString("#,##0.0") + " seconds");
+                
 
                 //Print it
                 Console.WriteLine("Full recognition: ");
