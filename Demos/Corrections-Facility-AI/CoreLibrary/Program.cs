@@ -280,6 +280,51 @@ namespace CoreLibrary
             {
                 Console.WriteLine("You selected scene 3: fight scene");
 
+                //Authenticate CDS
+                Console.Write("Authenticating CDS... ");
+                CdsService service = await FaceAuthenticator.AuthenticateCDSAsync();
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+
+
+                ////////////////////// SETTINGS ////////////////////
+
+                //ID's of the two fighters that will enter the cell and fight
+                //They will be entering cell 1
+                //They should have rivaling gangs registered in the system
+                Guid fighter1 = Guid.Parse("8de5ad15-17a6-ec11-983f-0022480b18d9");
+                Guid fighter2 = Guid.Parse("5a83a8c4-18a6-ec11-983f-0022480b18d9");
+
+                //Id's of locaitons
+                Guid podId = Guid.Parse("e905ec26-b5a4-ec11-983f-0022480b18d9"); //Id of the common area pod both fighters will start in
+                Guid cellId = Guid.Parse("e169257c-f9a5-ec11-983f-0022480b18d9"); //Id of the cell both fighters will step into and start fighting. This is cell C1.
+
+                ////////////////////////////////////////////////////
+
+                //Part 1: they are in the common area
+                Console.WriteLine("Part 1: They are both in the common area bickering.");
+                Console.Write("Logging fighter 1 in pod... ");
+                await CreateLocationDetectionAsync(service, fighter1, podId, null, null, 0.843f);
+                ConsoleVisualsToolkit.WriteLine("Succuss", ConsoleColor.Green);
+                Console.Write("Logging fighter 2 in pod... ");
+                await CreateLocationDetectionAsync(service, fighter2, podId, null, null, 0.94f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                //Wait
+                Console.WriteLine();
+                Console.Write("Press enter to proceed to next scene: Both fighters step into cell");
+                Console.ReadLine();
+                Console.WriteLine();
+
+                //Part 2: they both step into the cell
+                Console.WriteLine("Part 2: They both step into a cell");
+                Console.Write("Logging fighter 1 in cell... ");
+                await CreateLocationDetectionAsync(service, fighter1, null, cellId, null, 0.94f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+                Console.Write("Logging fighter 2 in cell... ");
+                await CreateLocationDetectionAsync(service, fighter2, null, cellId, null, 0.98f);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
             }
             else if (sceneID == "4")
             {
