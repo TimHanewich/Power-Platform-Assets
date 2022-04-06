@@ -31,8 +31,6 @@ namespace CoreLibrary
             if (args.Length == 0) //For testing
             {
                 CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-                JObject map = PrepareMapAsync(service, new DateTime(2020, 1, 1)).Result;
-                Console.WriteLine(map.ToString());
             }
             else
             {
@@ -484,6 +482,34 @@ namespace CoreLibrary
             {
                 return null;
             }
+        }
+
+        public static async Task CreateAlertAsync(CdsService service, string title, string description, Guid? pod, Guid? cell, Guid? recreational_area)
+        {
+            JObject jo = new JObject();
+
+            jo.Add("doc_title", title);
+            jo.Add("doc_description", description);
+
+            //Pod?
+            if (pod.HasValue)
+            {
+                jo.Add("doc_LocationPod@odata.bind", "doc_pods(" + pod.Value.ToString() + ")");
+            }
+
+            //Cell
+            if (cell.HasValue)
+            {
+                jo.Add("doc_LocationCell@odata.bind", "doc_cells(" + cell.Value.ToString() + ")");
+            }
+
+            //Recreational area?
+            if (recreational_area.HasValue)
+            {
+                jo.Add("doc_LocationRecreationalArea@odata.bind", "doc_recreationalareas(" + recreational_area.Value.ToString() + ")");
+            }
+
+            await service.CreateRecordAsync("doc_alerts", jo.ToString());
         }
 
         #endregion
