@@ -323,6 +323,17 @@ namespace CoreLibrary
                 await CreateLocationDetectionAsync(service, fighter2, null, cellId, null, 0.98f);
                 ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
 
+                //Some wait time before the alert is triggered
+                Console.WriteLine();
+                ConsoleVisualsToolkit.Write("Press enter when you are ready to move onto the next part of this scene: an alert is triggered.", ConsoleColor.Blue);
+                Console.ReadLine();
+                Console.WriteLine();
+
+                //Log the alert
+                Console.Write("Logging alert in the cell... ");
+                await CreateAlertAsync(service, "2 Rivaling Gang Members in Same Cell", "A high-risk situation was detected: a member of the BLACK GUERILLA FAMILY is alone with a member of the GANGSTER DISCIPLINES in Pod 1A, Cell 1.", null, cellId, null);
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
             }
             else if (sceneID == "4")
             {
