@@ -31,8 +31,7 @@ namespace CoreLibrary
             if (args.Length == 0) //For testing
             {
                 CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-                Guid id = CreateSpeechDetectionAsync(service, DateTime.UtcNow, null, Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"), null, "hiiiii").Result;
-                Console.WriteLine(id);
+                UpdateSpeechDetectionTranscriptAsync(service, Guid.Parse("7b9cb0e3-8ae2-4384-878b-00501a24ace7"), "ddsd.").Wait();
             }
             else
             {
@@ -570,6 +569,13 @@ namespace CoreLibrary
             await service.CreateRecordAsync("doc_detectedspeechs", jo.ToString());
 
             return NewIdForThisRecord;
+        }
+
+        public static async Task UpdateSpeechDetectionTranscriptAsync(CdsService service, Guid id, string new_transcript)
+        {
+            JObject jo = new JObject();
+            jo.Add("doc_transcript", new_transcript);
+            await service.UpdateRecordAsync("doc_detectedspeechs", id.ToString(), jo.ToString());
         }
 
         #endregion
