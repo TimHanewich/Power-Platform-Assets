@@ -372,6 +372,12 @@ namespace CoreLibrary
                 ConversationParts.Add("yeah");
                 ConversationParts.Add("the one who brings all the stuff in");
                 ConversationParts.Add("that's crazy");
+
+                //"RISKY" WORDS!
+                List<KeyValuePair<string, float>> RiskyWords = new List<KeyValuePair<string, float>>();
+                RiskyWords.Add(new KeyValuePair<string, float>("blunt", 0.87f));
+                RiskyWords.Add(new KeyValuePair<string, float>("lighter", 0.74f));
+                RiskyWords.Add(new KeyValuePair<string, float>("sneak", 0.49f));
                 
                 
                 //Wait until user indicates they are ready to move on
@@ -407,6 +413,19 @@ namespace CoreLibrary
 
                     //SUCCESS!
                     ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+                    //IF THIS PARTICULAR PART HAS A RISKY WORD IN IT, LOG IT AS RISKY!
+                    foreach (KeyValuePair<string, float> rword in RiskyWords)
+                    {
+                        if (s.ToLower().Contains(rword.Key.ToLower()))
+                        {
+                            Console.Write("This part of the conversation contains risky word '");
+                            ConsoleVisualsToolkit.Write(rword.Key.ToLower(), ConsoleColor.Red);
+                            Console.Write("'. Logging as risk... ");
+                            await CreateDetectedRiskPhraseAsync(service, ThisDetectedSpeech, rword.Key.ToLower(), rword.Value);
+                            ConsoleVisualsToolkit.WriteLine("Success!", ConsoleColor.Green);
+                        }
+                    }
                 }
                 
 
