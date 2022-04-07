@@ -31,7 +31,8 @@ namespace CoreLibrary
             if (args.Length == 0) //For testing
             {
                 CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-                CreateSpeechDetectionAsync(service, DateTime.UtcNow, null, Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"), null, "hiiiii").Wait();
+                Guid id = CreateSpeechDetectionAsync(service, DateTime.UtcNow, null, Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"), null, "hiiiii").Result;
+                Console.WriteLine(id);
             }
             else
             {
@@ -538,9 +539,11 @@ namespace CoreLibrary
             await service.CreateRecordAsync("doc_alerts", jo.ToString());
         }
 
-        public static async Task CreateSpeechDetectionAsync(CdsService service, DateTime detected_at, Guid? pod, Guid? cell, Guid? r_area, string transcript)
+        public static async Task<Guid> CreateSpeechDetectionAsync(CdsService service, DateTime detected_at, Guid? pod, Guid? cell, Guid? r_area, string transcript)
         {
             JObject jo = new JObject();
+            Guid NewIdForThisRecord = Guid.NewGuid();
+            jo.Add("doc_detectedspeechid", NewIdForThisRecord);
             jo.Add("doc_detectedat", DateTime.UtcNow);
             
             //Pod?
@@ -565,6 +568,8 @@ namespace CoreLibrary
             jo.Add("doc_transcript", transcript);
 
             await service.CreateRecordAsync("doc_detectedspeechs", jo.ToString());
+
+            return NewIdForThisRecord;
         }
 
         #endregion
