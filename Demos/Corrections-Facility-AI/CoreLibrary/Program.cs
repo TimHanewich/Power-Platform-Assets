@@ -31,7 +31,7 @@ namespace CoreLibrary
             if (args.Length == 0) //For testing
             {
                 CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
-                UpdateSpeechDetectionTranscriptAsync(service, Guid.Parse("7b9cb0e3-8ae2-4384-878b-00501a24ace7"), "ddsd.").Wait();
+                CreateDetectedRiskPhraseAsync(service, Guid.Parse("81ef5557-d043-4ddb-8fe5-4d818398f6bc"), "FRANKY!", 0.99f).Wait();
             }
             else
             {
@@ -636,6 +636,15 @@ namespace CoreLibrary
             await service.UpdateRecordAsync("doc_detectedspeechs", id.ToString(), jo.ToString());
         }
 
+        public static async Task CreateDetectedRiskPhraseAsync(CdsService service, Guid for_speech, string phrase, float score)
+        {
+            JObject jo = new JObject();
+            jo.Add("doc_FoundinSpeech@odata.bind", "doc_detectedspeechs(" + for_speech.ToString() + ")");
+            jo.Add("doc_phrase", phrase);
+            jo.Add("doc_riskscore", score);
+            await service.CreateRecordAsync("doc_detectedriskphrases", jo.ToString());
+        }
+      
         #endregion
 
         #region "For API - Map"
