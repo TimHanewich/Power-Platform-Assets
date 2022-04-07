@@ -31,6 +31,7 @@ namespace CoreLibrary
             if (args.Length == 0) //For testing
             {
                 CdsService service = FaceAuthenticator.AuthenticateCDSAsync().Result;
+                CreateSpeechDetectionAsync(service, DateTime.UtcNow, null, Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"), null, "hiiiii").Wait();
             }
             else
             {
@@ -385,7 +386,21 @@ namespace CoreLibrary
             }
             else
             {
-                Console.WriteLine("Scene '" + sceneID + "' not recognized or not available yet.");
+                Console.WriteLine("You selected scene 4: Two residents are sitting inside a cell and discussing drugs.");
+
+                //////////// SETTINGS ////////////
+
+                Guid CellId = Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"); //Cell 5
+
+                //////////////////////////////////
+
+                //First step: ensure the two participants are in the cell.
+
+
+
+                //Second step: Start logging a conversation history
+
+
             }
         }
 
@@ -521,6 +536,35 @@ namespace CoreLibrary
             }
 
             await service.CreateRecordAsync("doc_alerts", jo.ToString());
+        }
+
+        public static async Task CreateSpeechDetectionAsync(CdsService service, DateTime detected_at, Guid? pod, Guid? cell, Guid? r_area, string transcript)
+        {
+            JObject jo = new JObject();
+            jo.Add("doc_detectedat", DateTime.UtcNow);
+            
+            //Pod?
+            if (pod.HasValue)
+            {
+                jo.Add("doc_DetectedInPod@odata.bind", "doc_pods(" + pod.Value.ToString() + ")");
+            }
+
+            //Cell
+            if (cell.HasValue)
+            {
+                jo.Add("doc_DetectedInCell@odata.bind", "doc_cells(" + cell.Value.ToString() + ")");
+            }
+
+            //Recreational area?
+            if (r_area.HasValue)
+            {
+                jo.Add("doc_DectedInRecreationalArea@odata.bind", "doc_recreationalareas(" + r_area.Value.ToString() + ")");
+            }
+
+            //Beginning transcript
+            jo.Add("doc_transcript", transcript);
+
+            await service.CreateRecordAsync("doc_detectedspeechs", jo.ToString());
         }
 
         #endregion
