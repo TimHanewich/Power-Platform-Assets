@@ -362,12 +362,12 @@ namespace CoreLibrary
                 ConversationParts.Add("you can't be having the door open this morning");
                 ConversationParts.Add("what does it matter");
                 ConversationParts.Add("gonna come in here try to wake me up");
-                ConversationParts.Add("try to get me to smoke this blunt with them");
-                ConversationParts.Add("how are they getting a blunt");
+                ConversationParts.Add("try to get me to smoke this <b><font color=red>blunt</font></b> with them");
+                ConversationParts.Add("how are they getting a <b><font color=red>blunt</font></b>");
                 ConversationParts.Add("trust me");
                 ConversationParts.Add("how do they light it");
-                ConversationParts.Add("they get a lighter");
-                ConversationParts.Add("so they just sneak that stuff in. and they have lighters in here.");
+                ConversationParts.Add("they get a <b><font color=red>lighter</font></b>");
+                ConversationParts.Add("so they just <b><font color=red>sneak</font></b> that stuff in. and they have <b><font color=red>lighters</font></b> in here.");
                 ConversationParts.Add("you know the dude with the dreads");
                 ConversationParts.Add("yeah");
                 ConversationParts.Add("the one who brings all the stuff in");
@@ -400,7 +400,7 @@ namespace CoreLibrary
                     Console.Write("Logging now... ");
 
                     //Add it to the full
-                    FULL_TRANSCRIPT = FULL_TRANSCRIPT + Environment.NewLine + s;
+                    FULL_TRANSCRIPT = FULL_TRANSCRIPT + "<p>" + s + "</p>";
 
                     //Update it
                     await UpdateSpeechDetectionTranscriptAsync(service, ThisDetectedSpeech, FULL_TRANSCRIPT);
