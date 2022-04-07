@@ -335,8 +335,84 @@ namespace CoreLibrary
                 await CreateAlertAsync(service, "2 Rivaling Gang Members in Same Cell", "A high-risk situation was detected: a member of the BLACK GUERILLA FAMILY is alone with a member of the GANGSTER DISCIPLINES in Pod 1A, Cell 1.", null, cellId, null);
                 ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
 
-            }
+            } 
             else if (sceneID == "4")
+            {
+                //////////// SETTINGS ////////////
+
+                Guid CellId = Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"); //Cell 5
+                TimeSpan TimeInBetweenEachConversationPartUpload = new TimeSpan(0, 0, 4);
+
+                //////////////////////////////////
+
+                Console.WriteLine("You selected scene 4: Two residents are sitting inside a cell and discussing drugs.");
+
+                //Authenticate CDS
+                Console.Write("Authenticating CDS... ");
+                CdsService service = await FaceAuthenticator.AuthenticateCDSAsync();
+                ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+
+
+                //First step: ensure the two participants are in the cell.
+
+
+
+                //Second step: Start logging a conversation history
+                List<string> ConversationParts = new List<string>();
+                ConversationParts.Add("you can't be having the door open this morning");
+                ConversationParts.Add("what does it matter");
+                ConversationParts.Add("gonna come in here try to wake me up");
+                ConversationParts.Add("try to get me to smoke this blunt with them");
+                ConversationParts.Add("how are they getting a blunt");
+                ConversationParts.Add("trust me");
+                ConversationParts.Add("how do they light it");
+                ConversationParts.Add("they get a lighter");
+                ConversationParts.Add("so they just sneak that stuff in. and they have lighters in here.");
+                ConversationParts.Add("you know the dude with the dreads");
+                ConversationParts.Add("yeah");
+                ConversationParts.Add("the one who brings all the stuff in");
+                ConversationParts.Add("that's crazy");
+                
+                
+                //Wait until user indicates they are ready to move on
+                Console.WriteLine("Next step is for the speech to be logged.");
+                Console.Write("Press enter when you want to log the speech.");
+                Console.ReadLine();
+
+                //Log a new detected speech
+                string FULL_TRANSCRIPT = "yeah i do";
+                Console.Write("Logging a new detected speech... ");
+                Guid ThisDetectedSpeech = await CreateSpeechDetectionAsync(service, DateTime.UtcNow, null, CellId, null, FULL_TRANSCRIPT);
+                ConsoleVisualsToolkit.WriteLine("Success (" + ThisDetectedSpeech.ToString() + ")", ConsoleColor.Green);
+
+                //Wait until user indicates they are ready to move on
+                Console.WriteLine("The log was created. Next step is to APPEND EACH REMARK to that log.");
+                Console.Write("Press enter to move on");
+                Console.ReadLine();
+
+                //Log each
+                foreach (string s in ConversationParts)
+                {
+                    Console.Write("Waiting to log '");
+                    ConsoleVisualsToolkit.Write(s, ConsoleColor.Cyan);
+                    Console.Write("'... ");
+                    await Task.Delay(TimeInBetweenEachConversationPartUpload);
+                    Console.Write("Logging now... ");
+
+                    //Add it to the full
+                    FULL_TRANSCRIPT = FULL_TRANSCRIPT + Environment.NewLine + s;
+
+                    //Update it
+                    await UpdateSpeechDetectionTranscriptAsync(service, ThisDetectedSpeech, FULL_TRANSCRIPT);
+
+                    //SUCCESS!
+                    ConsoleVisualsToolkit.WriteLine("Success", ConsoleColor.Green);
+                }
+                
+
+
+            }
+            else if (sceneID == "4r")
             {
                 //// SETTINGS //////
                 string PathToAudioFile = @"C:\Users\tahan\Downloads\Face API\Scenes\Discussing sneaking in drugs\drugs.wav"; //Path to the audio file with the drug 
@@ -383,24 +459,6 @@ namespace CoreLibrary
                 //Print it
                 Console.WriteLine("Full recognition: ");
                 Console.WriteLine(FullRecognition);
-            }
-            else
-            {
-                Console.WriteLine("You selected scene 4: Two residents are sitting inside a cell and discussing drugs.");
-
-                //////////// SETTINGS ////////////
-
-                Guid CellId = Guid.Parse("e8c07088-f9a5-ec11-983f-0022480b18d9"); //Cell 5
-
-                //////////////////////////////////
-
-                //First step: ensure the two participants are in the cell.
-
-
-
-                //Second step: Start logging a conversation history
-
-
             }
         }
 
