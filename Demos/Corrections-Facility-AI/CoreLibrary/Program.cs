@@ -375,8 +375,8 @@ namespace CoreLibrary
 
                 //"RISKY" WORDS!
                 List<KeyValuePair<string, float>> RiskyWords = new List<KeyValuePair<string, float>>();
-                RiskyWords.Add(new KeyValuePair<string, float>("blunt", 0.87f));
-                RiskyWords.Add(new KeyValuePair<string, float>("lighter", 0.74f));
+                RiskyWords.Add(new KeyValuePair<string, float>("blunt", 0.94f));
+                RiskyWords.Add(new KeyValuePair<string, float>("lighter", 0.72f));
                 RiskyWords.Add(new KeyValuePair<string, float>("sneak", 0.49f));
                 
                 
