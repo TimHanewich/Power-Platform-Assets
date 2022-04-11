@@ -9,6 +9,9 @@ A staff member with the Department of Corrections will "scan" incoming inmate ma
 
 ## Badge Generation
 Staff members can generate an inmates badge via the **Resident Badge Generation** canvas app. This app will generate a unique QR code that will be placed on the badge and uniquely identifies that inmate. Officers within the facility can later scan this badge, review and document employee behavior or infractions, and review basic information about the inmate, via the **Officer Badge Verifier** canvas mobile app (phone form factor).
+![processing](./images/resident-processing.png)
+![badge generated](./images/badge.png)
+![officer badge verifier](./images/officer-badge-verifier.jpg)
 
 ## Solutions
 | Version | Notes |
