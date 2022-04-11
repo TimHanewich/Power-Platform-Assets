@@ -1,38 +1,6 @@
-Documentation: https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c
+# Corrections Facility Intelligence
+This solution leverages Microsoft Azure's cognitive service to provide a new level of "intelligence" to a correctional facility. A facilties *already existing* CCTV feed (video/periodic still imagery) will be fed into the system. The solution uses Azure's facial recognition capabilities to recognize offenders in each video feed and thus plot the movement of offenders in the facility. Guards will be alerted of potential high-risk encounter. For example, if it is detected a member of two rivalving gangs step into the same cell together along, an alert will be generated on live displays and sent to mobile phones that guards will have on their person.
 
-Steps:
-1. Create a PersonGroup (i.e. "residents", "officers")
-    - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395244
-2. Create a Person for each person you want to store. They must be associated to a PersonGroup
-    - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523c
-3. Add several faces (called "Persistent Face") for each of the people you added.
-    - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523b
-4. Detect a face by providing it
-    - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236
-    - Make sure you specify a recognition model. The recognition model you specify here must MATCH the one you use later on for the actual identification.
-    - This will return an ID of the detection you just did. You will pass this to the **identify** endpoint to identify who that is (what person it corresponds to)
-5. Identify a face
-    - https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239
-    - The recognitionModel you are using (a parameter) must MATCH the recognitionModel you specified in the step before this, the **Detection** step.
+Additionally, administrators will be able to "rewind" to any point in the past and see an interactive "map" of where each and every offender was at the time.
 
-
-## Research
-- [Architecture design of El Dorado](https://htkarchitects.net/projects/el-dorado-correctional-facility/)
-    - The El Dorado Correctional Facility consists of two general purpose housing units which are designed to accommodate minimum to maximum custody levels. Each unit is designed for a double bunk capacity of 256. The El Dorado Correctional Facility is divided into quadrants, each consisting of 31 or 33 cells with a common two level day room. The control room is centrally located with visibility into each quadrant. The inmates are housed along the exterior perimeter wall with cells constructed of masonry block. Precast hollow core slabs provide the floor system of the upper level mezzanine and the ceiling for the lower level. Colored, precast concrete sandwich panels comprise the exterior bearing walls. The roof is structural steel and bar joists while the foundation is concrete spread footings.
-
-## Notable Scenes in Show
-- Episode 6: 
-    - 19:43 jaclin entering basketball court.
-    - 39:23 Jacline re-entering pod
-    - 39:37 Jaclin re-entering cell
-    - 29:33 Matt sitting at table talking
-    - 34:23 fight breaks out (no one in it)
-    
-
-## Intended Demo "Scenes"
-1. Show simple "movement" of a resident
-    - Matt inside his cell. Now Matt in the pod common area talking to others.
-2. Show movement of a resident across facility
-    - Jaclin going from gym (basketball court) to pod to cell
-3. Show risk rating for a particular cell or pod.
-    - Two residents of rivaling gangs get together in a pod - that sets off an alert.
+Finally, if microphones are installed in the facility, the live feed will also go through Azure's speech-to-text service. If a conversation is detected, this conversatin will be fed through an algorithm that looks for words or phrases that are deemed "high risk" and pose a threat to the security and safety of officers and other offenders. Guards will be alerted to discussions that are detected in each part of the facility and can read the live transcript of the conversation as it happens. Each high-risk word or phrase will be flagged and displayed to the guards/administrators.
