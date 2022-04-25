@@ -8,7 +8,7 @@ You can find a directory of the Power Platform-based demonstrable content below:
 These demos are use cases that support a State's Environment Department:
 |Title|Description|
 |-|-|
-|Field-based Meter Inspection|**Offline** inspection of Water Meters deep in the Mountains of Colorado|
+|[Field-based Meter Inspection](./Field-Meter-Inspection/)|**Offline** inspection of Water Meters deep in the Mountains of Colorado|
 
 ### Judicial Branch
 These demos are specifically designed for a Judicial Branch of a state.
