@@ -4,6 +4,13 @@ Please note not all of these solutions are *fully* functional. They are availabl
 ## Demo Directory
 You can find a directory of the Power Platform-based demonstrable content below:
 
+### Judicial Branch
+These demos are specifically designed for a Judicial Branch of a state.
+|Title|Description|
+|-|-|
+|[Online Jury Questionnaire](./Jury-Questionnaire/)|Using a Power Apps Portal for distributing and receiving Jury Questionnaires mid-session|
+|Online Dispute Resolution||
+
 ### Department of Corrections
 These demos are specifically crafted for a Department of Corrections.
 |Title|Description|
