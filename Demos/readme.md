@@ -4,6 +4,12 @@ Please note not all of these solutions are *fully* functional. They are availabl
 ## Demo Directory
 You can find a directory of the Power Platform-based demonstrable content below:
 
+### Department of Environment
+These demos are use cases that support a State's Environment Department:
+|Title|Description|
+|-|-|
+|Field-based Meter Inspection|**Offline** inspection of Water Meters deep in the Mountains of Colorado|
+
 ### Judicial Branch
 These demos are specifically designed for a Judicial Branch of a state.
 |Title|Description|
