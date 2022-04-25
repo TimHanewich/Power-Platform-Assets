@@ -50,3 +50,4 @@ For use cases that don't fit a particular agency:
 |Title|Description|
 |-|-|
 |[Correspondence Management](./Correspondence-Management/)|Automatically receiving documents for signing via email, routes signing task to parties involved, signature collections, and then delivery back to the original requestor with fully signed document|
+|[HR Onboarding/Offboarding](./HR-Onboarding-Offboarding/)|HR solution for managing the onboarding/offboarding process for employees and a place to store documents|
