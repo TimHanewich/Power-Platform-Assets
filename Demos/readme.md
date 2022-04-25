@@ -31,10 +31,11 @@ These demos are designed for a State's Central IT department.
 |Title|Description|
 |-|-|
 |[Technology Investment Management](./Technology-Investment-Management/)|Georgia Technology Authority's Enterprise Portfolio Management Office (EPMO) assists state agencies with the planning and procurement of large technology investments. State agencies submit applications to have an investment reviewed and this is routed through a set of procedures based upon several criteria.|
+|[Request for Leave](./Request-For-Leave/)|Requesting of time off, approval routing, staffing forecasts, and team request reviewing|
 
 ### Technology-Focused
 These demos are focused on demonstrating a particular technology, feature, or functionality in the platform.
 |Title|Description|
 |-|-|
-|[External Data in Portals with Virtual Tables](.//Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.
+|[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.
 
