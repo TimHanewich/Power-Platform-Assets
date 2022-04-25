@@ -13,6 +13,12 @@ These demos are specifically crafted for a Department of Corrections.
 |[Parolee Management](./DOC-Parole-Check-In/)|Parolees can log into a portal on their mobile device and an app in the waiting room ahead of a parole appointment. The parole/probabtion officer can review this information before the meeting while the system flags high-risk changes and guides their attention.|
 |[Facility Intelligence](./Corrections-Facility-AI/)|Azure's Facial Recognition capabilities are used to track the movement of residents throughout a facility. Alerts are generated for high-risk encounters/situations. Audio logs from inside the facility are transcribed with Azure speech-to-text. High-risk discussions that pose a risk to the facility are flagged and reported to guards.
 
+### Department of Health
+These demos are specifically created for a State's Department of Health, Department of Human Services, etc.
+|Title|Description|
+|-|-|
+|[ImmuTrack](./ImmuTrack/)|Manage the outreach/marketing campaigns to COVID-19 at-risk state citizens through text and email. Evaluate which state residents are at highest risk, establish recurring outreach schedules for these residents, and monitor communication, registration, and vaccination status for these residents.|
+
 ### Central IT
 These demos are designed for a State's Central IT department.
 |Title|Description|
