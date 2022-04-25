@@ -15,7 +15,7 @@ These demos are specifically designed for a Judicial Branch of a state.
 |Title|Description|
 |-|-|
 |[Online Jury Questionnaire](./Jury-Questionnaire/)|Using a Power Apps Portal for distributing and receiving Jury Questionnaires mid-session|
-|Online Dispute Resolution|Provide two parties the opportunity to settle a dispute before the case heads to the state court system|
+|[Online Dispute Resolution](./Online-Dispute-Resolution/)|Provide two parties the opportunity to settle a dispute before the case heads to the state court system|
 
 ### Department of Corrections
 These demos are specifically crafted for a Department of Corrections.
@@ -45,3 +45,8 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 |-|-|
 |[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.
 
+### Miscellaneous
+For use cases that don't fit a particular agency:
+|Title|Description|
+|-|-|
+|[Correspondence Management](./Correspondence-Management/)|Automatically receiving documents for signing via email, routes signing task to parties involved, signature collections, and then delivery back to the original requestor with fully signed document|
