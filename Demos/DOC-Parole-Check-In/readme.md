@@ -29,3 +29,4 @@ All solutions can be found in [the solution folder](./solutions/).
 |-|-|
 |[1.0.0.1](./solutions/ParoleKiosk_1_0_0_1.zip)|First solution export. Core data structure only.|
 |[1.0.0.2](./solutions/ParoleKiosk_1_0_0_2.zip)|Added core functionality. Excludes check in canvas app.|
+|[1.0.0.3](./solutions/ParoleKiosk_1_0_0_3.zip)|Added Check In table and cloud flow to alert Parole Officer via push notification of check in at the office|
