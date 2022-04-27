@@ -1,6 +1,40 @@
 <p class="centered title-desc">Hello! Thank you for visiting the parole services page. You can use this as your one-stop-shop for updating information such as employment history, living situation, goal progress, and much more.</p>
 <p class="centered title-desc" style="margin-bottom: 50px">Please take a look at the available services below.</p>
 
+{% if user %}
+<p style="text-align: center">Hello, <b>{{user.fullname | escape}}</b>! Thank you for returning to the parole services page to update your information.</p>
+{% else %}
+<p>You are not logged in. Please click on <b>Sign in</b> in the top right corner.</p>
+{% endif %}
+
+{% fetchxml apptq %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false" count="1">
+    <entity name="kiosk_appointment">
+        <attribute name="kiosk_id"></attribute>
+        <attribute name="kiosk_appointmentid"></attribute>
+        <attribute name="kiosk_scheduledfor"></attribute>
+        <attribute name="ownerid"></attribute>
+        <attribute name="kiosk_notes"></attribute>
+        <attribute name="owninguser"></attribute>
+        <attribute name="kiosk_locationaddress"></attribute>
+        <order attribute="kiosk_scheduledfor" descending="true"></order>
+        <filter type="and">
+            <condition attribute="kiosk_scheduledfor" operator="next-x-days" value="90"></condition>
+        </filter>
+    </entity>
+</fetch>
+{% endfetchxml %}
+
+{% for result in apptq.results.entities %}
+<div style="border-width: 2px; border-color: black; border-style: solid; border-radius: 10px; margin-left: 100px; margin-right: 100px; padding-bottom: 16px; margin-bottom: 40px; background-color: #E9F7FF">
+    <h3 style="text-align: center">Your next upcoming parole appointment</h3>
+    <p style="text-align: center">Appointment ID Number: <b>{{ result.kiosk_id }}</b></p>
+    <p style="text-align: center">🕑 Scheduled for {{ result.kiosk_scheduledfor | date: 'g'}}</p>
+    <p style="text-align: center">🌐 Meeting location: {{ result.kiosk_locationaddress }}</p>
+    <p style="text-align: center; font-size: 14pt; text-decoration: underline; margin-top: 20px; margin-bottom: 6px"><i>Notes for this meeting from your Parole Officer</i></p>
+    <p style="text-align: center">{{ result.kiosk_notes }}</p>
+</div>
+{% endfor %}
 
 <!--Employment history-->
 <div class="service-container">
@@ -10,8 +44,8 @@
     <div class="sc-desc">
         <h3 class="centered sc-title">Employment History</h3>
         <p class="centered sc-desc-txt">Win in the workplace! Document updates to your employment status here.</p>
-        <a href="https://paroleservices.powerappsportals.com/employment/"><div class="timbtn create-btn">I have a new job</div></a>
-        <a href="https://paroleservices.powerappsportals.com/employmenthistory/"><div class="timbtn view-btn">My job history</div></a>
+        <a href="/employment/"><div class="timbtn create-btn">I have a new job</div></a>
+        <a href="/employmenthistory/"><div class="timbtn view-btn">My job history</div></a>
     </div>
 </div>
 
@@ -47,10 +81,10 @@
         <img class="sc-eimg" src="https://g5-assets-cld-res.cloudinary.com/image/upload/x_0,y_38,h_730,w_614,c_crop/q_auto,f_auto,c_fill,g_center,h_1425,w_1200/v1508449362/g5/g5-c-5befy22d4-morgan-properties/g5-cl-1hgobf8gm5-stoneridge-at-mark-center-apartment-homes/uploads/Stoneridge_at_Mark_Center_heroHome_crefq3.jpg">
     </div>
     <div class="sc-desc">
-        <h3 class="centered sc-title">Address Update</h3>
+        <h3 class="centered sc-title">Living Situation Update</h3>
         <p class="centered sc-desc-txt">Please use this form whenever your living situation updates.</p>
-        <a href=""><div class="timbtn create-btn">Update my address</div></a>
-        <a href=""><div class="timbtn view-btn">View my address history</div></a>
+        <a href="/addressupdate/"><div class="timbtn create-btn" style="width: 320px">Update my living situation</div></a>
+        <a href="/livingsitutionhistory/"><div class="timbtn view-btn" style="width: 320px">View my living situation history</div></a>
     </div>
 </div>
 
@@ -95,6 +129,11 @@
 
 
 <style>
+
+    h1
+    {
+        text-align: center;
+    }
 
     *
     {
