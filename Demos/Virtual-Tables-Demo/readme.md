@@ -4,7 +4,7 @@ A virtual table is a custom table in Microsoft Dataverse that has columns contai
 
 Read more about virtual tables [here](https://docs.microsoft.com/en-us/power-apps/maker/data-platform/create-edit-virtual-entities).
 
-This "proof of concepts" demonstrates using Dataverse virtual tables in a Power Apps portal. We are dynamically pulling data from a 3rd party API at run time (when the portal page is visited) on demand.
+This "proof of concept" demonstrates using Dataverse virtual tables in a Power Apps portal. We are dynamically pulling data from a 3rd party API at run time (when the portal page is visited) on demand.
 
 This demo was built by **Tim Hanewich** and **Al Smith**.
 
