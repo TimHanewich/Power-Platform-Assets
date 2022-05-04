@@ -6,7 +6,7 @@ Read more about virtual tables [here](https://docs.microsoft.com/en-us/power-app
 
 This "proof of concepts" demonstrates using Dataverse virtual tables in a Power Apps portal. We are dynamically pulling data from a 3rd party API at run time (when the portal page is visited) on demand.
 
-This demo was built by **Tim Hanewich** (timh@microsoft.com) and **Al Smith** (alsmit@microsoft.com).
+This demo was built by **Tim Hanewich** and **Al Smith**.
 
 A custom API was developed (an Azure Function) to serve as the external data API in this demo example. The source code to this Azure Function can be found [here](./RestApiAzureFunction/).
 - "Directory" endpoint, displaying all available tables: https://nmosi2.azurewebsites.net/nmosi
