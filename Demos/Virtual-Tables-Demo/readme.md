@@ -13,6 +13,10 @@ A custom API was developed (an Azure Function) to serve as the external data API
 - RateRequests table content: https://nmosi2.azurewebsites.net/nmosi/RateRequests
 - Associated metadata for the RateRequests table: https://nmosi2.azurewebsites.net/nmosi/$metadata
 
+The solution file that contains the core Dataverse records that resemble the data that is provided by the external REST API: [solution](./RateRequests_1_0_0_1.zip)
+
+Portal records that can be imported into an environment using [XrmToolbox](https://www.xrmtoolbox.com/): [Portal Records](./portal-records.xml)
+
 Associated code that handles the parsing of web requests, OData querying, sorting, etc. can be found in the CoreCode folder [here](./CoreCode/).
 
 ## Screenshots of Demo
