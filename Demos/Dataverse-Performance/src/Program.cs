@@ -11,8 +11,24 @@ namespace DataversePerformance
 
         public static void Main()
         {
-            Contact[] contacts = RandomContacts(500);
-            Console.WriteLine(JsonConvert.SerializeObject(contacts));
+            PerformDataverseUploadAsync().Wait();
+        }
+
+        public static async Task PerformDataverseUploadAsync()
+        {
+            string auth = await DataverseAuthenticator.GetAccessTokenAsync();
+            CdsService cds = new CdsService("https://orgde82f7a5.crm.dynamics.com/", auth);
+        
+            Contact[] contacts = RandomContacts(1);
+
+            for (int t = 0; t < contacts.Length; t++)
+            {
+                Contact toupload = contacts[t];
+                Console.Write("Uploading # " + (t+1).ToString("#,##0") + " / " + contacts.Length.ToString("#,##0") + "... ");
+                await cds.CreateRecordAsync("contacts", toupload.ToDataversePayload().ToString());
+                Console.WriteLine("Success!");
+            }
+
         }
         
         private static Contact[] RandomContacts(int count)
