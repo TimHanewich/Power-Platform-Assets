@@ -11,10 +11,23 @@ namespace DataversePerformance
     public class Program
     {
 
-        public static void Main()
+        public static void Main(string[] args)
         {
-            //PerformDataverseUploadAsync().Wait();
-            PerformSqlUploadAsync().Wait();
+            if (args.Length > 0)
+            {
+                if (args[0] == "cds")
+                {
+                    PerformDataverseUploadAsync().Wait();
+                }
+                else if (args[0] == "sql")
+                {
+                    PerformSqlUploadAsync().Wait();
+                }
+                else
+                {
+                    Console.WriteLine("I do not know that one.");
+                }
+            }
         }
 
         public static async Task PerformDataverseUploadAsync()

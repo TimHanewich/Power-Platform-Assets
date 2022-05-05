@@ -6,7 +6,7 @@ namespace DataversePerformance
     {
         public static string GetSqlConnectionString()
         {
-            return "";
+            return "Server=tcp:20220502performancetesting.database.windows.net,1433;Initial Catalog=20220502performancetest;Persist Security Info=False;User ID=pt20220505;Password=59Db7194497d;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         }
     }
 }
