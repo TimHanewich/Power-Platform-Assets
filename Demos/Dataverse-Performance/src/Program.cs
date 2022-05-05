@@ -35,7 +35,9 @@ namespace DataversePerformance
         {
             string[] FirstNames = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\FirstNames.txt").Split(Environment.NewLine);
             string[] LastNames = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\LastNames.txt").Split(Environment.NewLine);
+            string[] cities = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\cities.txt").Split(Environment.NewLine);
 
+            Random r = new Random();
             List<Contact> ToReturn = new List<Contact>();
             for (int t = 0; t < count; t++)
             {
@@ -44,6 +46,9 @@ namespace DataversePerformance
                 c.LastName = RandomFromArray(LastNames);
                 c.BirthDate = RandomDOB();
                 c.MobilePhone = RandomPhoneNumber();
+                c.AddressCity = RandomFromArray(cities);
+                c.AddressLatitude = Convert.ToSingle(r.NextDouble());
+                c.AddressLongitude = Convert.ToSingle(r.NextDouble());
                 ToReturn.Add(c);
             }
             return ToReturn.ToArray();
