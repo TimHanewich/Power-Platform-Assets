@@ -35,7 +35,7 @@ namespace DataversePerformance
             string auth = await DataverseAuthenticator.GetAccessTokenAsync();
             CdsService cds = new CdsService("https://orgde82f7a5.crm.dynamics.com/", auth);
         
-            Contact[] contacts = RandomContacts(50000);
+            Contact[] contacts = RandomContacts(5000000);
 
             for (int t = 0; t < contacts.Length; t++)
             {
@@ -51,7 +51,7 @@ namespace DataversePerformance
         
         public static async Task PerformSqlUploadAsync()
         {
-            Contact[] contacts = RandomContacts(50000);
+            Contact[] contacts = RandomContacts(5000000);
 
             SqlConnection sqlcon = new SqlConnection(SqlCredentialsProvider.GetSqlConnectionString());
             await sqlcon.OpenAsync();
