@@ -19,7 +19,7 @@ namespace DataversePerformance
             string auth = await DataverseAuthenticator.GetAccessTokenAsync();
             CdsService cds = new CdsService("https://orgde82f7a5.crm.dynamics.com/", auth);
         
-            Contact[] contacts = RandomContacts(1);
+            Contact[] contacts = RandomContacts(50000);
 
             for (int t = 0; t < contacts.Length; t++)
             {
@@ -49,6 +49,7 @@ namespace DataversePerformance
                 c.AddressCity = RandomFromArray(cities);
                 c.AddressLatitude = Convert.ToSingle(r.NextDouble());
                 c.AddressLongitude = Convert.ToSingle(r.NextDouble());
+                c.AnnualIncome = r.Next(30000, 450000);
                 ToReturn.Add(c);
             }
             return ToReturn.ToArray();

@@ -13,6 +13,7 @@ namespace DataversePerformance
         public string? AddressCity {get; set;}
         public float AddressLatitude {get; set;}
         public float AddressLongitude {get; set;}
+        public int AnnualIncome {get; set;}
 
         public JObject ToDataversePayload()
         {
@@ -24,6 +25,7 @@ namespace DataversePerformance
             jo.Add("address1_city", AddressCity);
             jo.Add("address1_latitude", AddressLatitude);
             jo.Add("address1_longitude", AddressLongitude);
+            jo.Add("annualincome", AnnualIncome);
             return jo;
         }
     }
