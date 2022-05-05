@@ -9,7 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="TimHanewich.Cds" Version="2.0.0" />
+    <PackageReference Include="TimHanewich.Sql" Version="0.3.1" />
   </ItemGroup>
 
 </Project>

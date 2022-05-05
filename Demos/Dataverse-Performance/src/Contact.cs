@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TimHanewich.Sql;
 
 namespace DataversePerformance
 {
@@ -27,6 +28,21 @@ namespace DataversePerformance
             jo.Add("address1_longitude", AddressLongitude);
             jo.Add("annualincome", AnnualIncome);
             return jo;
+        }
+
+        public string ToSqlInsert()
+        {
+            InsertHelper ih = new InsertHelper("Contact");
+            ih.Add("Id", Guid.NewGuid().ToString(), true);
+            ih.Add("FirstName", FirstName.Replace("'", ""), true);
+            ih.Add("LastName", LastName.Replace("'", ""), true);
+            ih.Add("BirthDate", SqlToolkit.ToSqlDateString(BirthDate), true);
+            ih.Add("MobilePhone", MobilePhone.ToString());
+            ih.Add("AddressCity", AddressCity.Replace("'", ""), true);
+            ih.Add("AddressLatitude", AddressLatitude.ToString());
+            ih.Add("AddressLongitude", AddressLongitude.ToString());
+            ih.Add("AnnualIncome", AnnualIncome.ToString());
+            return ih.ToString();
         }
     }
 }

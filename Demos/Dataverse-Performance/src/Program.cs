@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using TimHanewich.Cds;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 namespace DataversePerformance
 {
@@ -11,7 +13,8 @@ namespace DataversePerformance
 
         public static void Main()
         {
-            PerformDataverseUploadAsync().Wait();
+            //PerformDataverseUploadAsync().Wait();
+            PerformSqlUploadAsync().Wait();
         }
 
         public static async Task PerformDataverseUploadAsync()
@@ -33,6 +36,30 @@ namespace DataversePerformance
 
         }
         
+        public static async Task PerformSqlUploadAsync()
+        {
+            Contact[] contacts = RandomContacts(50000);
+
+            SqlConnection sqlcon = new SqlConnection(SqlCredentialsProvider.GetSqlConnectionString());
+            await sqlcon.OpenAsync();
+
+            for (int t = 0; t < contacts.Length; t++)
+            {
+                float pc = Convert.ToSingle(t) / Convert.ToSingle(contacts.Length);
+
+                Contact toupload = contacts[t];
+                Console.Write("Uploading # " + (t+1).ToString("#,##0") + " / " + contacts.Length.ToString("#,##0") + " (" + pc.ToString("#0.0%") + ")... ");
+                
+                SqlCommand sqlcmd = new SqlCommand(toupload.ToSqlInsert(), sqlcon);
+                await sqlcmd.ExecuteNonQueryAsync();
+
+                Console.WriteLine("Success!");
+            }
+
+            
+            
+        }
+
         private static Contact[] RandomContacts(int count)
         {
             string[] FirstNames = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\FirstNames.txt").Split(Environment.NewLine);
