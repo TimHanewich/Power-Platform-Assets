@@ -56,6 +56,7 @@ namespace DataversePerformance
                 Console.WriteLine("Success!");
             }
 
+            sqlcon.Close();
             
             
         }
