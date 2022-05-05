@@ -23,8 +23,10 @@ namespace DataversePerformance
 
             for (int t = 0; t < contacts.Length; t++)
             {
+                float pc = Convert.ToSingle(t) / Convert.ToSingle(contacts.Length);
+
                 Contact toupload = contacts[t];
-                Console.Write("Uploading # " + (t+1).ToString("#,##0") + " / " + contacts.Length.ToString("#,##0") + "... ");
+                Console.Write("Uploading # " + (t+1).ToString("#,##0") + " / " + contacts.Length.ToString("#,##0") + " (" + pc.ToString("#0.0%") + ")... ");
                 await cds.CreateRecordAsync("contacts", toupload.ToDataversePayload().ToString());
                 Console.WriteLine("Success!");
             }
