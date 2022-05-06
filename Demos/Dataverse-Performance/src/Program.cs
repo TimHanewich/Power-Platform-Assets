@@ -32,13 +32,27 @@ namespace DataversePerformance
 
         public static async Task PerformDataverseUploadAsync()
         {
-            string auth = await DataverseAuthenticator.GetAccessTokenAsync();
-            CdsService cds = new CdsService("https://orgde82f7a5.crm.dynamics.com/", auth);
+            string env_url = "https://orgde82f7a5.crm.dynamics.com/";
+            CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
+            await auth.GetAccessTokenAsync();
+            CdsService cds = new CdsService(env_url, auth.AccessToken);
         
             Contact[] contacts = RandomContacts(5000000);
 
             for (int t = 0; t < contacts.Length; t++)
             {
+
+                //Check if we need to refresh the access token
+                TimeSpan TimeRemaining = auth.AccessTokenExpiresUtc - DateTime.UtcNow;
+                if (TimeRemaining.TotalMinutes < 3)
+                {
+                    Console.Write("Refreshing access token... ");
+                    await auth.GetAccessTokenAsync();
+                    cds = new CdsService(env_url, auth.AccessToken);
+                    Console.WriteLine("Refreshed!");
+                }
+
+
                 float pc = Convert.ToSingle(t) / Convert.ToSingle(contacts.Length);
 
                 Contact toupload = contacts[t];
