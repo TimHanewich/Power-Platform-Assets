@@ -40,12 +40,12 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Test|SQL Query|Time|Dataverse Query|Time|
 |-|-|-|-|-|
 |Count rows in table|SELECT COUNT(Id) FROM CONTACT|6:40|||
-|Select oldest 10 people|SELECT TOP 10 * FROM CONTACT ORDER BY BirthDate ASC|0:28|||
-|Latitude within certain boundary|SELECT TOP 50 * FROM CONTACT WHERE Latitude > 0.1 AND Latitude < 0.4|1:26|||
-|Living in a certain city|SELECT TOP 50 * FROM CONTACT WHERE AddressCity = 'Los Angeles'|0:02|||
-|Last name begins with|SELECT * FROM CONTACT WHERE LastName LIKE 'at%'|0:10|||
-|First name contains|SELECT * FROM CONTACT WHERE FirstName LIKE '%tim%'|0:09|||
-|Large data download|SELECT TOP 3000 * FROM CONTACT|0:00|||
+|Select oldest 10 people|SELECT TOP 10 * FROM CONTACT ORDER BY BirthDate ASC|0:28|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=birthdate asc|0:48|
+|Latitude within certain boundary|SELECT * FROM CONTACT WHERE AddressLatitude > 0.2 AND AddressLatitude < 0.4|1:27|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_latitude gt 0.2 and address1_latitude lt 0.4|11.51|
+|Living in a certain city|SELECT TOP 50 * FROM CONTACT WHERE AddressCity = 'Los Angeles'|0:02|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Los Angeles'|52:74|
+|Last name begins with|SELECT * FROM CONTACT WHERE LastName LIKE 'at%'|0:10|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(lastname, 'at')|0:15|
+|First name contains|SELECT * FROM CONTACT WHERE FirstName LIKE '%tim%'|0:09|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$filter=contains(firstname, 'tim')|0:09|
+|Large data download|SELECT TOP 10000 * FROM CONTACT|0:01|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
 
 
 ## Notes
