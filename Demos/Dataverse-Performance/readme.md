@@ -22,6 +22,16 @@
 - Last name begins with
 - Large data download
 
+|Test|SQL Query|Time (s)|Dataverse Query|Time (s)|
+|-|-|-|-|-|
+|Count rows in table|SELECT COUNT(Id) FROM CONTACT||||
+|Select youngest 10 people|SELECT TOP 10 * FROM CONTACT ORDER BY BirthDate ASC||||
+|Latitude within certain boundary|SELECT * FROM CONTACT WHERE Latitude > 0.1 AND Latitude < 0.4||||
+|Living in a certain city|||||
+|Last name begins with|||||
+|First name contains|||||
+|Large data download|||||
+
 
 ## Notes
 - Counting the number of records in the contacts table:
