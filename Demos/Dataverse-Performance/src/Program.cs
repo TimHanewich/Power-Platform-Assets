@@ -36,11 +36,14 @@ namespace DataversePerformance
             CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
             await auth.GetAccessTokenAsync();
             CdsService cds = new CdsService(env_url, auth.AccessToken);
-        
-            Contact[] contacts = RandomContacts(5000000);
 
-            for (int t = 0; t < contacts.Length; t++)
+
+            int cycles = 65000;
+            int ConcurrentUploads = 45;
+
+            for (int t = 0; t < cycles; t++)
             {
+                float pc = Convert.ToSingle(t) / Convert.ToSingle(cycles);
 
                 //Check if we need to refresh the access token
                 TimeSpan TimeRemaining = auth.AccessTokenExpiresUtc - DateTime.UtcNow;
@@ -52,19 +55,27 @@ namespace DataversePerformance
                     Console.WriteLine("Refreshed!");
                 }
 
+                Console.WriteLine("On cycle # " + t.ToString() + " / " + cycles.ToString("#,##0") + " (" + pc.ToString("#0.0%") + ")");
 
-                float pc = Convert.ToSingle(t) / Convert.ToSingle(contacts.Length);
+                Contact[] contactsToUpload = RandomContacts(ConcurrentUploads);
 
-                Contact toupload = contacts[t];
-                Console.Write("Uploading # " + (t+1).ToString("#,##0") + " / " + contacts.Length.ToString("#,##0") + " (" + pc.ToString("#0.0%") + ")... ");
+                List<Task> CollectedTasks = new List<Task>();
+                foreach (Contact c in contactsToUpload)
+                {
+                    Task tsk = cds.CreateRecordAsync("contacts", c.ToDataversePayload().ToString());
+                    CollectedTasks.Add(tsk);
+                }
+
+                //Wait for all to upload
                 try
                 {
-                    await cds.CreateRecordAsync("contacts", toupload.ToDataversePayload().ToString());
+                    Console.Write("Uploading " + CollectedTasks.Count.ToString() + " right now... ");
+                    Task.WaitAll(CollectedTasks.ToArray());
                     Console.WriteLine("Success!");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("FAILURE! MSG: " + ex.Message);
+                    Console.WriteLine("FATAL FAILURE! Msg: " + ex.Message);
                 }
             }
 
