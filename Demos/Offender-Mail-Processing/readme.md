@@ -18,6 +18,7 @@ Staff members can generate an inmates badge via the **Resident Badge Generation*
 |---------|-------|
 |[1.0.0.2](./solutions/ResidentMailProcessing_1_0_0_2.zip)  | Initial release |
 |[1.0.0.3](./solutions/ResidentMailProcessing_1_0_0_3.zip)| Tweaked foreign language detection |
+|[1.0.0.4](./solutions/ResidentMailProcessing_1_0_0_4.zip)|Improved UI in Officer Badge Verifier|
 
 ## Deployment Instructions
 1. Import the solution ZIP file that can be found above.
