@@ -4,7 +4,7 @@ In this session we build and train an AI model to automatically detect a species
 ## Content
 - [Promotional flyer template](./Flyer.pptx)
 - [Script](./Script.md)
-- I provide a solution file with the pre-trained AI builder module below. But if you'd like to train one yourself, here is a [link to download a reposity of fish pictures for each species]() that you will need to supply to the model during training.
+- I provide a solution file with the pre-trained AI builder module below. But if you'd like to train one yourself, here is a [link to download a reposity of fish pictures for each species](https://tahmst.blob.core.windows.net/demo-assets/FishPictures.zip?sp=r&st=2022-05-16T14:32:28Z&se=2036-04-01T22:32:28Z&sv=2020-08-04&sr=b&sig=tk%2B46cVaFK7KgR7%2FHOOJA1OgkRsIcBd9%2FTzUw1Ozj%2Bs%3D) that you will need to supply to the model during training.
 - Pre-built solution files
     - [Data layer only (tables, option sets, etc)](./Solutions/FishSpeciesDetectionDataLayerOnly_1_0_0_1.zip)
     - [Pre-Trained AI Builder Module Only](./Solutions/FishSpeciesDetectionAIModelOnly_1_0_0_1.zip)
