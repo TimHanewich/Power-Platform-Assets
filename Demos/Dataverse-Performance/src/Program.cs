@@ -21,6 +21,17 @@ namespace DataversePerformance
                 {
                     PerformDataverseUploadAsync().Wait();
                 }
+                else if (args[0] == "cds-single")
+                {
+                    string env_url = "https://orgde82f7a5.crm.dynamics.com/";
+                    CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
+                    auth.GetAccessTokenAsync().Wait();
+                    CdsService cds = new CdsService(env_url, auth.AccessToken);
+
+                    Contact[] cs = RandomContacts(1);
+
+                    cds.CreateRecordAsync("contacts", cs[0].ToDataversePayload().ToString()).Wait();
+                }
                 else if (args[0] == "sql")
                 {
                     PerformSqlUploadAsync().Wait();
