@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using TimHanewich.Csv;
+using Newtonsoft.Json.Linq;
 
 namespace DataversePerformance
 {
@@ -28,6 +30,39 @@ namespace DataversePerformance
                     CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
                     auth.GetAccessTokenAsync().Wait();
                     Console.WriteLine(auth.AccessToken);
+                }
+                else if (args[0] == "csv")
+                {
+                    Console.Write("Dump to file: ");
+                    string? FilePath = Console.ReadLine();
+                    if (FilePath != null)
+                    {
+                        FilePath = FilePath.Replace("\"", "");
+                        
+                        Console.Write("Generating contacts... ");
+                        Contact[] contacts = RandomContacts(500);
+                        Console.WriteLine("Generated");
+
+                        //Put into array
+                        Console.WriteLine("Placing into array... ");
+                        JArray ja = new JArray();
+                        for (int t = 0; t < contacts.Length; t++)
+                        {
+                            Console.WriteLine("Placing into array # " + t.ToString("#,##0") + " / " + contacts.Length.ToString("#,##0"));
+                            ja.Add(contacts[t].ToDataversePayload());
+                        }
+                        Console.WriteLine("All in array");
+
+                        //Write to string
+                        Console.Write("Converting to CSV... ");
+                        CsvFile csv = CsvToolkit.JsonToCsv(ja);
+                        Console.WriteLine("Converted");
+
+                        //Write to file
+                        Console.Write("Writing to file... ");
+                        System.IO.File.WriteAllText(FilePath, csv.GenerateAsCsvFileContent());
+                        Console.WriteLine("Saved!");
+                    }
                 }
                 else
                 {
