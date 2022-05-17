@@ -22,7 +22,7 @@ Below I have linked to all of the content involved in the roundtables I have con
 ### Marketing Material
 Session-specific marketing material can be found in each sessions folder below. We also have session-generic marketing material:
 - ["Dark Theme" Roundtable Flyer with components](./Roundtable-Flyer-Bandler.pptx) - By David Bandler
-- "Power Banner" Created by David Bandler - can be downloaded [here](./power-banner.png). This can be used in marketing material such as fliers.
+- "Power Banner" Created by David Bandler - can be downloaded [here](./power-banner.png). This can be used in marketing material such as flyers.
     - ![power banner](./power-banner.png)
 
 ### Power Point deck:
