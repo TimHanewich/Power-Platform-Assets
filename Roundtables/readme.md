@@ -37,4 +37,3 @@ Session-specific marketing material can be found in each sessions folder below. 
 |Session 6|[Create an autonomous chatbot with Power Virtual Agents](./Permitting%20Chatbot%20Power%20Virtual%20Agent/)||
 
 ## To-Do
-- Link to large repository of fish images in the AI builder fish species detection roundtable content.
