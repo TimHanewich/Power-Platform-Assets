@@ -7,7 +7,6 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using TimHanewich.Csv;
 using Newtonsoft.Json.Linq;
-using System.Configuration
 
 namespace DataversePerformance
 {
