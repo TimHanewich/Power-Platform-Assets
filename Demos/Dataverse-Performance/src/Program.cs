@@ -23,6 +23,12 @@ namespace DataversePerformance
                 {
                     PerformSqlUploadAsync().Wait();
                 }
+                else if (args[0] == "cds-auth")
+                {
+                    CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
+                    auth.GetAccessTokenAsync().Wait();
+                    Console.WriteLine(auth.AccessToken);
+                }
                 else
                 {
                     Console.WriteLine("I do not know that one.");
