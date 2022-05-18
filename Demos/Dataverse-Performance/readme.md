@@ -47,6 +47,13 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |First name contains|SELECT * FROM CONTACT WHERE FirstName LIKE '%tim%'|0:09|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$filter=contains(firstname, 'tim')|0:09|
 |Large data download|SELECT TOP 10000 * FROM CONTACT|0:01|https://orgde82f7a5.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
 
+## Other Learnings
+- The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
+   - There is a limit on the total number of records you can place in the tenant. This is a limit on **the entire tenant**, not for a specific environment or specific table. Meaning, if you hit the limit across the tenant, you will not be able to upload a single record in *any* environment in *any* table.
+      - Error message when attempting to upload a record via the web API: *Unable to create new record of type 'contacts'. Content: {"error":{"code":"0x80072325","message":"Storage quota exceeded. Your organization instance has reached the storage limit for a trial or demo instance. Please reach out to your administrator, to convert this instance into paid one or create a service request with Microsoft support team. SqlException: The database 'db_crmcorenam_20220505_03304536_f788' has reached its size quota. Partition or delete data, drop indexes, or consult the documentation for possible resolutions."}}*
+   - The Dataverse DB in trial tenants/environments exhibits poor performance. When performing a query on the contacts table (sorting by a DateTime field) containing about 6,000,000 records, the query timed out:
+      - ![dataverse timeout](./images/dataverse-timeout.png)
+
 
 ## Notes
 - Counting the number of records in the contacts table:
