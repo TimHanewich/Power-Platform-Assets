@@ -34,11 +34,20 @@ namespace DataversePerformance
         {
             InsertHelper ih = new InsertHelper("Contact");
             ih.Add("Id", Guid.NewGuid().ToString(), true);
-            ih.Add("FirstName", FirstName.Replace("'", ""), true);
-            ih.Add("LastName", LastName.Replace("'", ""), true);
+            if (FirstName != null)
+            {
+                ih.Add("FirstName", FirstName.Replace("'", ""), true);
+            }
+            if (LastName != null)
+            {
+                ih.Add("LastName", LastName.Replace("'", ""), true);
+            }
+            if (AddressCity != null)
+            {
+                ih.Add("AddressCity", AddressCity.Replace("'", ""), true);
+            }
             ih.Add("BirthDate", SqlToolkit.ToSqlDateString(BirthDate), true);
             ih.Add("MobilePhone", MobilePhone.ToString());
-            ih.Add("AddressCity", AddressCity.Replace("'", ""), true);
             ih.Add("AddressLatitude", AddressLatitude.ToString());
             ih.Add("AddressLongitude", AddressLongitude.ToString());
             ih.Add("AnnualIncome", AnnualIncome.ToString());
