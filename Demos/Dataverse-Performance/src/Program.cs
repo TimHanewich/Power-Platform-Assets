@@ -84,10 +84,9 @@ namespace DataversePerformance
 
         public static async Task PerformDataverseUploadAsync()
         {
-            string env_url = "https://orgde82f7a5.crm.dynamics.com/";
             CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
             await auth.GetAccessTokenAsync();
-            CdsService cds = new CdsService(env_url, auth.AccessToken);
+            CdsService cds = new CdsService(DataverseAuthenticator.GetCdsAuthenticator().Resource, auth.AccessToken);
 
 
             int cycles = 65000;
@@ -103,7 +102,7 @@ namespace DataversePerformance
                 {
                     Console.Write("Refreshing access token... ");
                     await auth.GetAccessTokenAsync();
-                    cds = new CdsService(env_url, auth.AccessToken);
+                    cds = new CdsService(DataverseAuthenticator.GetCdsAuthenticator().Resource, auth.AccessToken);
                     Console.WriteLine("Refreshed!");
                 }
 
