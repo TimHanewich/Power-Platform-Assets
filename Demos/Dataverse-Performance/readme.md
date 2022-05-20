@@ -39,7 +39,7 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 
 |Test|SQL Query|Time|Dataverse Query|Time|
 |-|-|-|-|-|
-|Count rows in table|SELECT COUNT(Id) FROM CONTACT|6:40|https://org1ceaa16f.crm.dynamics.com//api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])|0:0.4|
+|Count rows in table|SELECT COUNT(Id) FROM CONTACT|6:40|https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])|0:0.4|
 |Select oldest 10 people|SELECT TOP 10 * FROM CONTACT ORDER BY BirthDate ASC|0:28|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=birthdate asc|0:48|
 |Latitude within certain boundary|SELECT * FROM CONTACT WHERE AddressLatitude > 0.2 AND AddressLatitude < 0.4|1:27|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_latitude gt 0.2 and address1_latitude lt 0.4|11.51|
 |Living in a certain city|SELECT TOP 50 * FROM CONTACT WHERE AddressCity = 'Los Angeles'|0:02|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Los Angeles'|52:74|
@@ -57,5 +57,5 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 
 ## Notes
 - Counting the number of records in the contacts table:
-    - https://org1ceaa16f.crm.dynamics.com//api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])
+    - https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])
     - https://crmtipoftheday.com/1375/get-record-count-for-entities/
