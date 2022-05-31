@@ -13,6 +13,7 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
     <PackageReference Include="TimHanewich.Cds" Version="2.0.0" />
     <PackageReference Include="TimHanewich.Csv" Version="2.1.0" />
+    <PackageReference Include="TimHanewich.MicrosoftGraphHelper" Version="1.0.0" />
     <PackageReference Include="TimHanewich.Sql" Version="0.3.1" />
   </ItemGroup>
 
