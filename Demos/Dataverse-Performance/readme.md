@@ -37,8 +37,8 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 - Last name begins with
 - Large data download
 
-|Test|SQL Query|Time|Dataverse Query|Time|
-|-|-|-|-|-|
+|Test|SQL Query|Time|Dataverse Query|Time|Sharepoint Query|Time|
+|-|-|-|-|-|-|-|
 |Count rows in table|SELECT COUNT(Id) FROM CONTACT|6:40|https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])|0:0.4|
 |Select oldest 10 people|SELECT TOP 10 * FROM CONTACT ORDER BY BirthDate ASC|0:28|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=birthdate asc|0:48|
 |Latitude within certain boundary|SELECT * FROM CONTACT WHERE AddressLatitude > 0.2 AND AddressLatitude < 0.4|1:27|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_latitude gt 0.2 and address1_latitude lt 0.4|11.51|
@@ -60,3 +60,4 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
     - https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])
     - https://crmtipoftheday.com/1375/get-record-count-for-entities/
 - SharePoint does not support numbers with > 5 decimal points. Not good for precise things like Lat/Lon - mine here use 6!
+- Example sharepoint query: https://graph.microsoft.com/v1.0/sites/2e069086-c6f2-4735-a728-eb33b8347842/lists/1c39d991-6ed6-4c34-87b2-f91bbb8212f5/items?$expand=fields&$top=3
