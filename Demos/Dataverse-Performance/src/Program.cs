@@ -82,6 +82,11 @@ namespace DataversePerformance
                 {
                     PerformSharepointUploadAsync().Wait();
                 }
+                else if (args[0] == "test")
+                {
+                    Contact[] cs = RandomContacts(3);
+                    Console.WriteLine(JsonConvert.SerializeObject(cs));
+                }
                 else
                 {
                     Console.WriteLine("I do not know that one.");
@@ -310,9 +315,24 @@ namespace DataversePerformance
 
         private static Contact[] RandomContacts(int count)
         {
-            string[] FirstNames = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\FirstNames.txt").Split(Environment.NewLine);
-            string[] LastNames = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\LastNames.txt").Split(Environment.NewLine);
-            string[] cities = System.IO.File.ReadAllText(@"C:\Users\tahan\Downloads\Power-Platform-Assets\Demos\Dataverse-Performance\src\cities.txt").Split(Environment.NewLine);
+            //Get the key values
+            string? fnpath = ConfigurationManager.AppSettings.Get("rd_firstnames");
+            string? lnpath = ConfigurationManager.AppSettings.Get("rd_lastnames");
+            string? citiespath = ConfigurationManager.AppSettings.Get("rd_cities");
+
+            if (fnpath == null || lnpath == null || citiespath == null)
+            {
+                throw new Exception("Paths to random data were not in the config file.");
+            }
+
+            if (fnpath == "" || lnpath == "" || citiespath == "")
+            {
+                throw new Exception("Paths to random data were BLANK in the config file.");
+            }
+
+            string[] FirstNames = System.IO.File.ReadAllText(fnpath).Split(Environment.NewLine);
+            string[] LastNames = System.IO.File.ReadAllText(lnpath).Split(Environment.NewLine);
+            string[] cities = System.IO.File.ReadAllText(citiespath).Split(Environment.NewLine);
 
             Random r = new Random();
             List<Contact> ToReturn = new List<Contact>();
