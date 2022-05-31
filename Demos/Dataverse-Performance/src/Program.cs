@@ -230,11 +230,12 @@ namespace DataversePerformance
 
 
             //To get the sites/lists if needed
-            // SharepointSite[] sites = await mgh.SearchSharepointSitesAsync("");
-            // Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(sites)).ToString());
+            //SharepointSite[] sites = await mgh.SearchSharepointSitesAsync("");
+            //Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(sites)).ToString());
 
-            // SharepointList[] lists = await mgh.ListSharepointListsAsync(Guid.Parse("2e069086-c6f2-4735-a728-eb33b8347842"));
-            // Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(lists)).ToString());
+            //SharepointList[] lists = await mgh.ListSharepointListsAsync(Guid.Parse("2e069086-c6f2-4735-a728-eb33b8347842"));
+            //Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(lists)).ToString());
+            //Console.ReadLine();
 
             //Get the delay time per each batch upload
             string? DelayUploadTimeStr = ConfigurationManager.AppSettings.Get("sp_delay");
