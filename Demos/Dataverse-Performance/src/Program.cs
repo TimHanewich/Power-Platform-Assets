@@ -101,8 +101,8 @@ namespace DataversePerformance
             CdsService cds = new CdsService(DataverseAuthenticator.GetCdsAuthenticator().Resource, auth.AccessToken);
 
 
-            int cycles = 208;
-            int ConcurrentUploads = 20;
+            int cycles = 2;
+            int ConcurrentUploads = 15;
 
             for (int t = 0; t < cycles; t++)
             {
