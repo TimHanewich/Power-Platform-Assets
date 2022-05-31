@@ -235,6 +235,20 @@ namespace DataversePerformance
             // SharepointList[] lists = await mgh.ListSharepointListsAsync(Guid.Parse("2e069086-c6f2-4735-a728-eb33b8347842"));
             // Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(lists)).ToString());
 
+            //Get the delay time per each batch upload
+            string? DelayUploadTimeStr = ConfigurationManager.AppSettings.Get("sp_delay");
+            if (DelayUploadTimeStr == null)
+            {
+                Console.WriteLine("sp_delay was not available in the config file.");
+                return;
+            }
+            if (DelayUploadTimeStr == "")
+            {
+                Console.WriteLine("sp_delay was blank in the config file.");
+                return;
+            }
+            int DelayUploadTime = Convert.ToInt32(DelayUploadTimeStr);
+
 
             //Get the ID's
             string? spsiteidstr = ConfigurationManager.AppSettings.Get("sp_siteid");
@@ -296,6 +310,9 @@ namespace DataversePerformance
                         {
                             Console.WriteLine("THAT FAILED! Msg: " + ex.Message);
                         }
+                        Console.Write("Delaying... ");
+                        await Task.Delay(DelayUploadTime);
+                        Console.WriteLine("Moving on!");
                     }
                 }
                 else
