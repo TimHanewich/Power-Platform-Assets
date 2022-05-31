@@ -282,8 +282,15 @@ namespace DataversePerformance
 
                         //Wait
                         Console.Write("Uploading batch # " + t.ToString("#,##0") + "... ");
-                        Task.WaitAll(ToDo.ToArray());
-                        Console.WriteLine("Successful!");
+                        try
+                        {
+                            Task.WaitAll(ToDo.ToArray());
+                            Console.WriteLine("Successful!");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("THAT FAILED! Msg: " + ex.Message);
+                        }
                     }
                 }
                 else
