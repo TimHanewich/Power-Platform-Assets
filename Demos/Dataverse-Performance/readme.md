@@ -59,3 +59,4 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 - Counting the number of records in the contacts table:
     - https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])
     - https://crmtipoftheday.com/1375/get-record-count-for-entities/
+- SharePoint does not support numbers with > 5 decimal points. Not good for precise things like Lat/Lon - mine here use 6!
