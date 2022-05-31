@@ -7,6 +7,9 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using TimHanewich.Csv;
 using Newtonsoft.Json.Linq;
+using TimHanewich.MicrosoftGraphHelper;
+using TimHanewich.MicrosoftGraphHelper.Sharepoint;
+using System.Configuration;
 
 namespace DataversePerformance
 {
@@ -74,6 +77,10 @@ namespace DataversePerformance
                         System.IO.File.WriteAllText(FilePath, csv.GenerateAsCsvFileContent());
                         Console.WriteLine("Saved!");
                     }
+                }
+                else if (args[0] == "sp")
+                {
+                    PerformSharepointUploadAsync().Wait();
                 }
                 else
                 {
@@ -156,6 +163,143 @@ namespace DataversePerformance
             
             
         }
+
+        public static async Task PerformSharepointUploadAsync()
+        {
+            MicrosoftGraphHelper? mgh = null;
+
+            //Get the mgh
+            string? mgh_path = ConfigurationManager.AppSettings.Get("mgh");
+            if (mgh_path != null)
+            {
+                if (mgh_path != "")
+                {
+                    string content = System.IO.File.ReadAllText(mgh_path);
+                    if (content.Length > 0)
+                    {
+                        mgh = JsonConvert.DeserializeObject<MicrosoftGraphHelper>(content);
+                    }
+                }
+            }
+
+            //If MGH was null, make one
+            if (mgh == null)
+            {
+                mgh = new MicrosoftGraphHelper();
+                mgh.TenantId = Guid.Parse("1e85f23f-c0af-4bce-bb96-92014d3c1359");
+                mgh.ClientId = Guid.Parse("d9571adf-0c99-4285-bd6c-85d1ad9df015");
+                mgh.RedirectUrl = "https://www.google.com/";
+                mgh.Scope.Add("Sites.ReadWrite.All");
+                string url = mgh.AssembleAuthorizationUrl(true, true);
+
+                Console.WriteLine("Please authenticate at the URL below:");
+                Console.WriteLine(url);
+
+                Console.WriteLine();
+                Console.WriteLine("What is the code you received back?");
+                Console.Write(">");
+                string? code = Console.ReadLine();
+                if (code != null)
+                {
+                    Console.Write("Getting access tokens... ");
+                    await mgh.GetAccessTokenAsync(code);
+                    Console.WriteLine("Got it!");
+
+                    
+
+                }
+                
+            }
+
+            //If the path is there, save it
+            if (mgh_path != null)
+            {
+                if (mgh_path != "")
+                {
+                    Console.Write("Saving mgh... ");
+                    System.IO.File.WriteAllText(mgh_path, JsonConvert.SerializeObject(mgh));
+                    Console.WriteLine("Saved!");
+                }
+            }
+
+
+            //To get the sites/lists if needed
+            // SharepointSite[] sites = await mgh.SearchSharepointSitesAsync("");
+            // Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(sites)).ToString());
+
+            // SharepointList[] lists = await mgh.ListSharepointListsAsync(Guid.Parse("2e069086-c6f2-4735-a728-eb33b8347842"));
+            // Console.WriteLine(JArray.Parse(JsonConvert.SerializeObject(lists)).ToString());
+
+
+            //Get the ID's
+            string? spsiteidstr = ConfigurationManager.AppSettings.Get("sp_siteid");
+            string? splistidstr = ConfigurationManager.AppSettings.Get("sp_listid");
+            if (spsiteidstr != null && splistidstr != null)
+            {
+                if (spsiteidstr != "" && splistidstr != "")
+                {
+
+                    //Parse
+                    Console.Write("Parsing Site ID and List ID... ");
+                    Guid site_id = Guid.Parse(spsiteidstr);
+                    Guid list_id = Guid.Parse(splistidstr);
+                    Console.WriteLine("Parsed!");
+
+
+                    for (int t = 0; t < 145145; t++) //# of batches to do
+                    {
+
+                        //Update if we have to
+                        if (mgh.AccessTokenHasExpired())
+                        {
+                            Console.Write("Refreshing access token... ");
+                            await mgh.RefreshAccessTokenAsync();
+                            Console.WriteLine("Refreshed!");
+
+                            //Save to file
+                            if (mgh_path != null)
+                            {
+                                if (mgh_path != "")
+                                {
+                                    Console.Write("Saving mgh to file... ");
+                                    System.IO.File.WriteAllText(mgh_path, JsonConvert.SerializeObject(mgh));
+                                    Console.WriteLine("Saved!");
+                                }
+                            }
+                        }
+
+                        //Create the contacts
+                        Contact[] ContactsToUpload = RandomContacts(40);
+
+                        //Create the tasks
+                        List<Task> ToDo = new List<Task>();
+                        foreach (Contact c in ContactsToUpload)
+                        {
+                            JObject jo = JObject.Parse(JsonConvert.SerializeObject(c));
+                            Task tsk = mgh.CreateItemAsync(site_id, list_id, jo);
+                            ToDo.Add(tsk);
+                        }
+
+                        //Wait
+                        Console.Write("Uploading batch # " + t.ToString("#,##0") + "... ");
+                        Task.WaitAll(ToDo.ToArray());
+                        Console.WriteLine("Successful!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The Sharepoint site ID or list ID was blank in the config.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The Sharepoint site ID or list ID was not in the config.");
+            }
+            
+
+            
+        }
+
 
         private static Contact[] RandomContacts(int count)
         {
