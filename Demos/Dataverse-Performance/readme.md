@@ -55,7 +55,8 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Contacts earnings > $50,000 and < $60,000|Select top 10 * from Contact where AnnualIncome > 50000 and AnnualIncome < 60000
 |0:02|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$filter=annualincome gt 50000 and annualincome lt 60000
 |0:00.7|
-|Contacts earnings less than $32,500 in the Washington metropolitan area|select Id, FirstName, LastName from Contact where AddressCity = 'Washington metropolitan area' and AnnualIncome < 32500|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=lastname desc&$filter=address1_city eq 'Washington metropolitan area' and annualincome lt 32500&$select=contactid,firstname,lastname|0:01.8|
+|Contacts earnings less than $32,500 in the Washington metropolitan area|select Id, FirstName, LastName from Contact where AddressCity = 'Washington metropolitan area' and AnnualIncome < 32500|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Washington metropolitan area' and annualincome lt 32500&$select=contactid,firstname,lastname
+|0:01.8|
 |Contacts with 941 area code (phone number)|select Id from Contact where convert(varchar, MobilePhone) like '941%'|0:08|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '941')&$select=contactid|0:00.4|
 |Find contact by their last name and birthday|select * from Contact where LastName = 'Costa' and BirthDate = '1966-09-03'|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=lastname eq 'Costa' and birthdate eq 1996-09-03|0:00.1|
 |Large data download|SELECT TOP 10000 * FROM Contact|0:01|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
