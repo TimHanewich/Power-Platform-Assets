@@ -44,12 +44,9 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Test|SQL Query|Time|Dataverse Query|Time|
 |-|-|-|-|-|
 |Count rows in table|SELECT COUNT(*) FROM Contact|0:09|https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])|0:0.4|
-|Select oldest 10 people|SELECT TOP 10 * FROM Contact ORDER BY BirthDate ASC|0:28|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=birthdate asc|0:48|
 |Latitude within certain boundary|SELECT * FROM Contact WHERE AddressLatitude > 0.2 AND AddressLatitude < 0.4|1:27|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_latitude gt 0.2 and address1_latitude lt 0.4|0:09|
 |Living in a certain city|SELECT TOP 50 * FROM Contact WHERE AddressCity = 'Los Angeles'|0:03|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Los Angeles'&$top=50|0:01|
-|Last name begins with|SELECT * FROM Contact WHERE LastName LIKE 'at%'|0:10|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(lastname, 'at')|0:15|
 |First name contains|SELECT * FROM Contact WHERE FirstName LIKE '%tim%'|0:10|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=contains(firstname, 'tim')|0:09|
-|Large data download|SELECT TOP 10000 * FROM Contact|0:01|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
 |Search by last name|select * from Contact where LastName = 'Scott'|0:06|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=lastname eq 'Scott'|0:01|
 |Select by first and last name|select * from Contact where FirstName = 'Elroy' and LastName = 'Zucker'|0:07|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Elroy' and lastname eq 'Zucker'|0:00.1|
 |Get ID's of all people living in Chicago|select Id from Contact where AddressCity = 'Chicago'|0:07|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Chicago'&$select=contactid|0.01|
@@ -59,6 +56,7 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Contacts earnings less than $32,500 in the Washington metropolitan area|select Id, FirstName, LastName from Contact where AddressCity = 'Washington metropolitan area' and AnnualIncome < 32500|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$orderby=lastname desc&$filter=address1_city eq 'Washington metropolitan area' and annualincome lt 32500&$select=contactid,firstname,lastname|0:01.8|
 |Contacts with 941 area code (phone number)|select Id from Contact where convert(varchar, MobilePhone) like '941%'|0:08|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '941')&$select=contactid|0:00.4|
 |Find contact by their last name and birthday|select * from Contact where LastName = 'Costa' and BirthDate = '1966-09-03'|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=lastname eq 'Costa' and birthdate eq 1996-09-03|0:00.1|
+|Large data download|SELECT TOP 10000 * FROM Contact|0:01|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
 
 ## Other Learnings
 - The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
