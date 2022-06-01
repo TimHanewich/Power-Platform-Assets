@@ -77,4 +77,6 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 
 
 ## Resources
+- [Sharepoint REST API Intro](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/get-to-know-the-sharepoint-rest-service?tabs=csom)
 - [Sharepoint REST OData Doc](https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/use-odata-query-operations-in-sharepoint-rest-requests)
+- [How to "swap" Microsoft Graph Refresh Token for Sharepoint REST API token](https://stackoverflow.com/questions/63321532/sharepoint-rest-api-how-to-get-access-token)
