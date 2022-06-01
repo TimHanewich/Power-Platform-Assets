@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using TimHanewich.MicrosoftGraphHelper;
 using TimHanewich.MicrosoftGraphHelper.Sharepoint;
 using System.Configuration;
+using TimHanewich.Cds.AdvancedRead;
 
 namespace DataversePerformance
 {
@@ -84,8 +85,42 @@ namespace DataversePerformance
                 }
                 else if (args[0] == "test")
                 {
-                    Contact[] cs = RandomContacts(3);
-                    Console.WriteLine(JsonConvert.SerializeObject(cs));
+                    CdsAuthenticator auth = new CdsAuthenticator();
+                    auth.Username = "";
+                    auth.Password = "";
+                    auth.Resource = "";
+                    auth.ClientId = Guid.Parse("51f81489-12ee-4a9e-aaae-a2591f45987d");
+                    auth.GetAccessTokenAsync().Wait();
+
+                    CdsService service = new CdsService(auth.Resource, auth.AccessToken);
+
+                    while (true)
+                    {
+                        Console.Write("Getting ID's... ");
+                        CdsReadOperation op = new CdsReadOperation();
+                        op.TableIdentifier = "contacts";
+                        op.AddColumn("contactid");
+                        op.Top = 100;
+                        JObject[] objs = service.ReadAsync(op).Result;
+                        Console.WriteLine(objs.Length.ToString() + "  retrieved.");
+
+                        //Delete each
+                        foreach (JObject jo in objs)
+                        {
+                            JProperty? prop = jo.Property("contactid");
+                            if (prop != null)
+                            {
+                                Guid id = Guid.Parse(prop.Value.ToString());
+                                Console.Write("Deleting " + id + "... ");
+                                service.DeleteRecordAsync("contacts", id.ToString()).Wait();
+                                Console.WriteLine("Deleted.");
+                            }
+                        }
+
+                    }
+
+                    
+
                 }
                 else
                 {
