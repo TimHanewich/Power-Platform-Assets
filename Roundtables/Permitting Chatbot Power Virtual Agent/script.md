@@ -1,7 +1,7 @@
 - Introduction
     - Thank you for coming to one of our regular Power Platform Roundtable sessions
         - If comng back, welcome back
-        - If first time, welcome – My name is Tim Hanewich 
+        - If first time, welcome - what this series is
     - Power Virtual Agents – one of the newer components of the Power Platform, now available in GCC.
     - For making chatbots
     - Introduce our use case:
