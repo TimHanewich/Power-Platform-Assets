@@ -11,7 +11,7 @@ This roundtable demonstrates the capabilities of Power Virtual Agents. We will d
             - Option sets
             - Model driven App
         - **Use this as a starting point for the roundtable.**
-    - ["End state" completed solution](./Solutions/WellPermitting_1_0_0_1.zip)
+    - ["End state" completed solution](./Solutions/WellPermitting_1_0_0_2.zip)
         - Includes:
             - Tables
             - Option sets
