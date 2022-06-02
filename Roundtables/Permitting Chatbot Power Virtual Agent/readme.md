@@ -3,7 +3,7 @@ This roundtable demonstrates the capabilities of Power Virtual Agents. We will d
 
 ## Content
 - [Promotional flyer template](./Flyer.pptx)
-- [Script](./Script.docx)
+- [Script](./script.md)
 - Solutions
     - [Data layer only](./Solutions/WellPermittingEssentialsOnly_1_0_0_2.zip)
         - Includes:
