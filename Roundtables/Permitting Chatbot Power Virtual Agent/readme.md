@@ -17,7 +17,8 @@ This roundtable demonstrates the capabilities of Power Virtual Agents. We will d
             - Option sets
             - Model Driven App
             - Chat Bot (and topics)
-            - Power Automate flow for creating Well Permit Application.
+            - Power Automate flow for creating Well Permit Application
+        - Please note that **this solution contains everything that the "Data layer only" solution contians**. Meaning that you do not need to install both to have the "complete" solution. You only need to install this solution to have the complete solution.
 
 ## Real-World Scenario
 I had this idea from the real-world use case with the State of Colorado/Denver here: https://dwr.colorado.gov/services/well-permitting
