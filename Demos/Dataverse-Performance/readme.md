@@ -34,13 +34,6 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 
 
 ## Test Results
-- Count rows in table
-- Get most recent 10 records
-- Latitude within certain boundary
-- Living in a certain city
-- Last name begins with
-- Large data download
-
 |Test|SQL Query|Time|Dataverse Query|Time|
 |-|-|-|-|-|
 |Count rows in table|SELECT COUNT(*) FROM Contact|0:09|https://org1ceaa16f.crm.dynamics.com/api/data/v9.1/RetrieveTotalRecordCount(EntityNames=['contact'])|0:0.4|
