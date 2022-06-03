@@ -96,6 +96,49 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 39. Select top 15 contacts where last name is "Benzi", born after 1974-8-25, with annual income > $71,400, sorted youngest to oldest.
 40. Select top 15 contacts where last name is "Mulvin", born after 1978-9-4, with annual income > $21,450, sorted youngest to oldest.
 
+### Concurrency Testing Results: SQL
+Completed in 287 seconds
+Results:
+Test # 1: 3.0
+Test # 2: 10.1
+Test # 4: 17.2
+Test # 6: 19.1
+Test # 3: 26.5
+Test # 5: 32.1
+Test # 8: 39.4
+Test # 7: 45.8
+Test # 10: 53.1
+Test # 12: 62.2
+Test # 14: 71.4
+Test # 16: 80.6
+Test # 18: 89.6
+Test # 20: 98.8
+Test # 9: 106.4
+Test # 11: 115.4
+Test # 15: 124.7
+Test # 13: 133.9
+Test # 17: 143.2
+Test # 19: 152.3
+Test # 22: 158.5
+Test # 24: 164.6
+Test # 26: 170.7
+Test # 28: 176.7
+Test # 30: 183.0
+Test # 32: 190.5
+Test # 34: 197.0
+Test # 36: 204.6
+Test # 38: 212.3
+Test # 40: 220.3
+Test # 21: 226.4
+Test # 23: 232.7
+Test # 25: 238.8
+Test # 27: 244.8
+Test # 29: 251.0
+Test # 31: 258.1
+Test # 33: 266.2
+Test # 35: 272.5
+Test # 37: 279.1
+Test # 39: 287.1
 
 ## Other Learnings
 - The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
