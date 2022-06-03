@@ -140,6 +140,50 @@ Test # 35: 272.5
 Test # 37: 279.1
 Test # 39: 287.1
 
+### Concurrency Testing Results: Dataverse
+Completed in 8 seconds
+Results:
+Test # 1: 0.5
+Test # 16: 0.5
+Test # 15: 0.5
+Test # 8: 0.5
+Test # 6: 0.5
+Test # 3: 0.6
+Test # 2: 0.6
+Test # 40: 0.6
+Test # 37: 0.6
+Test # 39: 0.6
+Test # 19: 0.7
+Test # 32: 0.7
+Test # 11: 0.7
+Test # 9: 0.8
+Test # 31: 0.7
+Test # 13: 0.8
+Test # 35: 0.8
+Test # 17: 0.8
+Test # 33: 0.8
+Test # 38: 0.8
+Test # 18: 0.9
+Test # 12: 0.9
+Test # 21: 2.5
+Test # 10: 2.6
+Test # 27: 2.6
+Test # 36: 2.9
+Test # 25: 2.9
+Test # 14: 3.0
+Test # 4: 3.0
+Test # 7: 3.1
+Test # 20: 3.1
+Test # 5: 3.2
+Test # 34: 3.8
+Test # 23: 5.1
+Test # 28: 6.1
+Test # 22: 6.3
+Test # 30: 6.7
+Test # 29: 7.1
+Test # 26: 7.9
+Test # 24: 8.1
+
 ## Other Learnings
 - The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
    - There is a limit on the total number of records you can place in the tenant. This is a limit on **the entire tenant**, not for a specific environment or specific table. Meaning, if you hit the limit across the tenant, you will not be able to upload a single record in *any* environment in *any* table.
