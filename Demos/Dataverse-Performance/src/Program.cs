@@ -92,6 +92,10 @@ namespace DataversePerformance
                 {
                     PerformSqlConcurrencyTest();
                 }
+                else if (args[0] == "con-cds")
+                {
+                    PerformCdsConcurrencyTest();
+                }
                 else
                 {
                     Console.WriteLine("I do not know that one.");
@@ -527,7 +531,7 @@ namespace DataversePerformance
             tsks.Add(CdsConcurrencyTest(dict, 19, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '312')&$top=8"));
             tsks.Add(CdsConcurrencyTest(dict, 20, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '713')&$top=8"));
         
-            tsks.Add(CdsConcurrencyTest(dict, 21, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1994-95-30"));
+            tsks.Add(CdsConcurrencyTest(dict, 21, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1994-05-30"));
             tsks.Add(CdsConcurrencyTest(dict, 22, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1981-08-22"));
             tsks.Add(CdsConcurrencyTest(dict, 23, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1979-01-03"));
             tsks.Add(CdsConcurrencyTest(dict, 24, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1966-04-01"));
