@@ -85,40 +85,6 @@ namespace DataversePerformance
                 }
                 else if (args[0] == "test")
                 {
-                    CdsAuthenticator auth = new CdsAuthenticator();
-                    auth.Username = "";
-                    auth.Password = "";
-                    auth.Resource = "";
-                    auth.ClientId = Guid.Parse("51f81489-12ee-4a9e-aaae-a2591f45987d");
-                    auth.GetAccessTokenAsync().Wait();
-
-                    CdsService service = new CdsService(auth.Resource, auth.AccessToken);
-
-                    while (true)
-                    {
-                        Console.Write("Getting ID's... ");
-                        CdsReadOperation op = new CdsReadOperation();
-                        op.TableIdentifier = "contacts";
-                        op.AddColumn("contactid");
-                        op.Top = 100;
-                        JObject[] objs = service.ReadAsync(op).Result;
-                        Console.WriteLine(objs.Length.ToString() + "  retrieved.");
-
-                        //Delete each
-                        foreach (JObject jo in objs)
-                        {
-                            JProperty? prop = jo.Property("contactid");
-                            if (prop != null)
-                            {
-                                Guid id = Guid.Parse(prop.Value.ToString());
-                                Console.Write("Deleting " + id + "... ");
-                                service.DeleteRecordAsync("contacts", id.ToString()).Wait();
-                                Console.WriteLine("Deleted.");
-                            }
-                        }
-
-                    }
-
                     
 
                 }
@@ -450,55 +416,58 @@ namespace DataversePerformance
             Dictionary<int, TimeSpan> dict = new Dictionary<int, TimeSpan>();
             List<Task> tsks = new List<Task>();
 
-            tsks.Add(SqlConcurrencyTest(dict, 1, "select top 5 * from Contact where FirstName ='Floyd' and LastName = 'Semble'"));
-            tsks.Add(SqlConcurrencyTest(dict, 2, "select top 5 * from Contact where FirstName ='Skippy' and LastName = 'Mushett'"));
-            tsks.Add(SqlConcurrencyTest(dict, 3, "select top 5 * from Contact where FirstName ='Lorry' and LastName = 'Cuffin'"));
-            tsks.Add(SqlConcurrencyTest(dict, 4, "select top 5 * from Contact where FirstName ='Wendall' and LastName = 'Mill'"));
-            tsks.Add(SqlConcurrencyTest(dict, 5, "select top 5 * from Contact where FirstName ='Aggi' and LastName = 'Oiller'"));
-            tsks.Add(SqlConcurrencyTest(dict, 6, "select top 5 * from Contact where FirstName ='Caril' and LastName = 'Flaune'"));
-            tsks.Add(SqlConcurrencyTest(dict, 7, "select top 5 * from Contact where FirstName ='Winfred' and LastName = 'Aykroyd'"));
-            tsks.Add(SqlConcurrencyTest(dict, 8, "select top 5 * from Contact where FirstName ='Tera' and LastName = 'Tirone'"));
-            tsks.Add(SqlConcurrencyTest(dict, 9, "select top 5 * from Contact where FirstName ='Catherin' and LastName = 'Pordal'"));
-            tsks.Add(SqlConcurrencyTest(dict, 10, "select top 5 * from Contact where FirstName ='Beck' and LastName = 'Sketh'"));
+            SqlConnection sqlcon = new SqlConnection(SqlCredentialsProvider.GetSqlConnectionString());
+            sqlcon.Open();
 
-            tsks.Add(SqlConcurrencyTest(dict, 11, "select Id from Contact where convert(varchar, MobilePhone) like '941%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 12, "select Id from Contact where convert(varchar, MobilePhone) like '310%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 13, "select Id from Contact where convert(varchar, MobilePhone) like '212%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 14, "select Id from Contact where convert(varchar, MobilePhone) like '305%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 15, "select Id from Contact where convert(varchar, MobilePhone) like '702%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 16, "select Id from Contact where convert(varchar, MobilePhone) like '202%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 17, "select Id from Contact where convert(varchar, MobilePhone) like '415%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 18, "select Id from Contact where convert(varchar, MobilePhone) like '404%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 19, "select Id from Contact where convert(varchar, MobilePhone) like '312%'"));
-            tsks.Add(SqlConcurrencyTest(dict, 20, "select Id from Contact where convert(varchar, MobilePhone) like '713%'"));
+            tsks.Add(SqlConcurrencyTest(dict, sqlcon, 1, "select top 5 * from Contact where FirstName ='Floyd' and LastName = 'Semble'"));
+            tsks.Add(SqlConcurrencyTest(dict, sqlcon, 2, "select top 5 * from Contact where FirstName ='Skippy' and LastName = 'Mushett'"));
+            //tsks.Add(SqlConcurrencyTest(dict, 3, "select top 5 * from Contact where FirstName ='Lorry' and LastName = 'Cuffin'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 4, "select top 5 * from Contact where FirstName ='Wendall' and LastName = 'Mill'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 5, "select top 5 * from Contact where FirstName ='Aggi' and LastName = 'Oiller'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 6, "select top 5 * from Contact where FirstName ='Caril' and LastName = 'Flaune'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 7, "select top 5 * from Contact where FirstName ='Winfred' and LastName = 'Aykroyd'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 8, "select top 5 * from Contact where FirstName ='Tera' and LastName = 'Tirone'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 9, "select top 5 * from Contact where FirstName ='Catherin' and LastName = 'Pordal'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 10, "select top 5 * from Contact where FirstName ='Beck' and LastName = 'Sketh'"));
+
+            // tsks.Add(SqlConcurrencyTest(dict, 11, "select Id from Contact where convert(varchar, MobilePhone) like '941%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 12, "select Id from Contact where convert(varchar, MobilePhone) like '310%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 13, "select Id from Contact where convert(varchar, MobilePhone) like '212%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 14, "select Id from Contact where convert(varchar, MobilePhone) like '305%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 15, "select Id from Contact where convert(varchar, MobilePhone) like '702%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 16, "select Id from Contact where convert(varchar, MobilePhone) like '202%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 17, "select Id from Contact where convert(varchar, MobilePhone) like '415%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 18, "select Id from Contact where convert(varchar, MobilePhone) like '404%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 19, "select Id from Contact where convert(varchar, MobilePhone) like '312%'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 20, "select Id from Contact where convert(varchar, MobilePhone) like '713%'"));
             
-            tsks.Add(SqlConcurrencyTest(dict, 21, "select * from Contact where BirthDate = '19940530'"));
-            tsks.Add(SqlConcurrencyTest(dict, 22, "select * from Contact where BirthDate = '19810822'"));
-            tsks.Add(SqlConcurrencyTest(dict, 23, "select * from Contact where BirthDate = '19790103'"));
-            tsks.Add(SqlConcurrencyTest(dict, 24, "select * from Contact where BirthDate = '19660401'"));
-            tsks.Add(SqlConcurrencyTest(dict, 25, "select * from Contact where BirthDate = '20011204'"));
-            tsks.Add(SqlConcurrencyTest(dict, 26, "select * from Contact where BirthDate = '19980219'"));
-            tsks.Add(SqlConcurrencyTest(dict, 27, "select * from Contact where BirthDate = '19951214'"));
-            tsks.Add(SqlConcurrencyTest(dict, 28, "select * from Contact where BirthDate = '20040304'"));
-            tsks.Add(SqlConcurrencyTest(dict, 29, "select * from Contact where BirthDate = '19820613'"));
-            tsks.Add(SqlConcurrencyTest(dict, 30, "select * from Contact where BirthDate = '19890505'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 21, "select * from Contact where BirthDate = '19940530'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 22, "select * from Contact where BirthDate = '19810822'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 23, "select * from Contact where BirthDate = '19790103'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 24, "select * from Contact where BirthDate = '19660401'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 25, "select * from Contact where BirthDate = '20011204'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 26, "select * from Contact where BirthDate = '19980219'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 27, "select * from Contact where BirthDate = '19951214'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 28, "select * from Contact where BirthDate = '20040304'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 29, "select * from Contact where BirthDate = '19820613'"));
+            // tsks.Add(SqlConcurrencyTest(dict, 30, "select * from Contact where BirthDate = '19890505'"));
 
-            tsks.Add(SqlConcurrencyTest(dict, 31, "select top 15 * from Contact where LastName = 'Semble' and BirthDate > '19910421' and AnnualIncome > 31000 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 32, "select top 15 * from Contact where LastName = 'Cuffin' and BirthDate > '19840209' and AnnualIncome > 43500 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 33, "select top 15 * from Contact where LastName = 'Mill' and BirthDate > '19621207' and AnnualIncome > 57800 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 34, "select top 15 * from Contact where LastName = 'Bromby' and BirthDate > '19990121' and AnnualIncome > 22000 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 35, "select top 15 * from Contact where LastName = 'Scartifield' and BirthDate > '20030509' and AnnualIncome > 21060 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 36, "select top 15 * from Contact where LastName = 'Cawthorne' and BirthDate > '19790530' and AnnualIncome > 60000 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 37, "select top 15 * from Contact where LastName = 'Scown' and BirthDate > '19960706' and AnnualIncome > 81900 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 38, "select top 15 * from Contact where LastName = 'Venner' and BirthDate > '19730923' and AnnualIncome > 79900 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 39, "select top 15 * from Contact where LastName = 'Benzi' and BirthDate > '19740825' and AnnualIncome > 71400 order by BirthDate desc"));
-            tsks.Add(SqlConcurrencyTest(dict, 40, "select top 15 * from Contact where LastName = 'Mulvin' and BirthDate > '19780904' and AnnualIncome > 21450 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 31, "select top 15 * from Contact where LastName = 'Semble' and BirthDate > '19910421' and AnnualIncome > 31000 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 32, "select top 15 * from Contact where LastName = 'Cuffin' and BirthDate > '19840209' and AnnualIncome > 43500 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 33, "select top 15 * from Contact where LastName = 'Mill' and BirthDate > '19621207' and AnnualIncome > 57800 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 34, "select top 15 * from Contact where LastName = 'Bromby' and BirthDate > '19990121' and AnnualIncome > 22000 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 35, "select top 15 * from Contact where LastName = 'Scartifield' and BirthDate > '20030509' and AnnualIncome > 21060 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 36, "select top 15 * from Contact where LastName = 'Cawthorne' and BirthDate > '19790530' and AnnualIncome > 60000 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 37, "select top 15 * from Contact where LastName = 'Scown' and BirthDate > '19960706' and AnnualIncome > 81900 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 38, "select top 15 * from Contact where LastName = 'Venner' and BirthDate > '19730923' and AnnualIncome > 79900 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 39, "select top 15 * from Contact where LastName = 'Benzi' and BirthDate > '19740825' and AnnualIncome > 71400 order by BirthDate desc"));
+            // tsks.Add(SqlConcurrencyTest(dict, 40, "select top 15 * from Contact where LastName = 'Mulvin' and BirthDate > '19780904' and AnnualIncome > 21450 order by BirthDate desc"));
 
             //RUN!
-            Console.Write("Running tasks... ");
-            DateTime dt1 = new DateTime();
+            Console.WriteLine("Running tasks... ");
+            DateTime dt1 = DateTime.UtcNow;
             Task.WaitAll(tsks.ToArray());
-            DateTime dt2 = new DateTime();
+            DateTime dt2 = DateTime.UtcNow;
             TimeSpan ts = dt2 - dt1;
             Console.WriteLine("Complete!");
             Console.WriteLine("Completed in " + ts.TotalSeconds.ToString("#,##0") + " seconds");
@@ -507,23 +476,24 @@ namespace DataversePerformance
             Console.WriteLine("Results:");
             foreach (KeyValuePair<int, TimeSpan> kvp in dict)
             {
-                Console.Write("Test # " + kvp.Key.ToString() + ": " + kvp.Value.TotalSeconds.ToString("#,##0.0"));
+                Console.WriteLine("Test # " + kvp.Key.ToString() + ": " + kvp.Value.TotalSeconds.ToString("#,##0.0"));
             }
 
         }
 
-        public static async Task SqlConcurrencyTest(Dictionary<int, TimeSpan> dict, int id, string command)
+        public static async Task SqlConcurrencyTest(Dictionary<int, TimeSpan> dict, SqlConnection sqlcon, int id, string command)
         {
             DateTime dt1 = DateTime.UtcNow;
-            SqlConnection sqlcon = new SqlConnection(SqlCredentialsProvider.GetSqlConnectionString());
-            await sqlcon.OpenAsync();
+            
             SqlCommand sqlcmd = new SqlCommand(command, sqlcon);
+            sqlcmd.CommandTimeout = 5000000;
             SqlDataReader dr = await sqlcmd.ExecuteReaderAsync();
             string json = TimHanewich.Sql.SqlToolkit.ReadSqlToJson(dr);
-            await sqlcon.CloseAsync();
+            //await sqlcon.CloseAsync();
             DateTime dt2 = DateTime.UtcNow;
             TimeSpan ts = dt2 - dt1;
             dict.Add(id, ts);
+            Console.WriteLine("Test # " + id.ToString() + " completed in " + ts.TotalSeconds.ToString("#,##0.0") + " seconds!");
         }
 
 
