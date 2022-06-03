@@ -496,6 +496,95 @@ namespace DataversePerformance
             Console.WriteLine("Test # " + id.ToString() + " completed in " + ts.TotalSeconds.ToString("#,##0.0") + " seconds!");
         }
 
+        public static void PerformCdsConcurrencyTest()
+        {
+            CdsAuthenticator auth = DataverseAuthenticator.GetCdsAuthenticator();
+            auth.GetAccessTokenAsync().Wait();
+            string token = auth.AccessToken;
+
+            Dictionary<int, TimeSpan> dict = new Dictionary<int, TimeSpan>();
+            List<Task> tsks = new List<Task>();
+
+            tsks.Add(CdsConcurrencyTest(dict, 1, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Floyd' and lastname eq 'Semble'"));
+            tsks.Add(CdsConcurrencyTest(dict, 2, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Skippy' and lastname eq 'Mushett'"));
+            tsks.Add(CdsConcurrencyTest(dict, 3, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Lorry' and lastname eq 'Cuffin'"));
+            tsks.Add(CdsConcurrencyTest(dict, 4, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Wendall' and lastname eq 'Mill'"));
+            tsks.Add(CdsConcurrencyTest(dict, 5, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Aggi' and lastname eq 'Oiller'"));
+            tsks.Add(CdsConcurrencyTest(dict, 6, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Caril' and lastname eq 'Flaune'"));
+            tsks.Add(CdsConcurrencyTest(dict, 7, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Winfred' and lastname eq 'Aykroyd'"));
+            tsks.Add(CdsConcurrencyTest(dict, 8, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Tera' and lastname eq 'Tirone'"));
+            tsks.Add(CdsConcurrencyTest(dict, 9, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Catherin' and lastname eq 'Pordal'"));
+            tsks.Add(CdsConcurrencyTest(dict, 10, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=firstname eq 'Beck' and lastname eq 'Sketh'"));
+
+            tsks.Add(CdsConcurrencyTest(dict, 11, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '941')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 12, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '310')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 13, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '212')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 14, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '305')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 15, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '702')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 16, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '202')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 17, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '415')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 18, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '404')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 19, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '312')&$top=8"));
+            tsks.Add(CdsConcurrencyTest(dict, 20, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '713')&$top=8"));
+        
+            tsks.Add(CdsConcurrencyTest(dict, 21, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1994-95-30"));
+            tsks.Add(CdsConcurrencyTest(dict, 22, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1981-08-22"));
+            tsks.Add(CdsConcurrencyTest(dict, 23, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1979-01-03"));
+            tsks.Add(CdsConcurrencyTest(dict, 24, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1966-04-01"));
+            tsks.Add(CdsConcurrencyTest(dict, 25, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 2001-12-04"));
+            tsks.Add(CdsConcurrencyTest(dict, 26, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1998-02-19"));
+            tsks.Add(CdsConcurrencyTest(dict, 27, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1995-12-14"));
+            tsks.Add(CdsConcurrencyTest(dict, 28, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 2004-03-04"));
+            tsks.Add(CdsConcurrencyTest(dict, 29, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1982-06-13"));
+            tsks.Add(CdsConcurrencyTest(dict, 30, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=birthdate eq 1989-05-05"));
+
+            tsks.Add(CdsConcurrencyTest(dict, 31, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Semble' and birthdate gt 1991-04-21 and annualincome gt 31000"));
+            tsks.Add(CdsConcurrencyTest(dict, 32, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Cuffin' and birthdate gt 1984-02-09 and annualincome gt 43500"));
+            tsks.Add(CdsConcurrencyTest(dict, 33, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Mill' and birthdate gt 1962-12-07 and annualincome gt 57800"));
+            tsks.Add(CdsConcurrencyTest(dict, 34, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Bromby' and birthdate gt 1999-01-21 and annualincome gt 22000"));
+            tsks.Add(CdsConcurrencyTest(dict, 35, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Scartifield' and birthdate gt 2003-05-09 and annualincome gt 21060"));
+            tsks.Add(CdsConcurrencyTest(dict, 36, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Cawthorne' and birthdate gt 1979-05-30 and annualincome gt 60000"));
+            tsks.Add(CdsConcurrencyTest(dict, 37, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Scown' and birthdate gt 1996-07-06 and annualincome gt 81900"));
+            tsks.Add(CdsConcurrencyTest(dict, 38, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Venner' and birthdate gt 1973-09-23 and annualincome gt 79900"));
+            tsks.Add(CdsConcurrencyTest(dict, 39, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Benzi' and birthdate gt 1974-08-25 and annualincome gt 71400"));
+            tsks.Add(CdsConcurrencyTest(dict, 40, token, "https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Mulvin' and birthdate gt 1978-09-04 and annualincome gt 21450"));
+        
+            //RUN!
+            Console.WriteLine("Running tasks... ");
+            DateTime dt1 = DateTime.UtcNow;
+            Task.WaitAll(tsks.ToArray());
+            DateTime dt2 = DateTime.UtcNow;
+            TimeSpan ts = dt2 - dt1;
+            Console.WriteLine("Complete!");
+            Console.WriteLine("Completed in " + ts.TotalSeconds.ToString("#,##0") + " seconds");
+            
+            //Results
+            Console.WriteLine("Results:");
+            foreach (KeyValuePair<int, TimeSpan> kvp in dict)
+            {
+                Console.WriteLine("Test # " + kvp.Key.ToString() + ": " + kvp.Value.TotalSeconds.ToString("#,##0.0"));
+            }        
+        }
+
+        public static async Task CdsConcurrencyTest(Dictionary<int, TimeSpan> dict, int id, string token, string url)
+        {
+            HttpRequestMessage req = new HttpRequestMessage();
+            req.Method = HttpMethod.Get;
+            req.Headers.Add("Authorization", "Bearer " + token);
+            req.RequestUri = new Uri(url);
+            HttpClient hc = new HttpClient();
+            DateTime dt1 = DateTime.UtcNow;
+            HttpResponseMessage resp = await hc.SendAsync(req);
+            if (resp.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new Exception("Query '" + url + "' failed with code " + resp.StatusCode.ToString());
+            }
+            DateTime dt2 = DateTime.UtcNow;
+            TimeSpan ts = dt2 - dt1;
+            dict.Add(id, ts);
+            Console.WriteLine("Test # " + id.ToString() + " completed in " + ts.TotalSeconds.ToString("#,##0.0") + " seconds!");
+        }
+
 
         #endregion
 
