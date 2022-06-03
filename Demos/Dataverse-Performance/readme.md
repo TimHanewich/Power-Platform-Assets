@@ -17,8 +17,8 @@
 ## Playing Field
 - Number of Records
    - SQL: 5,809,985
-   - Dataverse: 5,809,985 (waiting to verify)
-   - Sharepoint: 
+   - Dataverse: 5,809,985
+   - Sharepoint: ~30,000
 
 
 
