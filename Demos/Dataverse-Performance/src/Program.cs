@@ -520,6 +520,7 @@ namespace DataversePerformance
             SqlCommand sqlcmd = new SqlCommand(command, sqlcon);
             SqlDataReader dr = await sqlcmd.ExecuteReaderAsync();
             string json = TimHanewich.Sql.SqlToolkit.ReadSqlToJson(dr);
+            await sqlcon.CloseAsync();
             DateTime dt2 = DateTime.UtcNow;
             TimeSpan ts = dt2 - dt1;
             dict.Add(id, ts);
