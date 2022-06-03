@@ -45,14 +45,57 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Get ID's of all people living in Chicago|select Id from Contact where AddressCity = 'Chicago'|0:07|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Chicago'&$select=contactid|0.01|
 |Complex filtering|SELECT top 15 * FROM Contact WHERE LastName = 'Kimm' AND BirthDate > '19930504' AND AnnualIncome > 13000 order by BirthDate desc|0:06|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=15&$orderby=birthdate desc&$filter=lastname eq 'Kimm' and birthdate gt 1993-05-04 and annualincome gt 13000|0:00.1|
 |Find contact by phone number|select * from Contact where MobilePhone = 9364652201|0:12|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=mobilephone eq '2786139268'|0:00.07|
-|Contacts earnings > $50,000 and < $60,000|Select top 10 * from Contact where AnnualIncome > 50000 and AnnualIncome < 60000
-|0:02|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10&$filter=annualincome gt 50000 and annualincome lt 60000
-|0:00.7|
-|Contacts earnings less than $32,500 in the Washington metropolitan area|select Id, FirstName, LastName from Contact where AddressCity = 'Washington metropolitan area' and AnnualIncome < 32500|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Washington metropolitan area' and annualincome lt 32500&$select=contactid,firstname,lastname
-|0:01.8|
+|Contacts earnings > $50,000 and < $60,000|Select top 10 * from Contact where AnnualIncome > 50000 and AnnualIncome < 60000|0:02|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts$top=10&$filter=annualincome gt 50000 and annualincome lt 60000|0:00.7|
+|Contacts earnings less than $32,500 in the Washington metropolitan area|select Id, FirstName, LastName from Contact where AddressCity = 'Washington metropolitan area' and AnnualIncome < 32500|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=address1_city eq 'Washington metropolitan area' and annualincome lt 32500&$select=contactid,firstname,lastname|0:01.8|
 |Contacts with 941 area code (phone number)|select Id from Contact where convert(varchar, MobilePhone) like '941%'|0:08|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=startswith(mobilephone, '941')&$select=contactid|0:00.4|
 |Find contact by their last name and birthday|select * from Contact where LastName = 'Costa' and BirthDate = '1966-09-03'|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=lastname eq 'Costa' and birthdate eq 1996-09-03|0:00.1|
 |Large data download|SELECT TOP 10000 * FROM Contact|0:01|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
+
+## Concurrency Tests
+1. Select 5 users with first name "Floyd" and last name "Semble"
+2. Select 5 users with first name "Skippy" and last name "Mushett"
+3. Select 5 users with first name "Lorry" and last name "Cuffin"
+4. Select 5 users with first name "Wendall" and last name "Mill"
+5. Select 5 users with first name "Aggi" and last name "Oiller"
+6. Select 5 users with first name "Caril" and last name "Flaune"
+7. Select 5 users with first name "Winfred" and last name "Aykroyd"
+8. Select 5 users with first name "Tera" and last name "Tirone"
+9. Select 5 users with first name "Catherin" and last name "Pordal"
+10. Select 5 users with first name "Beck" and last name "Sketh"
+
+11. Select top 8 contacts with 941 area code
+12. Select top 8 contacts with 310 area code
+13. Select top 8 contacts with 212 area code
+14. Select top 8 contacts with 305 area code
+15. Select top 8 contacts with 702 area code
+16. Select top 8 contacts with 202 area code
+17. Select top 8 contacts with 415 area code
+18. Select top 8 contacts with 404 area code
+19. Select top 8 contacts with 312 area code
+20. Select top 8 contacts with 713 area code
+
+21. Select contacts born on 1994-5-30
+22. Select contacts born on 1981-8-22
+23. Select contacts born on 1979-1-3
+24. Select contacts born on 1966-4-1
+25. Select contacts born on 2001-12-4
+26. Select contacts born on 1998-2-19
+27. Select contacts born on 1995-12-14
+28. Select contacts born on 2004-3-4
+29. Select contacts born on 1982-6-13
+30. Select contacts born on 1989-5-5
+
+31. Select top 15 contacts where last name is "Semble", born after 1991-4-21, with annual income > $31,000, sorted youngest to oldest.
+32. Select top 15 contacts where last name is "Cuffin", born after 1984-2-9, with annual income > $43,500, sorted youngest to oldest.
+33. Select top 15 contacts where last name is "Mill", born after 1962-12-7, with annual income > $57,800, sorted youngest to oldest.
+34. Select top 15 contacts where last name is "Bromby", born after 1999-1-21, with annual income > $22,000, sorted youngest to oldest.
+35. Select top 15 contacts where last name is "Scartifield", born after 2003-5-9, with annual income > $21,060, sorted youngest to oldest.
+36. Select top 15 contacts where last name is "Cawthorne", born after 1979-5-30, with annual income > $60,000, sorted youngest to oldest.
+37. Select top 15 contacts where last name is "Scown", born after 1996-7-6, with annual income > $81,900, sorted youngest to oldest.
+38. Select top 15 contacts where last name is "Venner", born after 1973-9-23, with annual income > $79,900, sorted youngest to oldest.
+39. Select top 15 contacts where last name is "Benzi", born after 1974-8-25, with annual income > $71,400, sorted youngest to oldest.
+40. Select top 15 contacts where last name is "Mulvin", born after 1978-9-4, with annual income > $21,450, sorted youngest to oldest.
+
 
 ## Other Learnings
 - The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
