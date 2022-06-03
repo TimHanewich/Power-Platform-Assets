@@ -51,7 +51,7 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 |Find contact by their last name and birthday|select * from Contact where LastName = 'Costa' and BirthDate = '1966-09-03'|0:05|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$filter=lastname eq 'Costa' and birthdate eq 1996-09-03|0:00.1|
 |Large data download|SELECT TOP 10000 * FROM Contact|0:01|https://org1ceaa16f.crm.dynamics.com/api/data/v9.0/contacts?$top=10000|0:10|
 
-## Concurrency Tests
+## Concurrency Test
 1. Select 5 users with first name "Floyd" and last name "Semble"
 2. Select 5 users with first name "Skippy" and last name "Mushett"
 3. Select 5 users with first name "Lorry" and last name "Cuffin"
@@ -96,93 +96,147 @@ The SQL database that was tested against has not employed any "SQL tuning" techn
 39. Select top 15 contacts where last name is "Benzi", born after 1974-8-25, with annual income > $71,400, sorted youngest to oldest.
 40. Select top 15 contacts where last name is "Mulvin", born after 1978-9-4, with annual income > $21,450, sorted youngest to oldest.
 
-### Concurrency Testing Results: SQL
-Completed in 287 seconds
-Results:
-Test # 1: 3.0
-Test # 2: 10.1
-Test # 4: 17.2
-Test # 6: 19.1
-Test # 3: 26.5
-Test # 5: 32.1
-Test # 8: 39.4
-Test # 7: 45.8
-Test # 10: 53.1
-Test # 12: 62.2
-Test # 14: 71.4
-Test # 16: 80.6
-Test # 18: 89.6
-Test # 20: 98.8
-Test # 9: 106.4
-Test # 11: 115.4
-Test # 15: 124.7
-Test # 13: 133.9
-Test # 17: 143.2
-Test # 19: 152.3
-Test # 22: 158.5
-Test # 24: 164.6
-Test # 26: 170.7
-Test # 28: 176.7
-Test # 30: 183.0
-Test # 32: 190.5
-Test # 34: 197.0
-Test # 36: 204.6
-Test # 38: 212.3
-Test # 40: 220.3
-Test # 21: 226.4
-Test # 23: 232.7
-Test # 25: 238.8
-Test # 27: 244.8
-Test # 29: 251.0
-Test # 31: 258.1
-Test # 33: 266.2
-Test # 35: 272.5
-Test # 37: 279.1
-Test # 39: 287.1
+## Concurrency Test Results
+All response times in *seconds*
 
-### Concurrency Testing Results: Dataverse
-Completed in 8 seconds
-Results:
-Test # 1: 0.5
-Test # 16: 0.5
-Test # 15: 0.5
-Test # 8: 0.5
-Test # 6: 0.5
-Test # 3: 0.6
-Test # 2: 0.6
-Test # 40: 0.6
-Test # 37: 0.6
-Test # 39: 0.6
-Test # 19: 0.7
-Test # 32: 0.7
-Test # 11: 0.7
-Test # 9: 0.8
-Test # 31: 0.7
-Test # 13: 0.8
-Test # 35: 0.8
-Test # 17: 0.8
-Test # 33: 0.8
-Test # 38: 0.8
-Test # 18: 0.9
-Test # 12: 0.9
-Test # 21: 2.5
-Test # 10: 2.6
-Test # 27: 2.6
-Test # 36: 2.9
-Test # 25: 2.9
-Test # 14: 3.0
-Test # 4: 3.0
-Test # 7: 3.1
-Test # 20: 3.1
-Test # 5: 3.2
-Test # 34: 3.8
-Test # 23: 5.1
-Test # 28: 6.1
-Test # 22: 6.3
-Test # 30: 6.7
-Test # 29: 7.1
-Test # 26: 7.9
-Test # 24: 8.1
+|Metric|SQL|Dataverse|
+|-|-|-|
+|Total Response Time*|5,900|94.5|
+|Average Response Time|146|2.4|
+|Time to complete all 40 requests|287|8|
+
+**The sum of each response time. For example, if 40 requests were made and each request took 1 second, the total response time would be 40 seconds. This is defined as the total amount of time that the "clients" of the database had to wait for their response to be filled - an important metric for benchmarking.*
+
+|Query #|SQL Response (seconds)|Dataverse Response (seconds)|
+|-|-|-|
+|1|3.0|0.5|
+|2|10.1|0.6|
+|3|26.3|0.6|
+|4|17.2|3.0|
+|5|32.1|3.2|
+|6|19.1|0.5|
+|7|45.8|3.1|
+|8|39.4|0.5|
+|9|106.4|0.8|
+|10|53.1|2.6|
+|11|115.4|0.7|
+|12|62.2|0.9|
+|13|133.9|0.8|
+|14|71.4|3.0|
+|15|124.7|0.5|
+|16|80.6|0.5|
+|17|143.2|0.8|
+|18|89.6|0.9|
+|19|152.3|0.7|
+|20|98.8|3.1|
+|21|226.4|2.5|
+|22|158.5|6.3|
+|23|232.7|5.1|
+|24|164.6|8.1|
+|25|238.8|2.9|
+|26|170.7|7.9|
+|27|244.8|2.6|
+|28|176.7|6.1|
+|29|251.0|7.1|
+|30|183.0|6.7|
+|31|258.1|0.7|
+|32|190.5|0.7|
+|33|266.2|0.8|
+|34|197.0|3.4|
+|35|272.5|0.8|
+|36|204.6|2.9|
+|37|279.1|0.6|
+|38|212.3|0.8|
+|39|287.1|0.6|
+|40|220.3|0.6|
+
+### RAW Concurrency Testing Results: SQL
+Completed in 287 seconds  
+Results:  
+Test # 1: 3.0    
+Test # 2: 10.1  
+Test # 4: 17.2  
+Test # 6: 19.1  
+Test # 3: 26.5  
+Test # 5: 32.1  
+Test # 8: 39.4  
+Test # 7: 45.8  
+Test # 10: 53.1  
+Test # 12: 62.2  
+Test # 14: 71.4  
+Test # 16: 80.6  
+Test # 18: 89.6  
+Test # 20: 98.8  
+Test # 9: 106.4  
+Test # 11: 115.4  
+Test # 15: 124.7    
+Test # 13: 133.9  
+Test # 17: 143.2  
+Test # 19: 152.3  
+Test # 22: 158.5  
+Test # 24: 164.6  
+Test # 26: 170.7  
+Test # 28: 176.7  
+Test # 30: 183.0  
+Test # 32: 190.5  
+Test # 34: 197.0  
+Test # 36: 204.6  
+Test # 38: 212.3  
+Test # 40: 220.3  
+Test # 21: 226.4  
+Test # 23: 232.7  
+Test # 25: 238.8  
+Test # 27: 244.8  
+Test # 29: 251.0  
+Test # 31: 258.1  
+Test # 33: 266.2  
+Test # 35: 272.5  
+Test # 37: 279.1  
+Test # 39: 287.1  
+
+### RAW Concurrency Testing Results: Dataverse
+Completed in 8 seconds   
+Results:  
+Test # 1: 0.5   
+Test # 16: 0.5  
+Test # 15: 0.5  
+Test # 8: 0.5  
+Test # 6: 0.5  
+Test # 3: 0.6  
+Test # 2: 0.6  
+Test # 40: 0.6  
+Test # 37: 0.6  
+Test # 39: 0.6  
+Test # 19: 0.7  
+Test # 32: 0.7  
+Test # 11: 0.7  
+Test # 9: 0.8  
+Test # 31: 0.7  
+Test # 13: 0.8  
+Test # 35: 0.8  
+Test # 17: 0.8  
+Test # 33: 0.8  
+Test # 38: 0.8  
+Test # 18: 0.9  
+Test # 12: 0.9  
+Test # 21: 2.5  
+Test # 10: 2.6  
+Test # 27: 2.6  
+Test # 36: 2.9  
+Test # 25: 2.9  
+Test # 14: 3.0  
+Test # 4: 3.0  
+Test # 7: 3.1  
+Test # 20: 3.1  
+Test # 5: 3.2  
+Test # 34: 3.8  
+Test # 23: 5.1  
+Test # 28: 6.1  
+Test # 22: 6.3  
+Test # 30: 6.7  
+Test # 29: 7.1  
+Test # 26: 7.9  
+Test # 24: 8.1  
 
 ## Other Learnings
 - The 12-month demo tenants we receive are designated "trial" tenants. Compared to a production tenant, the trial tenant receives less resources and has limitations:
