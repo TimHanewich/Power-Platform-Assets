@@ -1,5 +1,5 @@
 # Dynamics 365/Model-Driven Power Apps: Solving the AADSTS50011 Error
-You may experience an uncommon, but frusturating and bewildering error while trying to access a Model-Driven interace in the Microsoft Dynamics 365/Power Platform:
+You may experience an uncommon, but frustrating and bewildering error while trying to access a Model-Driven interface in the Microsoft Dynamics 365/Power Platform:
 
 ```
 Sorry, but we're having trouble signing you in.
@@ -11,7 +11,7 @@ AADSTS50011: The redirect URI 'https://by2--namcrmlivesg667.crm.dynamics.com/' s
 This error would occur as soon as a user attempts to launch a model-driven interface, either in a Dynamics 365 first-party app or your own custom-built model-driven Power App.
 
 ## What does this mean?
-There is a section within Azure Active Directory named *Enterprise Applications*. This contains a list of the applications that you have registered to be authenticated against and used within the context of M365. For example, if you wish for one of your applications to use the Sharepoint API through the Microsoft Graph API, you'd register your app within Azure Active Directory here. The newly registered application would allow for you to set up an OAuth authentication flow, meaning users of your app would be able to log in with their own Microsoft account (personal or business) and in doing so allow your app to "use" Sharepoint on their behalf. 
+There is a section within Azure Active Directory named *Enterprise Applications*. This contains a list of the applications that you have registered to be authenticated against and used within the context of M365. For example, if you wish for one of your applications to use the SharePoint API through the Microsoft Graph API, you'd register your app within Azure Active Directory here. The newly registered application would allow for you to set up an OAuth authentication flow, meaning users of your app would be able to log in with their own Microsoft account (personal or business) and in doing so allow your app to "use" SharePoint on their behalf. 
 
 Upon the user authenticating (logging in), an expiring token is delivered back to *your* application via a simple GET request to your registered "callback" or "redirect" URL that you set up in the registered application in the Azure portal. This token is what you will provide to the Microsoft Graph API to verify that you were given permission by the user via authentication. 
 
@@ -27,11 +27,11 @@ Due to the fact that we are trying to add up to 30 callback/redirect URL's to th
 
 I believe this to be the case for several reasons:
 1. I've attempted this with many groups many times. It is a consistent issue and has happened each time.
-2. The same result always occurs: rougly 50% of the group *does* have access to the model-driven interface as expected, but the ther 50% *does not*. Some get through, some do not.
-3. This error never occurs when slowing things down and only creating a new environment every 30 seconds to a minute or so. Perhaps one could create multiple environments even 5 seconds apart, but the nearly instantanous creation is what seems to cause the error; not the quantity of the environments, but rather the time in between their creation.
+2. The same result always occurs: roughly 50% of the group *does* have access to the model-driven interface as expected, but the other 50% *does not*. Some get through, some do not.
+3. This error never occurs when slowing things down and only creating a new environment every 30 seconds to a minute or so. Perhaps one could create multiple environments even 5 seconds apart, but the nearly instantaneous creation is what seems to cause the error; not the quantity of the environments, but rather the time in between their creation.
 
 ## The solution
-Fortuntately, I have discovered what seems to be an indirect solution to this issue:
+Fortunately, I have discovered what seems to be an indirect solution to this issue:
 
 1. Give one of the affected users permission to use *another* environment in the tenant that *is* functioning properly (grant the Environment Maker role and perhaps a single Dataverse-related role for good measure).
 2. The user selects (enters) the functioning environment they were given access to.
