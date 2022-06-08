@@ -30,7 +30,7 @@ I believe this to be the case for several reasons:
 2. The same result always occurs: roughly 50% of the group *does* have access to the model-driven interface as expected, but the other 50% *does not*. Some get through, some do not.
 3. This error never occurs when slowing things down and only creating a new environment every 30 seconds to a minute or so. Perhaps one could create multiple environments even 5 seconds apart, but the nearly instantaneous creation is what seems to cause the error; not the quantity of the environments, but rather the time in between their creation.
 
-## The solution
+## The Solution
 Fortunately, I have discovered what seems to be an indirect solution to this issue:
 
 1. Give one of the affected users permission to use *another* environment in the tenant that *is* functioning properly (grant the Environment Maker role and perhaps a single Dataverse-related role for good measure).
