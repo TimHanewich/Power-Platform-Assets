@@ -1,3 +1,5 @@
+*This story is published on Medium: https://timhanewich.medium.com/dynamics-365-model-driven-power-apps-solving-the-aadsts50011-error-8ef6310ee0a5*
+
 # Dynamics 365/Model-Driven Power Apps: Solving the AADSTS50011 Error
 You may experience an uncommon, but frustrating and bewildering error while trying to access a Model-Driven interface in the Microsoft Dynamics 365/Power Platform:
 
