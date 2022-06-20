@@ -29,7 +29,7 @@ Session-specific marketing material can be found in each sessions folder below. 
 [This presentation deck](./Roundtable%20Deck.pptx) contains the Power Point content for *all* of the sessions below.
 
 ### Click on a session below to view the associated content
-|Session|Topic|Targeted Agency|
+|Session|Topic|Targeted Audience|
 |-|-|-|
 |Session 1|[Introduction to Power Apps - HR Onboarding Management](./HR%20Onboarding/)||
 |Session 2|[Detecting Fish Species with AI Builder](./Fish%20Species%20Detection%20AI/)|Dept of Fish & Wildlife|
