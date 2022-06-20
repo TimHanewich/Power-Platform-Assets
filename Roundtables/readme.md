@@ -37,5 +37,8 @@ Session-specific marketing material can be found in each sessions folder below. 
 |Session 4|[Bring your own API - Develop a custom connector](./Custom%20Connector/)|IT|
 |Session 5|[Automate the desktop with Robotic Process Automation](./Robotic%20Process%20Automation/)||
 |Session 6|[Create an autonomous chatbot with Power Virtual Agents](./Permitting%20Chatbot%20Power%20Virtual%20Agent/)||
+|Session 7|Version control with Power Apps using Git (in development)||
+|Session 8|Dataflows (in development)||
+
 
 ## To-Do
