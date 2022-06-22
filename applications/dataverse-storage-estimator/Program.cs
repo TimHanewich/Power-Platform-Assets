@@ -130,7 +130,29 @@ namespace DataverseStorageEstimator
                         List<EntityMetadataSummary> search_ems = new List<EntityMetadataSummary>();
                         foreach (EntityMetadataSummary ems in summaries)
                         {
-                            if (ems.LogicalName.ToLower().Contains(input.ToLower()) || ems.SchemaName.ToLower().Contains(input.ToLower()) || ems.DisplayName.ToLower().Contains(input.ToLower()))
+                            bool ShouldInclude = false;
+                            if (ems.LogicalName != null)
+                            {
+                                if (ems.LogicalName.ToLower().Contains(input.ToLower()))
+                                {
+                                    ShouldInclude = true;
+                                }
+                            }
+                            if (ems.SchemaName != null)
+                            {
+                                if (ems.SchemaName.ToLower().Contains(input.ToLower()))
+                                {
+                                    ShouldInclude = true;
+                                }
+                            }
+                            if (ems.DisplayName != null)
+                            {
+                                if (ems.DisplayName.ToLower().Contains(input.ToLower()))
+                                {
+                                    ShouldInclude = true;
+                                }
+                            }
+                            if (ShouldInclude)
                             {
                                 search_ems.Add(ems);
                             }
@@ -138,13 +160,16 @@ namespace DataverseStorageEstimator
 
                         //Print results
                         PrintEntityMetadataSummaries(search_ems.ToArray());
+
+                        //Set the scope to the search results
+                        ScopedSummaries = search_ems.ToArray();
                     }
                 }
             }
 
             //Confirm selection
             Console.Write("You have selected '");
-            ConsoleVisualsToolkit.WriteLine(TargetTableSchemaName, ConsoleColor.Cyan);
+            ConsoleVisualsToolkit.Write(TargetTableSchemaName, ConsoleColor.Cyan);
             Console.WriteLine("' as your target table!");
         }
 
@@ -153,9 +178,10 @@ namespace DataverseStorageEstimator
             ConsoleTable ct = ConsoleTable.Create("#", "Schema Name", "Display Name");
             for (int t = 0; t < summaries.Length; t++)
             {
-                ct.AddRow(t.ToString("#,##0"), summaries[t].SchemaName, summaries[t].DisplayName);
+                ct.AddRow((t+1).ToString("#,##0"), summaries[t].SchemaName, summaries[t].DisplayName);
             }
             Console.WriteLine();
+            ct.WriteTable();
         }
 
     }
