@@ -79,6 +79,22 @@ namespace DataverseStorageEstimator
                 ConsoleVisualsToolkit.WriteLine("Authentication failed: " + ex.Message, ConsoleColor.Red);
                 return;
             }
+
+            //Create the service
+            CdsService cds = new CdsService(auth.Resource, auth.AccessToken);
+
+
+            //Get a list of all tables and print them
+            Console.Write("Getting tables in environment... ");
+            EntityMetadataSummary[] summaries = await cds.GetEntityMetadataSummariesAsync();
+            ConsoleTable ct = ConsoleTable.Create("#", "Schema Name", "Display Name");
+            for (int t = 0; t < summaries.Length; t++)
+            {
+                ct.AddRow(t.ToString("#,##0"), summaries[t].SchemaName, summaries[t].DisplayName);
+            }
+            Console.WriteLine();
+            ct.WriteTable();
+
             
         }
 
