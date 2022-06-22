@@ -4,6 +4,7 @@ using TimHanewich.Cds.Metadata;
 using System.Threading;
 using System.Threading.Tasks;
 using ConsoleVisuals;
+using System.Collections.Generic;
 
 namespace DataverseStorageEstimator
 {
@@ -87,18 +88,75 @@ namespace DataverseStorageEstimator
             //Get a list of all tables and print them
             Console.Write("Getting tables in environment... ");
             EntityMetadataSummary[] summaries = await cds.GetEntityMetadataSummariesAsync();
+            PrintEntityMetadataSummaries(summaries);
+
+            //Get the table that the user is targeting
+            Console.WriteLine("You can find a list of every table in the Dataverse environment listed above.");
+            Console.WriteLine("Enter the ID # (left column) of the table you are targeting.");
+            Console.WriteLine("Alternatively, enter in text to search the tables and get a shorter list.");
+            EntityMetadataSummary[] ScopedSummaries = summaries;
+            string TargetTableSchemaName = "";
+            while (TargetTableSchemaName == "")
+            {
+                Console.Write("Table # or search: ");
+                string? input = Console.ReadLine();
+                if (input != null)
+                {
+                    //Firstly, is this a number? if it is, it is a selection
+                    int? num = null;
+                    try
+                    {
+                        num = Convert.ToInt32(input);
+                    }
+                    catch
+                    {
+
+                    }
+                    if (num.HasValue) //they provided a number
+                    {
+                        try
+                        {
+                            TargetTableSchemaName = ScopedSummaries[num.Value - 1].SchemaName;
+                        }
+                        catch
+                        {
+                            ConsoleVisualsToolkit.WriteLine("Number '" + num.Value.ToString() + "' is not valid.", ConsoleColor.Red);
+                        }
+                    }
+                    else //They provided a string value (to search)
+                    {
+
+                        //Search and assemble results
+                        List<EntityMetadataSummary> search_ems = new List<EntityMetadataSummary>();
+                        foreach (EntityMetadataSummary ems in summaries)
+                        {
+                            if (ems.LogicalName.ToLower().Contains(input.ToLower()) || ems.SchemaName.ToLower().Contains(input.ToLower()) || ems.DisplayName.ToLower().Contains(input.ToLower()))
+                            {
+                                search_ems.Add(ems);
+                            }
+                        }
+
+                        //Print results
+                        PrintEntityMetadataSummaries(search_ems.ToArray());
+                    }
+                }
+            }
+
+            //Confirm selection
+            Console.Write("You have selected '");
+            ConsoleVisualsToolkit.WriteLine(TargetTableSchemaName, ConsoleColor.Cyan);
+            Console.WriteLine("' as your target table!");
+        }
+
+        private static void PrintEntityMetadataSummaries(EntityMetadataSummary[] summaries)
+        {
             ConsoleTable ct = ConsoleTable.Create("#", "Schema Name", "Display Name");
             for (int t = 0; t < summaries.Length; t++)
             {
                 ct.AddRow(t.ToString("#,##0"), summaries[t].SchemaName, summaries[t].DisplayName);
             }
             Console.WriteLine();
-            ct.WriteTable();
-
-            
         }
-
-
 
     }
 }
