@@ -171,6 +171,135 @@ namespace DataverseStorageEstimator
             Console.Write("You have selected '");
             ConsoleVisualsToolkit.Write(TargetTableSchemaName, ConsoleColor.Cyan);
             Console.WriteLine("' as your target table!");
+
+            //Find the logical name for that table
+            string TargetTableLogicalName = "";
+            foreach (EntityMetadataSummary ems in summaries)
+            {
+                if (ems.SchemaName == TargetTableSchemaName)
+                {
+                    if (ems.LogicalName != null)
+                    {
+                        TargetTableLogicalName = ems.LogicalName;
+                    }
+                    else
+                    {
+                        TargetTableLogicalName = TargetTableSchemaName;
+                    }
+                }
+            }
+
+
+            //Get metadata for this table
+            Console.Write("Acquiring schema for '" + TargetTableSchemaName + "'... ");
+            EntityMetadata meta;
+            try
+            {
+                meta = await cds.GetEntityMetadataAsync(TargetTableLogicalName);
+                ConsoleVisualsToolkit.WriteLine("Success!", ConsoleColor.Green);
+            }
+            catch (Exception ex)
+            {
+                ConsoleVisualsToolkit.WriteLine("Failure! " + ex.Message, ConsoleColor.Red);
+                return;
+            }
+            Console.WriteLine();
+
+
+            //Calculate
+            Console.WriteLine("Proceeding now to calculations...");
+            int ByteCount = 0;
+            foreach (AttributeMetadata am in meta.Attributes)
+            {
+                switch (am.AttributeType)
+                {
+                    case AttributeType.Other:
+                        break;
+                    case AttributeType.String:
+
+                        if (am.IsCustomAttribute == false)
+                        {
+                            Console.Write("You have a text field, ");
+                            ConsoleVisualsToolkit.WriteLine(am.DisplayName, ConsoleColor.Cyan);
+                            Console.Write(" (");
+                            ConsoleVisualsToolkit.Write(am.SchemaName, ConsoleColor.Cyan);
+                            Console.WriteLine(")");
+                            Console.Write("How many characters, on average, do you expect this field to be occupied by? > ");
+                            int? length = null;
+                            while (length == null)
+                            {
+                                string? ip = Console.ReadLine();
+                                if (ip != null)
+                                {
+                                    try
+                                    {
+                                        length = Convert.ToInt32(ip);
+                                    }
+                                    catch
+                                    {
+                                        ConsoleVisualsToolkit.WriteLine("'" + ip + "' is not a valid integer.", ConsoleColor.Red);
+                                    }
+                                }
+                            }
+
+                            //Add it to the byte count
+                            ByteCount = ByteCount + length.Value + 2; //1 byte per character and then 2 bytes to store length information
+                        }
+
+                        break;
+                    case AttributeType.Money:
+                        ByteCount = ByteCount + 8; //Takes 8 bytes (bigint/double)
+                        ByteCount = ByteCount + 8; //For the "base" field (read only)
+                        ByteCount = ByteCount + 16; //For the lookup to the currency it belongs to (titled "_transactioncurrencyid_value")
+                        ByteCount = ByteCount + 8; //For the "exchangerate" field
+                        break;
+                    case AttributeType.Integer:
+                        ByteCount = ByteCount + 4;
+                        break;
+                    case AttributeType.Lookup:
+                        ByteCount = ByteCount + 16; //A lookup uses a GUID, which is 16 bytes
+                        break;
+                    case AttributeType.Boolean:
+                       ByteCount = ByteCount + 1; //It uses one bit, but is stored as one byte
+                       break;
+                    case AttributeType.DateTime:
+                        ByteCount = ByteCount + 8;
+                        break;
+                    case AttributeType.Memo:
+                        break;
+                    case AttributeType.Decimal:
+                        ByteCount = ByteCount + 16;
+                        break;
+                    case AttributeType.Customer:
+                        ByteCount = ByteCount + 16; // A "customer" field is a lookup to a contact or account table. So 16 bytes for the lookup, but is there more storage being used to point to what table the reference points to? (polymorphism)
+                        break; 
+                    case AttributeType.Virtual:
+                        break;
+                    case AttributeType.Picklist:
+                        ByteCount = ByteCount + 4; //Pick list uses integer
+                        break;
+                    case AttributeType.Double:
+                        ByteCount = ByteCount + 8;
+                        break;
+                    case AttributeType.BigInt:
+                        ByteCount = ByteCount + 8;
+                        break;
+                    case AttributeType.EntityName:
+                        break;
+                    case AttributeType.State:
+                        ByteCount = ByteCount + 1; //Assuming 1 byte (it is 0 or 1)
+                        break;
+                    case AttributeType.Owner:
+                        ByteCount = ByteCount + 16; //It is a lookup (GUID)
+                        break;
+                    case AttributeType.Uniqueidentifier: //GUID
+                        ByteCount = ByteCount + 16;
+                        break; 
+                    case AttributeType.Status:
+                        ByteCount = ByteCount + 1;
+                        break;
+                }
+            }
         }
 
         private static void PrintEntityMetadataSummaries(EntityMetadataSummary[] summaries)
