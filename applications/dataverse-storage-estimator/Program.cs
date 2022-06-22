@@ -220,7 +220,7 @@ namespace DataverseStorageEstimator
                         if (am.IsCustomAttribute == true)
                         {
                             Console.Write("You have a text field, ");
-                            ConsoleVisualsToolkit.WriteLine(am.DisplayName, ConsoleColor.Cyan);
+                            ConsoleVisualsToolkit.Write(am.DisplayName, ConsoleColor.Cyan);
                             Console.Write(" (");
                             ConsoleVisualsToolkit.Write(am.SchemaName, ConsoleColor.Cyan);
                             Console.WriteLine(")");
