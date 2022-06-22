@@ -217,7 +217,7 @@ namespace DataverseStorageEstimator
                         break;
                     case AttributeType.String:
 
-                        if (am.IsCustomAttribute == false)
+                        if (am.IsCustomAttribute == true)
                         {
                             Console.Write("You have a text field, ");
                             ConsoleVisualsToolkit.WriteLine(am.DisplayName, ConsoleColor.Cyan);
@@ -300,6 +300,17 @@ namespace DataverseStorageEstimator
                         break;
                 }
             }
+        
+            //Print the results
+            Console.WriteLine();
+            Console.WriteLine("Storage size calculated!", ConsoleColor.Green);
+            Console.WriteLine();
+            ConsoleTable ct = ConsoleTable.Create("Records", "Size", "Unit");
+            ct.AddRow("1", ByteCount.ToString("#,##0"), "bytes");
+            ct.AddRow("1,000", BytesToGigabytes(ByteCount * 1000).ToString("#,##0.000"), "Gigabyte");
+            ct.AddRow("1,000,000", BytesToGigabytes(ByteCount * 1000000).ToString("#,##0.000"), "Gigabyte");
+            ct.AddRow("100,000,000", BytesToGigabytes(ByteCount * 100000000).ToString("#,##0.0"), "Gigabyte");
+            ct.WriteTable();
         }
 
         private static void PrintEntityMetadataSummaries(EntityMetadataSummary[] summaries)
@@ -312,6 +323,16 @@ namespace DataverseStorageEstimator
             Console.WriteLine();
             ct.WriteTable();
         }
+
+        private static float BytesToGigabytes(int bytes)
+        {
+            float mb = Convert.ToSingle(bytes) / 1000000f;
+            float gb = mb / 1000f;
+            return gb;
+        }
+
+
+
 
     }
 }
