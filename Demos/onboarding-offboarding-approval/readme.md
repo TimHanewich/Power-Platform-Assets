@@ -1,5 +1,5 @@
 # Employee Onboarding/Offboarding
-Originally developed for the State of Michigan, this is a prototype for an HR Onboarding and Offboarding approval workflow.
+This is a prototype for an HR Onboarding and Offboarding approval workflow.
 The solution contains the following functionality:
 
 - A canvas App (for managers) and one model driven app (for admins)
