@@ -38,6 +38,13 @@ These demos are designed for a State's Central IT department.
 |[Technology Investment Management](./Technology-Investment-Management/)|Georgia Technology Authority's Enterprise Portfolio Management Office (EPMO) assists state agencies with the planning and procurement of large technology investments. State agencies submit applications to have an investment reviewed and this is routed through a set of procedures based upon several criteria.|
 |[Request for Leave](./Request-For-Leave/)|Requesting of time off, approval routing, staffing forecasts, and team request reviewing|
 
+### Human Resources
+These demos are focused on Human Resources-related functions.
+|Title|Description|
+|-|-|
+|[HR Onboarding/Offboarding and Approval Routing](./onboarding-offboarding-approval/)|Following the request/approval process for onboarding of employees, managing of access catalogs, security roles, and more|
+|[HR Onboarding/Offboarding](./HR-Onboarding-Offboarding/)|HR solution for managing the onboarding/offboarding process for employees and a place to store documents|
+
 ### Technology-Focused
 These demos are focused on demonstrating a particular technology, feature, or functionality in the platform.
 |Title|Description|
@@ -45,8 +52,8 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 |[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.
 
 ### Miscellaneous
-For use cases that don't fit a particular agency:
+For use cases that don't fit a particular agency or department:
 |Title|Description|
 |-|-|
 |[Correspondence Management](./Correspondence-Management/)|Automatically receiving documents for signing via email, routes signing task to parties involved, signature collections, and then delivery back to the original requestor with fully signed document|
-|[HR Onboarding/Offboarding](./HR-Onboarding-Offboarding/)|HR solution for managing the onboarding/offboarding process for employees and a place to store documents|
+
