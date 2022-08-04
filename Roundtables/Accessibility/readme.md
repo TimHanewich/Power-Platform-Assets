@@ -4,6 +4,9 @@ This roundtable is designed to showcase Power Apps' accessibility features.
 ## Presentation Deck
 Download the presentation deck for this roundtable session [here](https://timh.blob.core.windows.net/downloadable/Accessibility%20Roundtable.pptx?sp=r&st=2022-08-04T15:59:55Z&se=2099-08-04T23:59:55Z&sv=2021-06-08&sr=b&sig=bes%2F3tpWf%2FqQcy%2FXmFQFuWRdBzzT0S1I2ML49yMDX54%3D).
 
+## Presentation Script & Build Checklist
+You can find a high-level script/agenda for this roundtable in the [script file](./script.md). You will also find a checklist of accessibility features that the app will showcase.
+
 ## Solution Packages
 Click on the links below to download the solution packages.
 - [Foundation only](https://timh.blob.core.windows.net/downloadable/TimeOffRequestFoundationAccessibility_1_0_0_1.zip?sp=r&st=2022-08-04T15:35:34Z&se=2099-08-04T23:35:34Z&sv=2021-06-08&sr=b&sig=kJR75gVcfVthUKSWvheerHxifbI17rzJPgm%2FLg1ZFCc%3D)
