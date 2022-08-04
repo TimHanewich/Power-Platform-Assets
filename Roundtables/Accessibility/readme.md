@@ -1,6 +1,6 @@
 # Accessibility Roundtable
 
-## Agenda / Talk Track
+## Script
 - Welcome
 - Recap of last session
 - Intro to Accessibility
@@ -33,10 +33,41 @@
         - TabIndex
         - Role
         - The Accessibility Checker Feature
-- Demonstration
-    - Build out an accessible app
-    - Use it with JAWS
 
+
+## Live Build Accessibility Feature checklist
+- Create Welcome Screen
+    - Name the screen
+    - State Seal picture has **AccessibleLabel**
+    - State Seal picture has **TabIndex**
+    - Set two labels and button **TabIndex** to 0
+    - Set welcome label **Role** to Role.Heading1 and description label **Role** to Role.Heading2
+- Time Off Request Screen
+    - Name the screen
+    - `Please fill out the form below with information about your leave` instructions label
+        - **TabIndex** = *0*
+        - **Role** = *Role.Heading1*
+    - Leave Request Form
+        - Every field has **AccessibleLabel** filled out
+        - `Starting Monday` Date Picker **IsEditable** = *true*
+        - `Starting Monday` hour & time picker
+            - **DisplayMode** = *DisplayMode.Disabled*
+            - **TabIndex** = *-1*
+        - Every other field has **TabIndex** = *0*
+    - `This request will use __ hours` label
+        - **Role** = *Role.Heading2*
+        - **TabIndex** = *0*
+        - **Live** = *Live.Assertive*
+    - `Submit` button
+        - **TabIndex** = *0*
+- Success Screen
+    - Name the screen
+    - `Your time-off request was submitted! You may now close this app.` label
+        - **TabIndex** = *0*
+        - **Role** = *Role.Heading1*
+    - Home icon
+        - **TabIndex** = *0*
+        - **AccessibleLabel** = *Return home icon to go back to the welcome screen*
 
 
 
