@@ -20,3 +20,6 @@ Click on the links below to download the solution packages.
 - [Completed Build](https://timh.blob.core.windows.net/downloadable/TimeOffRequestAccessibility_1_0_0_1.zip?sp=r&st=2022-08-04T15:07:53Z&se=2099-08-04T23:07:53Z&sv=2021-06-08&sr=b&sig=kNyItXSmPA49p3JwYZ00K55anhYmxRWTWmtJCdB6m68%3D)
     - This is the intended finished state after the live build demonstration
     - I recommend installing this in a separate environment and using this as a guideline on a second monitor while performing the live build demonsration
+
+## Session Recordings
+- Tim Hanewich, New Mexico, August 2022: https://youtu.be/HNLGUca_uGE
