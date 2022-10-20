@@ -20,4 +20,4 @@
     4. *token* - After plugging in the above three variables, use the **Authorize** function to request an Access token, labeled `access_token`. Copy & Paste this value (starts with "ey") into a variable called *token* in your new environment
 4. On the top right part of Postman, click on the environment dropdown and select the new environment that you made
 
-Each request in the collection are designed to dynamically reference these variables. After plugging in the *token* variable in your new environment, you are now able to run any request found in this collection.
+Each request in the collection is designed to dynamically reference these variables. After plugging in the *token* variable in your new environment, you are now able to run any request found in this collection.
