@@ -13,7 +13,7 @@
 ## Steps to use this postman collection
 1. [Download and install Postman](https://www.postman.com/downloads/)
 2. In Postman, click on *Collections* on the left pane. Click on *import* and select the [Dataverse Postman Collection](./Dataverse%20Web%20API.postman_collection.json) from this repo.
-3. Click on *Environments* on the left pane. Create a new **environment** in Postman with the following variables:
+3. Click on *Environments* on the left pane. Create a new **environment** in Postman with the following variables, plugging in your information in the *Current Value* column.
     1. *username* - your Azure AD username
     2. *password* - your Azure AD password
     3. *resource* - the URL of the Dataverse environment you would like to access
