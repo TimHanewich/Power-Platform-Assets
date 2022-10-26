@@ -21,3 +21,6 @@
 4. On the top right part of Postman, click on the environment dropdown and select the new environment that you made
 
 Each request in the collection is designed to dynamically reference these variables. After plugging in the *token* variable in your new environment, you are now able to run any request found in this collection.
+
+## Before using
+All of the example requests from this collection use the out of the box `contact` table, except for the final two: *Download image* and *Download file*. For the sake of this example kit, a field called *Profile Picture* (logical name "crfce_profilepicture") and a field called *Application* (logical name "crfce_application") was added so downloading of an image and file could be demonstrated. If you do not add these fields to **your** contact table (and logical names match), you will not be able to demonstrate these two requests.
