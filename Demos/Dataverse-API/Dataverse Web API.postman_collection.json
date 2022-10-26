@@ -391,6 +391,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Download file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{resource}}/api/data/v9.0/contacts(e2116395-8250-ed11-bba2-000d3a337946)/crfce_application/$value",
+					"host": [
+						"{{resource}}"
+					],
+					"path": [
+						"api",
+						"data",
+						"v9.0",
+						"contacts(e2116395-8250-ed11-bba2-000d3a337946)",
+						"crfce_application",
+						"$value"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
