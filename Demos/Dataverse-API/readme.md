@@ -9,6 +9,8 @@
 - Performing a complex query on the contacts table, with filtering, ordering, and more
 - Accessing metadata for the contact table
 - Accessing metadata for option sets in an environment
+- Downloading an image stored as a column in a record
+- Download a file stored as a column in a record
 
 ## Steps to use this postman collection
 1. [Download and install Postman](https://www.postman.com/downloads/)
