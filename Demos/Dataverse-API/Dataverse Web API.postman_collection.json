@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3645ee57-cff1-4b9b-9011-8057dbb854a4",
+		"_postman_id": "da846139-1921-4d2e-99b4-1ac106bc78be",
 		"name": "Dataverse Web API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -337,6 +337,56 @@
 						"data",
 						"v9.0",
 						"GlobalOptionSetDefinitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download image",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{resource}}/Image/download.aspx?Entity=contact&Id=e2116395-8250-ed11-bba2-000d3a337946&Attribute=crfce_profilepicture&Full=true",
+					"host": [
+						"{{resource}}"
+					],
+					"path": [
+						"Image",
+						"download.aspx"
+					],
+					"query": [
+						{
+							"key": "Entity",
+							"value": "contact",
+							"description": "Name of the entity (table) that contains the image you want to download"
+						},
+						{
+							"key": "Id",
+							"value": "e2116395-8250-ed11-bba2-000d3a337946",
+							"description": "ID (guid) of the record that contains the image you want to download"
+						},
+						{
+							"key": "Attribute",
+							"value": "crfce_profilepicture",
+							"description": "I created a custom column in the contacts table, \"Profile Picture\", an image column, to demonstrate this. If you have not made this column on your contact table (and the schema name matches here), you will receive an error from Dataverse."
+						},
+						{
+							"key": "Full",
+							"value": "true",
+							"description": "We are requesting the full image (not a thumbnail)"
+						}
 					]
 				}
 			},
