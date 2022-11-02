@@ -50,7 +50,7 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 |Title|Description|
 |-|-|
 |[Dataverse Web API Authentication and CRUD](./Dataverse-API/)|A Postman collection demonstrating use of the Dataverse Web API|
-|[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.
+|[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.|
 
 ### Miscellaneous
 For use cases that don't fit a particular agency or department:
