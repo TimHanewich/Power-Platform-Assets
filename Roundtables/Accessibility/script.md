@@ -66,6 +66,7 @@
     - Home icon
         - **TabIndex** = *0*
         - **AccessibleLabel** = *Return home icon to go back to the welcome screen*
+- When playing, you can append `&hidenavbar=true` to your URL to hide the navigation bar (O365 banner), which will remove things needed to tab through.
 
 
 
