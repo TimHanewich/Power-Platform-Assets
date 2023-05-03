@@ -57,5 +57,6 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 For use cases that don't fit a particular agency or department:
 |Title|Description|
 |-|-|
+|[Connecting Power Platform GCC to Azure Commercial Resources](./GCC-to-Commercial/)|Demonstrates a workaround that allows a Power Platform/Dynamics 365 environment in GCC to interact with Azure resources that reside in Commercial (not Azure Government)|
 |[Correspondence Management](./Correspondence-Management/)|Automatically receiving documents for signing via email, routes signing task to parties involved, signature collections, and then delivery back to the original requestor with fully signed document|
 
