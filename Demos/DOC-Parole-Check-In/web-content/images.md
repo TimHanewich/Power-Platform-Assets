@@ -9,3 +9,9 @@ To do list:
 
 Running:  
 ![running](https://i.imgur.com/YMHhAgy.png)
+
+Kansas DOC White, 459x786:  
+![Kansas DOC](https://i.imgur.com/ZHPMhWy.png)
+
+Kansas DOC White, 86x50:  
+![Kansas DOC](https://i.imgur.com/xuu4fxz.png)
