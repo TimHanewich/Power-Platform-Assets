@@ -18,9 +18,9 @@ The check-in app on a tablet in the waiting room of the parole office: home scre
 Updating an employment update in the check-in app:
 ![update employment](./images/kiosk-new-job.png)
 A Parole/Probation Officer's view into the parolee's record, displaying background information and flagging the important updates the parolee has provided since the last meeting:
-![parolee-view](./images/parolee-view.png)
+![parolee-view](https://i.imgur.com/V9YU3pn.png)
 Administrators and leadership will have a parole dashboard available, allowing them to keep a pulse on how effective their program has been for parolees:
-![parole dashboard](./images/parole-dashboard.png)
+![parole dashboard](https://i.imgur.com/ya1n018.png)
 
 
 ## Solutions
