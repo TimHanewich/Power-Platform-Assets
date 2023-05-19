@@ -37,3 +37,11 @@ The portal content can be found [here](./parole-kiosk-portal.xml). You can impor
 
 ## Power BI Report
 You can download the Power BI report (seen above) from [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/1/parole-dashboard.pbix). This contains both the data and the report.
+
+## Steps to deploy
+1. In a new environment, create a portal. We need to create a portal first because this solution has portal-related dependencies. If those are not installed in the environment prior to import, import will fail.
+2. Import the solution (download from above).
+3. Using the **XrmToolbox Portal Records Mover**, import the portal content (found above).
+4. Delete the original portal you had made. Create a new portal. Opt to create a portal from an existing record(s) and choose the portal record that was imported.
+5. Deploy the Power BI Dashboard (found above) to Power BI online. Open the *Parole Management* Model-Driven app. In this app you'll find a custom page. Update the Power BI tile URL to the URL of the Power BI report you've deployed.
+6. Create demo data: portal contact "John Connors" (use [portrait](./assets/portrait.jpg) and [profile](./assets/profile.jpg) pictures), etc.
