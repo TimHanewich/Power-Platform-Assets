@@ -33,7 +33,7 @@ All solutions can be found in [the solution folder](./solutions/).
 |[1.0.0.2](./solutions/ParoleKiosk_1_0_0_2.zip)|Added core functionality. Excludes check in canvas app.|
 |[1.0.0.3](./solutions/ParoleKiosk_1_0_0_3.zip)|Added Check In table and cloud flow to alert Parole Officer via push notification of check in at the office|
 |[1.0.0.3 fixed](./solutions/ParoleKiosk_1_0_0_3_fixed.zip)|Version 1.0.0.3 above had import issues (missing dependencies). These are fixed. This version is importable.|
-|[1.0.0.4]()|Power BI dashboard as custom page, MD-app theming, Parolee (contact) business process flow|
+|[1.0.0.6](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/2/ParoleKiosk_1_0_0_6.zip)|Power BI dashboard as custom page, MD-app theming, Parolee (contact) business process flow|
 
 ## Portal Content
 The portal content can be found [here](./parole-kiosk-portal.xml). You can import this into an environment with the **Portal Records Mover** tool in the XrmToolbox. This will import all web content (includes pages, with the full HTML markup and so forth). If you have trouble with this important, the raw content is supplied [here](./web-content/) (you can copy and paste).
