@@ -14,9 +14,11 @@ The online portal a parolee can check in to on their mobile device to provide li
 The check-in app on a tablet in the waiting room of the parole office: check in
 ![app log in](./images/kiosk-log-in.png)
 The check-in app on a tablet in the waiting room of the parole office: home screen
-![app home screen](./images/kiosk-home.png)
+![app home screen](https://i.imgur.com/ouJAd35.png)
 Updating an employment update in the check-in app:
 ![update employment](./images/kiosk-new-job.png)
+After a parolee checks in for their office visit (using the kiosk tablet), their parole officer will be notified on their mobile device:  
+![check in notification](https://i.imgur.com/qhUwDmz.png)
 A Parole/Probation Officer's view into the parolee's record, displaying background information and flagging the important updates the parolee has provided since the last meeting:
 ![parolee-view](https://i.imgur.com/V9YU3pn.png)
 Administrators and leadership will have a parole dashboard available, allowing them to keep a pulse on how effective their program has been for parolees:
@@ -31,6 +33,7 @@ All solutions can be found in [the solution folder](./solutions/).
 |[1.0.0.2](./solutions/ParoleKiosk_1_0_0_2.zip)|Added core functionality. Excludes check in canvas app.|
 |[1.0.0.3](./solutions/ParoleKiosk_1_0_0_3.zip)|Added Check In table and cloud flow to alert Parole Officer via push notification of check in at the office|
 |[1.0.0.3 fixed](./solutions/ParoleKiosk_1_0_0_3_fixed.zip)|Version 1.0.0.3 above had import issues (missing dependencies). These are fixed. This version is importable.|
+|[1.0.0.4]()|Power BI dashboard as custom page, MD-app theming, Parolee (contact) business process flow|
 
 ## Portal Content
 The portal content can be found [here](./parole-kiosk-portal.xml). You can import this into an environment with the **Portal Records Mover** tool in the XrmToolbox. This will import all web content (includes pages, with the full HTML markup and so forth). If you have trouble with this important, the raw content is supplied [here](./web-content/) (you can copy and paste).
