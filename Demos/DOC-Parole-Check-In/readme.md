@@ -48,3 +48,4 @@ You can download the Power BI report (seen above) from [here](https://github.com
 4. Delete the original portal you had made. Create a new portal. Opt to create a portal from an existing record(s) and choose the portal record that was imported.
 5. Deploy the Power BI Dashboard (found above) to Power BI online. Open the *Parole Management* Model-Driven app. In this app you'll find a custom page. Update the Power BI tile URL to the URL of the Power BI report you've deployed.
 6. Create demo data: portal contact "John Connors" (use [portrait](./assets/portrait.jpg) and [profile](./assets/profile.jpg) pictures), etc.
+7. Install Power Automate on your phone and log in. This will be used to notify you (acting as the parole officer in this case) upon the parolee checking in via the kiosk app.
