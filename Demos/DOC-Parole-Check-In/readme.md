@@ -34,3 +34,6 @@ All solutions can be found in [the solution folder](./solutions/).
 
 ## Portal Content
 The portal content can be found [here](./parole-kiosk-portal.xml). You can import this into an environment with the **Portal Records Mover** tool in the XrmToolbox. This will import all web content (includes pages, with the full HTML markup and so forth). If you have trouble with this important, the raw content is supplied [here](./web-content/) (you can copy and paste).
+
+## Power BI Report
+You can download the Power BI report (seen above) from [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/1/parole-dashboard.pbix)
