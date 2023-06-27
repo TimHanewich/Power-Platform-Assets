@@ -52,6 +52,7 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 |[Dataverse Web API Authentication and CRUD](./Dataverse-API/)|A Postman collection demonstrating use of the Dataverse Web API|
 |[NCEI Precipitation Data](./NCEI-Precipitation/)|Access precipitation data from the National Centers for Environmental Information (NCEI) API through a custom connector|
 |[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.|
+|[Leveraging a SQL database with Power Apps](./PowerApps-with-SQL/)|Basic demonstration of bidirectional communication with a SQL database (reading/writing via CRUD operations) in a Power Apps Canvas App|
 
 ### Miscellaneous
 For use cases that don't fit a particular agency or department:
