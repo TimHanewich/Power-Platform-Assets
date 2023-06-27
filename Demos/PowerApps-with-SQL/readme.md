@@ -24,5 +24,5 @@ Logging an inspection for a restaurant:
 - You can download the Power Apps Canvas App [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/4/Restaurant.Health.Inspection.msapp). Note, you will have to set up your SQL integration be adding the "SQL Server" connector and walking through the prompt to establish a connection.
 
 ## Required: Whitelist Azure IP Addresses
-Whether you are using an on-premises or cloud-based SQL server, you must **whitelist** the IP addresses that the Micorosft Azure Cloud uses to *call* to your SQL server to retrieve data *for* your Power App. Navigate [here](https://learn.microsoft.com/en-us/power-platform/admin/online-requirements#ip-addresses-required) to find a list of IP addresses that you will need to whitelist for your particular cloud and region.  
+Whether you are using an on-premises or cloud-based SQL server, you must **whitelist** the IP addresses that the Microsoft Azure Cloud uses to *call* to your SQL server to retrieve data *for* your Power App. Navigate [here](https://learn.microsoft.com/en-us/power-platform/admin/online-requirements#ip-addresses-required) to find a list of IP addresses that you will need to whitelist for your particular cloud and region.  
 ![whitelist](https://i.imgur.com/R4uEf0u.png)
