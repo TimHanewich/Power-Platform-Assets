@@ -13,7 +13,7 @@ This is designed to only be a **functional demonstration** of these capabilities
 - How to implement a report/dashboard with Power BI and print/export it.
 
 ## Architecture
-To demonstrate this, we are using a basic **Restaurant Health Inspection** use case. The entity relationship diagram can be found below:
+To demonstrate this, we are using a basic **Restaurant Health Inspection** use case. The entity relationship diagram (SQL only) can be found below:
 ![erd](https://i.imgur.com/MftCzGG.png)
 Two tables are used (`restaurant` and `inspection`) to demonstrate parent/child, PK/FK relationships. The `id` field of each table (primary key) is set to *auto-increment*, meaning that this does not need to be specified by the Power App during an insert operation.
 
