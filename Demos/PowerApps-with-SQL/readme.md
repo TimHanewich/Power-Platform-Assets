@@ -24,6 +24,8 @@ Reviewing inspections for a restaurant:
 ![img](https://i.imgur.com/6PWc0D4.png)
 Logging an inspection for a restaurant:  
 ![img](https://i.imgur.com/FEXL3x2.png)
+Basic report dashboard:  
+![img](https://i.imgur.com/ULHfGV0.png)
 
 ## Assets
 - The SQL script to create the `restaurant` and `inspection` table can be found [here](./script.sql). Run this to create the tables in your SQL database.
