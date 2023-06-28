@@ -3,7 +3,7 @@ The assets in this folder demonstrate how to leverage a SQL database in a Power 
 - Creating a record
 - Reading records
 - Updating a record
-- Deleting a record
+- Deleting a record  
 This is designed to only be a **functional demonstration** of these capabilities; this is why and UI/UX of the app is rather bland.
 
 ## Additional Features Demonstrated
