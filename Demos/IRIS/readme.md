@@ -19,3 +19,21 @@ AI-driven functionality is achieved via the following architecture:
 
 Satellite and birds eye view imagery is presented via Bing Maps:
 ![IRIS Mapping](https://i.imgur.com/tc8CJZL.png)
+
+## Assets
+- The C# source code behind the Azure Function App API [here](./src/)
+- You can download the Power Platform solution [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/6/investigations_1_0_0_2.zip). This contains all of the necessary resources to stand this up in an environment - apps, tables, flows, connectors, etc.
+- Sample data for every table used in the demo video above:
+    - [Contacts](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/contacts.csv)
+    - [Cases](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/inv_cases.csv)
+    - [Case Affiliations](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/inv_caseaffiliations.csv)
+    - [Digital Evidence](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/inv_digitalevidences.csv)
+    - [Testimonies](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/inv_testimonies.csv)
+
+## Steps to Deploy
+1. Deploy the [Azure Function App Code](./src/api/) to a new Azure Function App. Note the endpoint URL's of the `compare` and `summarize` services.
+2. Import the Power Platform solution to a new enviornment. See the link above to download this solution.
+3. Open the "PSJ AI" custom connector in the solution you just imported. Replace the URL endpoints for the `Compare` and `Summarize` action with the respective URL endpoints you noted from step 1.
+4. Open the `Embedded Investigation Interface` canvas app within the solution. When it prompts you to "sign in" to the PSJ AI custom connector, click on "do not allow". Once the app opens fully, delete the "PSJ AI" connection from the list of data connections. Re-add it and sign in (establish a connection). This will refresh and reconnect to the proper endpoints.
+5. Import the sample data from the links listed above.
+6. Open the `Investigations Management` model-driven app to test all functionality.
