@@ -20,6 +20,8 @@ AI-driven functionality is achieved via the following architecture:
 Satellite and birds eye view imagery is presented via Bing Maps:
 ![IRIS Mapping](https://i.imgur.com/tc8CJZL.png)
 
+You can find the architecture diagrams above in [this](./architecture.pptx) PowerPoint deck.
+
 ## Assets
 - The C# source code behind the Azure Function App API [here](./src/)
 - You can download the Power Platform solution [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/6/investigations_1_0_0_2.zip). This contains all of the necessary resources to stand this up in an environment - apps, tables, flows, connectors, etc.
