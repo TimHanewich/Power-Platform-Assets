@@ -24,6 +24,7 @@ These demos are specifically crafted for a Department of Corrections.
 |[Resident Mail Processing](./Offender-Mail-Processing/)|Offender mail is scanned and passed through an algorithm that detects high-risk words and phrases that may pose a risk to the facility and staff/resident safety.|
 |[Resident Processing and Badge Generation](./Offender-Mail-Processing/)|A solution for processing residents (capturing information, body imagery, etc) and generating a badge. Also an app for guards to use to scan the badge and document disciplinary action.|
 |[Parolee Management](./DOC-Parole-Check-In/)|Parolees can log into a portal on their mobile device and an app in the waiting room ahead of a parole appointment. The parole/probabtion officer can review this information before the meeting while the system flags high-risk changes and guides their attention.|
+|[I.R.I.S. - Case Investigations AI Bot](./IRIS/)|Embedded AI system in a case management platform. Employs next-gen generative AI to aid public investigators in various investigation tasks|
 
 ### Department of Health
 These demos are specifically created for a State's Department of Health, Department of Human Services, etc.
