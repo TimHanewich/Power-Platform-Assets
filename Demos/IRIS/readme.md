@@ -1,4 +1,4 @@
-# I.R.I.S. (**I**ntelligent, **R**esourceful **I**nvestigation **S**upport A.I. Bot)
+# I.R.I.S. - Public Safety & Justice Investigation Support AI
 
 *IRIS* - your **I**ntelligent, **R**esourceful **I**nvestigation **S**upport bot is an embedded AI system within an investigations case management system. IRIS uses next-generation generative AI models to assist public investigators with their investigations in the following ways:
 
