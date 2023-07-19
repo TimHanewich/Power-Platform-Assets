@@ -17,7 +17,7 @@ These demos are specifically designed for a Judicial Branch of a state.
 |[Online Jury Questionnaire](./Jury-Questionnaire/)|Using a Power Apps Portal for distributing and receiving Jury Questionnaires mid-session|
 |[Online Dispute Resolution](./Online-Dispute-Resolution/)|Provide two parties the opportunity to settle a dispute before the case heads to the state court system|
 
-### Department of Corrections
+### Public Safety & Justice
 These demos are specifically crafted for a Department of Corrections.
 |Title|Description|
 |-|-|
