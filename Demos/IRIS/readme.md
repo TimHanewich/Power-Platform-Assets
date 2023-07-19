@@ -31,9 +31,12 @@ Satellite and birds eye view imagery is presented via Bing Maps:
     - [Testimonies](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/7/inv_testimonies.csv)
 
 ## Steps to Deploy
-1. Deploy the [Azure Function App Code](./src/api/) to a new Azure Function App. Note the endpoint URL's of the `compare` and `summarize` services.
-2. Import the Power Platform solution to a new enviornment. See the link above to download this solution.
-3. Open the "PSJ AI" custom connector in the solution you just imported. Replace the URL endpoints for the `Compare` and `Summarize` action with the respective URL endpoints you noted from step 1.
-4. Open the `Embedded Investigation Interface` canvas app within the solution. When it prompts you to "sign in" to the PSJ AI custom connector, click on "do not allow". Once the app opens fully, delete the "PSJ AI" connection from the list of data connections. Re-add it and sign in (establish a connection). This will refresh and reconnect to the proper endpoints.
-5. Import the sample data from the links listed above.
-6. Open the `Investigations Management` model-driven app to test all functionality.
+1. Replace the "secrets" (API keys, subscription keys, resource URL's, usernames/passwords, etc.) in the [Azure Function App Source Code](./src/api/):
+    1. Add your Azure AD **username**, **password**, and **Dataverse URL** to the `CdsAuthAsync` method at the end of the [InvestigationTools.cs](./src/engine/InvestigationTools.cs) file.
+    2. Add your Azure OpenAI **endpoint URL** and **subscription key** to the `PromptAsync` method at the top of the [SimpleGPT.cs](./src/engine/SimpleGPT.cs) file.
+2. Deploy the [Azure Function Source App Code](./src/api/) to a new Azure Function App. Note the endpoint URL's of the `compare` and `summarize` services.
+3. Import the Power Platform solution to a new enviornment. See the link above to download this solution.
+4. Open the "PSJ AI" custom connector in the solution you just imported. Replace the URL endpoints for the `Compare` and `Summarize` action with the respective URL endpoints you noted from step 1.
+5. Open the `Embedded Investigation Interface` canvas app within the solution. When it prompts you to "sign in" to the PSJ AI custom connector, click on "do not allow". Once the app opens fully, delete the "PSJ AI" connection from the list of data connections. Re-add it and sign in (establish a connection). This will refresh and reconnect to the proper endpoints.
+6. Import the sample data from the links listed above.
+7. Open the `Investigations Management` model-driven app to test all functionality.
