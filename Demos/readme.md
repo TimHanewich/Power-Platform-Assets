@@ -46,7 +46,7 @@ These demos are focused on Human Resources-related functions.
 |[HR Onboarding/Offboarding and Approval Routing](./onboarding-offboarding-approval/)|Following the request/approval process for onboarding of employees, managing of access catalogs, security roles, and more|
 |[HR Onboarding/Offboarding](./HR-Onboarding-Offboarding/)|HR solution for managing the onboarding/offboarding process for employees and a place to store documents|
 
-### Technology-Focused
+### Pro-Dev Focused
 These demos are focused on demonstrating a particular technology, feature, or functionality in the platform.
 |Title|Description|
 |-|-|
@@ -54,6 +54,7 @@ These demos are focused on demonstrating a particular technology, feature, or fu
 |[NCEI Precipitation Data](./NCEI-Precipitation/)|Access precipitation data from the National Centers for Environmental Information (NCEI) API through a custom connector|
 |[External Data in Portals with Virtual Tables](./Virtual-Tables-Demo/)|This demo, originally built for New Mexico's Office of Superintendant of Insurance, is designed to demonstrate how you can surface content from an **external data source** through a **3rd Party REST API that implements the OData V4 Standard**.|
 |[Leveraging a SQL database with Power Apps](./PowerApps-with-SQL/)|Basic demonstration of bidirectional communication with a SQL database (reading/writing via CRUD operations) in a Power Apps Canvas App|
+|[Capturing Air Quality Data from an On-Premises Resource via a Data Gateway](https://github.com/TimHanewich/Air-Quality-IoT)|This demonstrates how you can accomplish bidirectional communication with an on-premises server (on your local server) via a *data gateway* that "brokers" the communication between your local service and the Azure cloud (Power Apps). **Scroll down to find the Power Platform portion!**|
 
 ### Miscellaneous
 For use cases that don't fit a particular agency or department:
