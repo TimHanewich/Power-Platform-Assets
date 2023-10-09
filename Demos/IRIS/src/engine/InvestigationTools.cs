@@ -107,7 +107,7 @@ namespace PSJ
     
         #region "Sketch drawing generation"
 
-        public async Task GenerateSuspectDrawingsAsync(Guid witness_desscription_id)
+        public static async Task GenerateSuspectDrawingsAsync(Guid witness_desscription_id)
         {
             CdsService cds = await CdsAuthAsync();
 
