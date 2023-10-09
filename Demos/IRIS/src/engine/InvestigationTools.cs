@@ -107,7 +107,7 @@ namespace PSJ
     
         #region "Sketch drawing generation"
 
-        public static async Task GenerateSuspectDrawingsAsync(Guid witness_desscription_id)
+        public static async Task GenerateSuspectDrawingsAsync(Guid witness_desscription_id, int count = 4)
         {
             CdsService cds = await CdsAuthAsync();
 
@@ -136,7 +136,7 @@ namespace PSJ
             //Generate
             DALLECredentialsProvider cp = new DALLECredentialsProvider();
             SimpleDALLE dalle = new SimpleDALLE(cp.GenerateUrl, cp.ApiKey);
-            string[] imageb64s = await dalle.GenerateAsBase64Async(PROMPT, 4, "512x512");
+            string[] imageb64s = await dalle.GenerateAsBase64Async(PROMPT, count, "512x512");
 
             //Upload each suspect drawing
             List<Task> Uploads = new List<Task>();
