@@ -57,7 +57,7 @@ namespace PSJ
             {
                 throw new Exception("Header 'operation-location' not found in generation request response.");
             }
-            Console.WriteLine("Operation location: " + operation_location);
+            //Console.WriteLine("Operation location: " + operation_location);
 
 
             //Collect URLS to collect images (generations)
@@ -82,7 +82,7 @@ namespace PSJ
                 JProperty? prop_status = g.Property("status");    
                 if (prop_status != null)
                 {
-                    Console.WriteLine("Generation status: " + prop_status.Value.ToString());
+                    //Console.WriteLine("Generation status: " + prop_status.Value.ToString());
                     if (prop_status.Value.ToString() == "succeeded")
                     {
                         JToken? jt_data = g.SelectToken("result.data");
