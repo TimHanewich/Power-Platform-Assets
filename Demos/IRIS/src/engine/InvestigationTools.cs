@@ -104,6 +104,61 @@ namespace PSJ
         }
 
 
+    
+        #region "Sketch drawing generation"
+
+        public async Task GenerateSuspectDrawingsAsync(Guid witness_desscription_id)
+        {
+            CdsService cds = await CdsAuthAsync();
+
+            //Get the witness description
+            JObject WitnessDescription = await cds.GetRecordAsync("inv_witnessdescriptions", witness_desscription_id.ToString());
+
+            //Get description
+            string description = "";
+            JProperty? prop_description = WitnessDescription.Property("inv_description");
+            if (prop_description != null)
+            {
+                description = prop_description.Value.ToString();
+            }
+
+            //Get the GUID of the case this description points to
+            Guid CaseId = Guid.Empty;
+            JProperty? prop_relatedto = WitnessDescription.Property("inv_relatedto_value");
+            if (prop_relatedto != null)
+            {
+                CaseId = Guid.Parse(prop_relatedto.Value.ToString());
+            }
+
+            //Construct the prompt
+            string PROMPT = "Composite pencil sketch (suspect drawing) like those used in investigations for a suspect with the following description: " + description;
+
+            //Generate
+            DALLECredentialsProvider cp = new DALLECredentialsProvider();
+            SimpleDALLE dalle = new SimpleDALLE(cp.GenerateUrl, cp.ApiKey);
+            string[] imageb64s = await dalle.GenerateAsBase64Async(PROMPT, 4, "512x512");
+
+            //Upload each suspect drawing
+            List<Task> Uploads = new List<Task>();
+            foreach (string b64 in imageb64s)
+            {
+                //Construct what to post
+                JObject body = new JObject();
+                body.Add("inv_ForCase@odata.bind", "inv_cases(" + CaseId.ToString() + ")"); //Connect to case
+                body.Add("inv_BasedOnDescription@odata.bind", "inv_witnessdescriptions(" + witness_desscription_id.ToString() + ")"); //Connect to the witness description it came from
+                body.Add("inv_drawingstatus", 826570000); //drawing is proposed, not accepted or rejected (must be reviewed)
+                body.Add("inv_drawing", b64); //The image content
+
+                Uploads.Add(cds.CreateRecordAsync("inv_suspectdrawings", body.ToString()));
+            }   
+
+            //Run uploads at the same time
+            await Task.WhenAll(Uploads);
+        }
+
+        #endregion
+
+
 
 
         ///////////////////////// UTILITY BELOW //////////////////
