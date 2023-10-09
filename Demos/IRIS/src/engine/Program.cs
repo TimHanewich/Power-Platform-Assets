@@ -9,8 +9,8 @@ namespace PSJ
     public class Program
     {
         public static void Main(string[] args)
-        {            
-            Console.WriteLine("hi!");
+        { 
+            InvestigationTools.GenerateSuspectDrawingsAsync(Guid.Parse("4081651b-b266-ee11-8def-001dd80bf6ae")).Wait();
         }
     }
 }
