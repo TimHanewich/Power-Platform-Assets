@@ -124,7 +124,7 @@ namespace PSJ
 
             //Get the GUID of the case this description points to
             Guid CaseId = Guid.Empty;
-            JProperty? prop_relatedto = WitnessDescription.Property("inv_relatedto_value");
+            JProperty? prop_relatedto = WitnessDescription.Property("_inv_relatedto_value");
             if (prop_relatedto != null)
             {
                 CaseId = Guid.Parse(prop_relatedto.Value.ToString());
