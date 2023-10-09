@@ -11,8 +11,8 @@ namespace PSJ
     {
         public static async Task<string> PromptAsync(string prompt)
         {
-            string url = "<YOUR AZURE OPENAI ENDPOINT HERE>";
-            string api_key = "<YOUR AZURE OPENAI API KEY HERE>";
+            string url = "<YOUR AZURE OPENAI ENDPOINT HERE>"; //i.e. POST https://YOUR_RESOURCE_NAME.openai.azure.com/openai/deployments/YOUR_DEPLOYMENT_NAME/completions?api-version=2023-05-15
+            string api_key = "<YOUR AZURE OPENAI API KEY HERE>"; //a GUID
 
             HttpClient hc = new HttpClient();
             HttpRequestMessage req = new HttpRequestMessage();
