@@ -102,16 +102,35 @@ namespace PSJ
                 }    
             }
 
-
-            //Get each image with the url
-            List<string> ToReturn = new List<string>();
+            //Collect a list of tasks to run to collect
+            List<Task<HttpResponseMessage>> ImageRetrievals = new List<Task<HttpResponseMessage>>();
             foreach (string url in urls)
             {
-                HttpResponseMessage respi = await hc.GetAsync(url);
+                ImageRetrievals.Add(hc.GetAsync(url));
+            }
+
+            //Get all images
+            HttpResponseMessage[] responses = await Task.WhenAll(ImageRetrievals);
+
+            //Get each, all at once
+            List<string> ToReturn = new List<string>();
+            foreach (HttpResponseMessage respi in responses)
+            {
                 byte[] imagebytes = await respi.Content.ReadAsByteArrayAsync();
                 string b64 = Convert.ToBase64String(imagebytes);
                 ToReturn.Add(b64);
             }
+
+
+            // //Get each image with the url
+            // List<string> ToReturn = new List<string>();
+            // foreach (string url in urls)
+            // {
+            //     HttpResponseMessage respi = await hc.GetAsync(url);
+            //     byte[] imagebytes = await respi.Content.ReadAsByteArrayAsync();
+            //     string b64 = Convert.ToBase64String(imagebytes);
+            //     ToReturn.Add(b64);
+            // }
 
             return ToReturn.ToArray();            
         }
