@@ -12,6 +12,7 @@ namespace PSJAI
 {
     public class draw
     {
+        [Function("draw")]
         public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
         {
             //EXAMPLE POST BODY BELOW
