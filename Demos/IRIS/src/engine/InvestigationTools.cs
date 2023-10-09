@@ -109,10 +109,11 @@ namespace PSJ
         ///////////////////////// UTILITY BELOW //////////////////
         public static async Task<CdsService> CdsAuthAsync()
         {
+            DataverseCredentialsProvider dcp = new DataverseCredentialsProvider();
             CdsAuthenticator a = new CdsAuthenticator();
-            a.Username = "<YOUR AZURE AD USERNAME HERE (for connecting with dataverse)>";
-            a.Password = "<YOUR AZURE AD PASSWORD HERE>";
-            a.Resource = "<YOUR AZURE DATAVERSE URL ENDPOINT HERE>";
+            a.Username = dcp.Username;
+            a.Password = dcp.Password;
+            a.Resource = dcp.Resource;
             a.ClientId = Guid.Parse("51f81489-12ee-4a9e-aaae-a2591f45987d");
             await a.GetAccessTokenAsync();
             
