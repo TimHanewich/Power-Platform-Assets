@@ -10,7 +10,8 @@ namespace PSJ
     {
         public static void Main(string[] args)
         { 
-            InvestigationTools.GenerateSuspectDrawingsAsync(Guid.Parse("4081651b-b266-ee11-8def-001dd80bf6ae")).Wait();
+            string r = SimpleGPT.PromptAsync("Why is the sky blue?").Result;
+            Console.WriteLine(r);
         }
     }
 }
