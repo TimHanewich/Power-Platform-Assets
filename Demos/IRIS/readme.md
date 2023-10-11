@@ -13,7 +13,7 @@ Click the image below for a short demonstration video.
 [![IRIS Demo Video](https://i.imgur.com/ziasLDu.png)](https://youtu.be/IDTXlGXEco4)
 
 ## Architecture
-For learning purposes, I've included a few diagrams below that depict how I.R.I.S. works:
+I've included a few diagrams below that depict how I.R.I.S. works:
 
 AI-driven functionality is achieved via the following architecture:
 ![IRIS AI](https://i.imgur.com/boZRM7q.png)
