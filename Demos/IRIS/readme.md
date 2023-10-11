@@ -48,3 +48,7 @@ You can find the architecture diagrams above in [this](./architecture.pptx) Powe
 6. Open the `Embedded Investigation Interface` canvas app within the solution. When it prompts you to "sign in" to the PSJ AI custom connector, click on "do not allow". Once the app opens fully, delete the "PSJ AI" connection from the list of data connections. Re-add it and sign in (establish a connection). This will refresh and reconnect to the proper endpoints.
 7. Import the sample data from the links listed above.
 8. Open the `Investigations Management` model-driven app to test all functionality.
+
+## Credits
+- IRIS architecture, logic, code, and AI integration by [Tim Hanewich](https://github.com/TimHanewich)
+- IRIS embedded application UI/UX designed by [Kelly Cason](https://www.linkedin.com/in/kellycason/)
