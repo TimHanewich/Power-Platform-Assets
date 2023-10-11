@@ -2,11 +2,11 @@
 
 *IRIS* - your **I**ntelligent, **R**esourceful **I**nvestigation **S**upport bot is an embedded AI system within an investigations case management system. IRIS uses next-generation generative AI models to assist public investigators with their investigations in the following ways:
 
-- Provides ariel imagery of case points of interest, viewable from Satellite or birds eye view imagery. 
-- Uses AI to compare witness testimonies and extract corroborating aspects and discrepancies.
-- Transcribes body cam footage , 911 calls, or other media using Azure Speech to Text Cognitive Services and analyzes this text and gets back to the user with a summarization of what happened in  the call, important details, and next steps.
-- Draws composite sketches of suspects based on witness descriptions (using DALL-E)
-- Logs any findings/analysis to case notes.
+- 🌎 Provides ariel imagery of case points of interest, viewable from Satellite or birds eye view imagery.  
+- ⚖️ Uses generative AI to compare witness testimonies and extract corroborating aspects and discrepancies.
+- 🎥 Transcribes body cam footage , 911 calls, or other media using Azure Speech to Text Cognitive Services and analyzes this text and gets back to the user with a summarization of what happened in  the call, important details, and next steps.
+- 🎨 Draws composite sketches of suspects based on witness descriptions (using DALL-E)
+- 📝 Logs any findings/analysis to case notes.
 
 ## Demo Video
 Click the image below for a short demonstration video.
