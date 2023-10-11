@@ -34,8 +34,9 @@ You can find the architecture diagrams above in [this](./architecture.pptx) Powe
 
 ## Steps to Deploy
 1. Replace the "secrets" (API keys, subscription keys, resource URL's, usernames/passwords, etc.) in the [Azure Function App Source Code](./src/api/):
-    1. Add your Azure AD **username**, **password**, and **Dataverse URL** to the `CdsAuthAsync` method at the end of the [InvestigationTools.cs](./src/engine/InvestigationTools.cs) file.
-    2. Add your Azure OpenAI **endpoint URL** and **subscription key** to the `PromptAsync` method at the top of the [SimpleGPT.cs](./src/engine/SimpleGPT.cs) file.
+    1. Add your Azure AD **username**, **password**, and **Dataverse URL** to the `DataverseCredentialsProvider` class constructor [here](./src/engine/DataverseCredentialsProvider.cs).
+    2. Add your Azure OpenAI **endpoint URL (for text generations)** and **subscription key** to the `PromptAsync` method at the top of the [SimpleGPT.cs](./src/engine/SimpleGPT.cs) file.
+    3. Add your Azure OpenAI DALLE-E **generation URL (for image generations)** and **subscription key** to the `DALLECredentialsProvider` class constructor [here](./src/engine/DALLECredentialsProvider.cs).
 2. Deploy the [Azure Function Source App Code](./src/api/) to a new Azure Function App. Note the endpoint URL's of the `compare` and `summarize` services.
 3. Import the Power Platform solution to a new enviornment. See the link above to download this solution.
 4. Open the `Embedded Investigation Interface` canvas app. In the `OnSelect` property of the log in button on the first page of the app, replace `<INSERT YOUR BING MAPS API KEY HERE>` with your Bing Maps API key.
