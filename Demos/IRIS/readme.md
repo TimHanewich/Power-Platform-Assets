@@ -9,14 +9,14 @@
 - 📝 Logs any findings/analysis to case notes.
 
 ## Demo Video
-Click the image below for a short demonstration video with the following timestamps:
-- **0:00** - Investigations Case Management System Foundations
-- **0:31** - Interactive Satellite Imagery
-- **0:48** - Witness Testimony Analysis & Comparison
-- **1:40** - Evidence Analysis: Officer Body Cam Video
-- **2:18** - Evidence Analysis: 911 Call Audio
-- **2:45** - Generate Suspect Composite Sketches
-- **4:09** - Archive Generations to Case Notes
+Click the image below for a short demonstration video with the following linked timestamps:
+- [**0:00**](https://youtu.be/5KNDsAtLkJU?t=5) - Investigations Case Management System Foundations
+- [**0:31**](https://youtu.be/5KNDsAtLkJU?t=31) - Interactive Satellite Imagery
+- [**0:48**](https://youtu.be/5KNDsAtLkJU?t=48) - Witness Testimony Analysis & Comparison
+- [**1:40**](https://youtu.be/5KNDsAtLkJU?t=100) - Evidence Analysis: Officer Body Cam Video
+- [**2:18**](https://youtu.be/5KNDsAtLkJU?t=138) - Evidence Analysis: 911 Call Audio
+- [**2:45**](https://youtu.be/5KNDsAtLkJU?t=165) - Generate Suspect Composite Sketches
+- [**4:09**](https://youtu.be/5KNDsAtLkJU?t=249) - Archive Generations to Case Notes
 [![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/5KNDsAtLkJU)
 
 ## Architecture
