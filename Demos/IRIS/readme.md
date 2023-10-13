@@ -10,7 +10,7 @@
 
 ## Demo Video
 Click the image below for a short demonstration video.
-[![IRIS Demo Video](https://i.imgur.com/ziasLDu.png)](https://youtu.be/IDTXlGXEco4)
+[![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/5KNDsAtLkJU)
 
 ## Architecture
 I've included a few diagrams below that depict how I.R.I.S. works:
