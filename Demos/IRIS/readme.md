@@ -50,9 +50,9 @@ You can download the architecture diagrams above (PowerPoint deck) [here](https:
     3. Add your Azure OpenAI DALLE-E **generation URL (for image generations)** and **subscription key** to the `DALLECredentialsProvider` class constructor [here](./src/engine/DALLECredentialsProvider.cs).
 2. Deploy the [Azure Function Source App Code](./src/api/) to a new Azure Function App. This will create three unique endpoints:
     - `/summarize`: used to summarize media transcripts (911 calls, bodycam footage audio, etc.)
-    - `/compare`: used to compare multiple testimonies and note corroborations and discrepencies
+    - `/compare`: used to compare multiple testimonies and note corroborations and discrepancies
     - `/draw`: used to trigger a workflow that performs generation of composite sketches based on witness descriptions using DALL-E
-3. Import the Power Platform solution to a new enviornment. See the link above to download this solution.
+3. Import the Power Platform solution to a new environment. See the link above to download this solution.
 4. Open the `Embedded Investigation Interface` canvas app. In the `OnSelect` property of the log in button on the first page of the app, replace `<INSERT YOUR BING MAPS API KEY HERE>` with your Bing Maps API key.
 5. Open the "PSJ AI" custom connector in the solution you just imported. Replace the URL endpoints for the `Compare` and `Summarize` action with the respective URL endpoints you noted from step 1.
 6. Open the `Embedded Investigation Interface` canvas app within the solution. When it prompts you to "sign in" to the PSJ AI custom connector, click on "do not allow". Once the app opens fully, delete the "PSJ AI" connection from the list of data connections. Re-add it and sign in (establish a connection). This will refresh and reconnect to the proper endpoints.
