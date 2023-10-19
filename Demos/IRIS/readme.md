@@ -21,7 +21,7 @@ Click the image below for a short demonstration video with the following linked 
 [![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/5KNDsAtLkJU)
 
 ## Architecture
-If running in Microsoft's **Government Community Cloud (GCC)**, this architecture leverages cross-cloud communication techniques to "reach across" the boundaries of the Azure Government Cloud, into Azure Commercial, to consume the GPT and DALL-E models of Azure OpenAI service (Azure OpenAI service is not available in Azure Government as of the time of this writing). More on this architecture technique can be found [here](https://azure.microsoft.com/en-us/blog/unlock-new-insights-with-azure-openai-service-for-government/).
+If running in Microsoft's **Government Community Cloud (GCC)**, this architecture implements a cross-cloud communication technique to "reach across" the boundaries of the Azure Government Cloud, into Azure Commercial, to consume Azure OpenAI service (Azure OpenAI service is not available in Azure Government as of the time of this writing). More on this cross-cloud architecture can be found [here](https://azure.microsoft.com/en-us/blog/unlock-new-insights-with-azure-openai-service-for-government/).
 
 I've included a few diagrams below that depict how I.R.I.S. works below. 
 
