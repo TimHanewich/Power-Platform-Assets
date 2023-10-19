@@ -24,7 +24,7 @@ Click the image below for a short demonstration video with the following linked 
 I've included a few diagrams below that depict how I.R.I.S. works:
 
 AI-driven functionality is achieved via the following architecture:
-![IRIS AI](https://i.imgur.com/boZRM7q.png)
+![IRIS AI](https://i.imgur.com/6wyEJpC.png)
 
 Satellite and birds eye view imagery is presented via Bing Maps:
 ![IRIS Mapping](https://i.imgur.com/tc8CJZL.png)
