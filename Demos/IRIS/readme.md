@@ -31,7 +31,7 @@ I've included a few diagrams below that depict how I.R.I.S. works below.
 ### Satellite and birds eye view imagery is presented via Bing Maps:
 ![IRIS Mapping](https://i.imgur.com/tc8CJZL.png)
 
-You can download the architecture diagrams above (PowerPoint deck) [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/9/architecture.pptx).
+You can download the architecture diagrams above (PowerPoint deck) [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/10/architecture.pptx).
 
 ## Assets
 - The C# source code behind the Azure Function App API [here](./src/)
