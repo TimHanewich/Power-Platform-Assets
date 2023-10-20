@@ -26,7 +26,7 @@ If running in Microsoft's **Government Community Cloud (GCC)**, this architectur
 I've included a few diagrams below that depict how I.R.I.S. works below. 
 
 ### AI-driven functionality is achieved via the following architecture:
-![IRIS AI](https://i.imgur.com/6wyEJpC.png)
+![IRIS AI](https://i.imgur.com/UcLqeBE.png)
 
 ### Satellite and birds eye view imagery is presented via Bing Maps:
 ![IRIS Mapping](https://i.imgur.com/tc8CJZL.png)
