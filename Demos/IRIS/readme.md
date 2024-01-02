@@ -13,13 +13,13 @@ This is a real demonstration of AI technology powered by Microsoft Azure and Mic
 
 ## Demo Video
 Click the image below for a short demonstration video with the following linked timestamps:
-- [**0:00**](https://youtu.be/5KNDsAtLkJU?t=5) - Investigations Case Management System Foundations
-- [**0:31**](https://youtu.be/5KNDsAtLkJU?t=31) - Interactive Satellite Imagery
-- [**0:48**](https://youtu.be/5KNDsAtLkJU?t=48) - Witness Testimony Analysis & Comparison
-- [**1:40**](https://youtu.be/5KNDsAtLkJU?t=100) - Evidence Analysis: Officer Body Cam Video
-- [**2:18**](https://youtu.be/5KNDsAtLkJU?t=138) - Evidence Analysis: 911 Call Audio
-- [**2:45**](https://youtu.be/5KNDsAtLkJU?t=165) - Generate Suspect Composite Sketches
-- [**4:09**](https://youtu.be/5KNDsAtLkJU?t=249) - Archive Generations to Case Notes
+- [**0:15**](https://youtu.be/xZUZtMX8tc4?t=15) - Investigations Case Management System Foundations
+- [**0:56**](https://youtu.be/xZUZtMX8tc4?t=56) - Interactive Satellite Imagery
+- [**1:16**](https://youtu.be/xZUZtMX8tc4?t=76) - Witness Testimony Analysis & Comparison
+- [**2:07**](https://youtu.be/xZUZtMX8tc4?t=127) - Evidence Analysis: Officer Body Cam Video
+- [**2:45**](https://youtu.be/xZUZtMX8tc4?t=165) - Evidence Analysis: 911 Call Audio
+- [**4:10**](https://youtu.be/xZUZtMX8tc4?t=250) - Generate Suspect Composite Sketches
+- [**4:31**](https://youtu.be/xZUZtMX8tc4?t=271) - Archive Generations to Case Notes
 
 [![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/xZUZtMX8tc4)
 
