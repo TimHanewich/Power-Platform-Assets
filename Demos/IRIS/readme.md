@@ -21,7 +21,7 @@ Click the image below for a short demonstration video with the following linked 
 - [**2:45**](https://youtu.be/5KNDsAtLkJU?t=165) - Generate Suspect Composite Sketches
 - [**4:09**](https://youtu.be/5KNDsAtLkJU?t=249) - Archive Generations to Case Notes
 
-[![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/5KNDsAtLkJU)
+[![IRIS Demo Video](https://i.imgur.com/hPlxqDv.png)](https://youtu.be/xZUZtMX8tc4)
 
 ## Architecture
 If running in Microsoft's **Government Community Cloud (GCC)**, this architecture implements a cross-cloud communication technique to "reach across" the boundaries of the Azure Government Cloud, into Azure Commercial, to consume Azure OpenAI service (Azure OpenAI service is not available in Azure Government as of the time of this writing). More on this cross-cloud architecture can be found [here](https://azure.microsoft.com/en-us/blog/unlock-new-insights-with-azure-openai-service-for-government/).
