@@ -9,7 +9,7 @@
 - 📝 Logs any findings/analysis to case notes.
 
 ### Disclaimer
-This demonstration showcases real technology powered by Microsoft Azure and Microsoft Power Platform. However, please note that the content presented here is for demonstration purposes only. AI-generated content can contain inaccuracies or errors. It's essential to verify information from reliable sources and not solely rely on this content for decision-making.
+This is a real demonstration of AI technology powered by Microsoft Azure and Microsoft Power Platform. However, please note that the content presented here is for demonstration purposes only. AI-generated content can contain inaccuracies or errors. It's essential to verify information from reliable sources and not solely rely on this content for decision-making.
 
 ## Demo Video
 Click the image below for a short demonstration video with the following linked timestamps:
