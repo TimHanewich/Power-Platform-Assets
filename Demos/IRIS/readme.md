@@ -8,7 +8,7 @@
 - 🎨 Draws composite sketches of suspects based on witness descriptions (using DALL-E)
 - 📝 Logs any findings/analysis to case notes.
 
-## Disclaimer
+### Disclaimer
 This demonstration showcases real technology powered by Microsoft Azure and Microsoft Power Platform. However, please note that the content presented here is for demonstration purposes only. AI-generated content can contain inaccuracies or errors. It's essential to verify information from reliable sources and not solely rely on this content for decision-making.
 
 ## Demo Video
