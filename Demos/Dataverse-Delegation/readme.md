@@ -11,3 +11,8 @@ As predicted, both SQL and Dataverse did not update *every* record of the table 
 
 However, once activating [a currently in-preview feature](https://learn.microsoft.com/en-us/power-platform/release-plan/2023wave1/power-apps/enhance-delegation-updateif-removeif), Power Fx then *did* delegate the Dataverse database, updating every record accordingly.
 
+## Sample Data
+The 30,000 random animal records I generated and then uploaded to SQL and Dataverse can be downloaded as a JSON array [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/13/animals.json).
+
+Please note that those records above do *not* contain a primary key. You will need to set up a primary key to auto-set and auto-increment in SQL because a primary key is needed for the UpdateIf operation in Dataverse (it updates record by record).
+
