@@ -16,7 +16,7 @@ This endpoint returns a list of Public Safety Alert records as a JSON array.
 
 Example request:
 ```
-GET http://localhost:7071/alerts/
+GET https://ExampleService.com/alerts/
 ```
 
 Example response:
@@ -46,7 +46,7 @@ Example response:
 ]
 ```
 
-**Tip: You can also extend the URL with `/clear` to delete all public safety records in the database (GET request to `http://localhost:7071/alerts/clear`).**
+**Tip: You can also extend the URL with `/clear` to delete all public safety records in the database (GET request to `https://ExampleService.com/alerts/clear`).**
 
 ### Create a new (random) Public Safety Record
 This endpoint will create a new random public safety alert record. This is meant to be an internal-only endpoint, meaning it only exists for the purposes of the demonstration. After subscribing your endpoint service (Power Automate workflow) to the webhook service below, you can make a request to this endpoint to 1) have a new Public Safety Record created with random data, 2) saved to the database, and 3) alert every subscribed endpoint service of this new Public Safety Alert record.
@@ -54,7 +54,7 @@ This endpoint will create a new random public safety alert record. This is meant
 Example request:
 
 ```
-GET http://localhost:7071/newpsa
+GET https://ExampleService.com/newpsa
 ```
 
 Example response (this response body is purely for informational purposes):
@@ -84,7 +84,7 @@ This endpoint allows you to *subscribe* your own web service to get updates on t
 Example request:
 
 ```
-POST http://localhost:7071/subscribe
+POST https://ExampleService.com/subscribe
 
 {
     "url": "https://exampleservice.com/example_workflow_trigger"
@@ -96,7 +96,7 @@ The request above will subscribe the endpoint `https://exampleservice.com/exampl
 The response to the request above will look like the following:
 ```
 201 Created
-Location http://localhost:7071/unsubscribe/4BE194C820
+Location https://ExampleService.com/unsubscribe/4BE194C820
 ```
 
 The `Location` header above is crucial - this is the *exact* endpoint that the subscribed webhook service (Power Automate in the case of this demo) will send a `DELETE` HTTP request to, requesting it be unsubscribed from the webhook service. **Thus, it is vital that this service provides a `Location` endpoint that is *unique* to the newly subscribed service (from this request).**
@@ -126,7 +126,7 @@ As described above, it will specifically use the **exact** URL that the webhook 
 
 In the example in the `/subscribe` endpoint description above, Power Automate would make an HTTP DELETE request to the endpoint as such:
 ```
-DELETE http://localhost:7071/unsubscribe/4BE194C820
+DELETE https://ExampleService.com/unsubscribe/4BE194C820
 ```
 Again, the URL must be unique to *a specific* subscribed endpoint (flow trigger); thus, in this case, the `4BE194C820` is a unique identifier, identifying the specific subscribed endpoint to unsubscribe.
 
