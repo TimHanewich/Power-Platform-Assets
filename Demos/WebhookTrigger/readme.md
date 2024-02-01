@@ -87,11 +87,11 @@ Example request:
 POST https://ExampleService.com/subscribe
 
 {
-    "url": "https://exampleservice.com/example_workflow_trigger"
+    "url": "https://MyCoolWorkflow.com/example_workflow_trigger"
 }
 ```
 
-The request above will subscribe the endpoint `https://exampleservice.com/example_workflow_trigger` to future updates of new Public Safety Alert records. 
+The request above will subscribe the endpoint `https://MyCoolWorkflow.com/example_workflow_trigger` to future updates of new Public Safety Alert records. 
 
 The response to the request above will look like the following:
 ```
