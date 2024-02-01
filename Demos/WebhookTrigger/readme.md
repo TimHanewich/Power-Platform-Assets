@@ -103,7 +103,7 @@ The `Location` header above is crucial - this is the *exact* endpoint that the s
 
 Once subscribed, once new Public Safety Alerts are created via the `/create` endpoint above, this is what the HTTP request delivered to the subscribed service will look like:
 ```
-POST https://your_subscribed_service_endpoint.com/trigger_me_here
+POST https://MyCoolWorkflow.com/example_workflow_trigger
 
 {
   "Id": "848903",
