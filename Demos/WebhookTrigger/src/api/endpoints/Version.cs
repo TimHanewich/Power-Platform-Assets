@@ -18,7 +18,7 @@ namespace PublicSafetyAPI
         {
             HttpResponseData resp  = req.CreateResponse();
             resp.StatusCode = System.Net.HttpStatusCode.OK;
-            await resp.WriteStringAsync("0.1.0");
+            await resp.WriteStringAsync("0.2.0");
             return resp;
         }
     }
