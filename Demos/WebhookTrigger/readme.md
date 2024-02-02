@@ -130,3 +130,7 @@ So what happens if, for whatever reason, the unsubscribe process did not work? A
 ![workflow has been deleted and thus has been unsubscribed](https://i.imgur.com/aGYMmaw.png)
 
 This is Power Automate's way of reminding your webhook service that this flow has previously asked to be unsubscribed, so it no longer wants updates.
+
+## Appendix Resources
+- Full PSA Graphic: https://i.imgur.com/QrTUJnQ.png
+- Safety Shield Graphic: https://i.imgur.com/SlSyzgw.png
