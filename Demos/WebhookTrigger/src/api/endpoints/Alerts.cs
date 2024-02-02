@@ -63,42 +63,48 @@ namespace PublicSafetyAPI
                 }
                 else if (req.Method.ToLower().Trim() == "post") //Making a new record
                 {
+                    //Create random record
+                    PublicSafetyAlert psa = PublicSafetyAlert.Random();
+
                     //Get body
                     StreamReader sr = new StreamReader(req.Body);
                     string jsontxt = await sr.ReadToEndAsync();
 
-                    //Parse
-                    JObject jo;
-                    try
+                    //If it isn't blank, it must be JSON. And if it is JSON, get the properties.
+                    if (jsontxt != null && jsontxt != "")
                     {
-                        jo = JObject.Parse(jsontxt);
-                    }
-                    catch
-                    {
-                        HttpResponseData bjson = req.CreateResponse();
-                        bjson.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                        await bjson.WriteStringAsync("JSON body not formatted properly!");
-                        return bjson;
-                    }
+                        //Parse
+                        JObject jo;
+                        try
+                        {
+                            jo = JObject.Parse(jsontxt);
+                        }
+                        catch
+                        {
+                            HttpResponseData bjson = req.CreateResponse();
+                            bjson.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                            await bjson.WriteStringAsync("JSON body not formatted properly!");
+                            return bjson;
+                        }
 
-                    //Get individual properties
-                    JProperty? prop_IssuingAuthority = jo.Property("IssuingAuthority");
-                    JProperty? prop_AlertType = jo.Property("AlertType");
-                    JProperty? prop_AffectedRegions = jo.Property("AffectedRegions");
+                        //Get individual properties
+                        JProperty? prop_IssuingAuthority = jo.Property("IssuingAuthority");
+                        JProperty? prop_AlertType = jo.Property("AlertType");
+                        JProperty? prop_AffectedRegions = jo.Property("AffectedRegions");
 
-                    //Create a random PSA and plug in accordingly
-                    PublicSafetyAlert psa = PublicSafetyAlert.Random();
-                    if (prop_IssuingAuthority != null)
-                    {
-                        psa.IssuingAuthority = prop_IssuingAuthority.Value.ToString();
-                    }
-                    if (prop_AlertType != null)
-                    {
-                        psa.AlertType = prop_AlertType.Value.ToString();
-                    }
-                    if (prop_AffectedRegions != null)
-                    {
-                        psa.AffectedRegions = prop_AffectedRegions.Value.ToString();
+                        //Plug in accordingly
+                        if (prop_IssuingAuthority != null)
+                        {
+                            psa.IssuingAuthority = prop_IssuingAuthority.Value.ToString();
+                        }
+                        if (prop_AlertType != null)
+                        {
+                            psa.AlertType = prop_AlertType.Value.ToString();
+                        }
+                        if (prop_AffectedRegions != null)
+                        {
+                            psa.AffectedRegions = prop_AffectedRegions.Value.ToString();
+                        }
                     }
 
                     //Add it to the DB
