@@ -77,7 +77,7 @@ Example response (this response body is purely for informational purposes):
     ]
 }
 ```
-You can see in the response above, it shows the new record that was made and saved to the DB, a count of how many subscribed endpoints were notified of this new Public Safety Alert record, and each "notified" subscribed endpoint listed. 
+You can see in the response above, it shows the new record that was made and saved to the DB, a count of how many subscribed endpoints were notified of this new Public Safety Alert record, and each "notified" subscribed endpoint listed (both the endpoint itself and the ID of that particular webhook subscription). 
 
 Again, this endpoint is *only* mean to be used for demo purposes. This is *not* an endpoint that is supposed to be registered with a custom connector. Simply make a GET request to this endpoint *after* your Power Automate endpoint to demonstrate the Power Automate "trigger" functionality.
 
