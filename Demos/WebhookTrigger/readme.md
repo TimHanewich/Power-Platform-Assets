@@ -127,6 +127,13 @@ DELETE https://ExampleService.com/unsubscribe/4BE194C820
 ```
 Again, the URL must be unique to *a specific* subscribed endpoint (flow trigger); thus, in this case, the `4BE194C820` is a unique identifier, identifying the specific subscribed endpoint to unsubscribe.
 
+The `/unsubscribe` endpoint is supposed to only be used to unsubscribe a specific, single endpoint. Alternatively, I also built in functionality for unsubscribing *all* subscribed endpoints in one call. Simply replace the unique webhook subscription ID with `all`:
+```
+DELETE https://ExampleService.com/unsubscribe/all
+```
+
+The request above will again return `200 OK`, confirming all subscribed webhooks have been deleted.
+
 So what happens if, for whatever reason, the unsubscribe process did not work? And the flow is deleted but your webhook service continues to try to make calls to it when new Public Safety Alert records are created? In this event, the Power Automate service will return a `400 BAD REQUEST` response, instead of the expected `202 ACCEPTED` if it was accepted (triggered a workflow) successfully:
 
 ![workflow has been deleted and thus has been unsubscribed](https://i.imgur.com/aGYMmaw.png)
