@@ -1,5 +1,7 @@
 # Webhook Service Example: Public Safety Alerts
-This is a fictitious webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
+![public safety alert](https://i.imgur.com/vS34Ep5.png)
+
+This is a webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
 
 ## Endpoints Needed to support this POC
 - Get Public Safety Alerts (action)
