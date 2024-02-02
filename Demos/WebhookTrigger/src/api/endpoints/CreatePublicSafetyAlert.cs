@@ -53,18 +53,11 @@ namespace PublicSafetyAPI
                     }
                 }
 
-                //Get list of webhook subscribers
-                List<string> suburlsnotified = new List<string>();
-                foreach (WebhookSubscription sub in subs)
-                {
-                    suburlsnotified.Add(sub.Endpoint);
-                }
-
                 //Assemble response body... purly for information purposes
                 JObject jo = new JObject();
                 jo.Add("newRecord", JObject.Parse(JsonConvert.SerializeObject(psa)));
                 jo.Add("webhookSubscribersNotifiedCount", subs.Length);
-                jo.Add("webhookSubscribersNotified", JArray.Parse(JsonConvert.SerializeObject(suburlsnotified.ToArray())));
+                jo.Add("webhookSubscribersNotified", JArray.Parse(JsonConvert.SerializeObject(subs)));
 
                 //Say 201 created
                 HttpResponseData sresp = req.CreateResponse();
