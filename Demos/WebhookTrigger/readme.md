@@ -4,7 +4,7 @@
 This is a webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
 
 ## Endpoint Services, Documented
-The [Azure Functions-based API](./src/api/) has several endpoints that are described below:
+The [Azure Functions-based API](./src/api/) has several endpoints that are described below. Please note that the endpoints provided below are **live**. You are welcome to use them for testing purposes. Please do not abuse them.
 
 ### Get Public Safety Alerts
 This endpoint returns a list of Public Safety Alert records as a JSON array.
