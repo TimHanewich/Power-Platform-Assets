@@ -7,7 +7,7 @@ This is a webhook service that serves to demonstrate the use of Power Platform's
 The [Azure Functions-based API](./src/api/) has several endpoints that are described below. Please note that the endpoints provided below are **live**. You are welcome to use them for testing purposes. Please do not abuse them.
 
 ### Get Public Safety Alerts
-This endpoint returns a list of Public Safety Alert records as a JSON array.
+This endpoint returns a list of all Public Safety Alert records as a JSON array.
 
 Example request:
 ```
@@ -44,7 +44,7 @@ Example response:
 **Tip: You can also extend the URL with `/clear` to delete all public safety records in the database (GET request to `https://publicsafetyalerts.azurewebsites.net/alerts/clear`).**
 
 ### Create a new (random) Public Safety Record
-This endpoint will create a new random public safety alert record. This is meant to be an internal-only endpoint, meaning it only exists for the purposes of the demonstration. After subscribing your endpoint service (Power Automate workflow) to the webhook service below, you can make a request to this endpoint to 1) have a new Public Safety Record created with random data, 2) saved to the database, and 3) alert every subscribed endpoint service of this new Public Safety Alert record.
+This endpoint will create a new random public safety alert record. This is meant to be an internal-only endpoint, meaning it only exists for the purposes of the demonstration. After subscribing your endpoint service (Power Automate workflow) to the webhook service below, you can make a request to this endpoint to 1) have a new Public Safety Record created with random data, 2) have this new PSA record saved to the database, and 3) alert every subscribed endpoint service of this new Public Safety Alert record.
 
 Example request:
 
@@ -104,7 +104,7 @@ Location https://publicsafetyalerts.azurewebsites.net/unsubscribe/4BE194C820
 
 The `Location` header above is crucial - this is the *exact* endpoint that the subscribed webhook service (Power Automate in the case of this demo) will send a `DELETE` HTTP request to, requesting it be unsubscribed from the webhook service. **Thus, it is vital that this service provides a `Location` endpoint that is *unique* to the newly subscribed service (from this request).**
 
-Once subscribed, once new Public Safety Alerts are created via the `/create` endpoint above, this is what the HTTP request delivered to the subscribed service will look like:
+Once subscribed, once new Public Safety Alerts are created via the `/newpsa` endpoint above, this is what the HTTP request delivered to the subscribed service will look like:
 ```
 POST https://MyCoolWorkflow.com/example_workflow_trigger
 
@@ -118,7 +118,7 @@ POST https://MyCoolWorkflow.com/example_workflow_trigger
 ```
 As seen above, it is only a single Public Safety Alert record, the new one that was just made.
 
-And, if you're curious about how Power Automate will respond to this request, it will simply return a `202 ACCEPTED` response, indicating that it has accepted the new record and thus triggered the subscribed workflow:
+And, if you're curious about how Power Automate will respond to this POST request notification, it will simply return a `202 ACCEPTED` response, indicating that it has accepted the new record and thus triggered the subscribed workflow:
 
 ![triggered workflow](https://i.imgur.com/zrkG8Vw.png)
 
@@ -131,9 +131,9 @@ In the example in the `/subscribe` endpoint description above, Power Automate wo
 ```
 DELETE https://publicsafetyalerts.azurewebsites.net/unsubscribe/4BE194C820
 ```
-Again, the URL must be unique to *a specific* subscribed endpoint (flow trigger); thus, in this case, the `4BE194C820` is a unique identifier, identifying the specific subscribed endpoint to unsubscribe.
+Again, the URL must be unique to *a specific* subscribed endpoint (flow trigger); thus, in this case, the `4BE194C820` appended at the end serves as a unique identifier, identifying the specific subscribed endpoint to unsubscribe. The response will be `200 OK`, confirming the webhook subscription of the supplied ID has been unsubscribed and will no longer receieve notifications.
 
-The `/unsubscribe` endpoint is supposed to only be used to unsubscribe a specific, single endpoint. Alternatively, I also built in functionality for unsubscribing *all* subscribed endpoints in one call. Simply replace the unique webhook subscription ID with `all`:
+The `/unsubscribe` endpoint is supposed to only be used to unsubscribe a specific, single endpoint. However, I also built in functionality for unsubscribing *all* subscribed endpoints in one call, purely for ease of demo purposes. Simply replace the unique webhook subscription ID with `all`:
 ```
 DELETE https://publicsafetyalerts.azurewebsites.net/unsubscribe/all
 ```
