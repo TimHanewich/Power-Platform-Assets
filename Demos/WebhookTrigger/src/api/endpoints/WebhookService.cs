@@ -77,6 +77,17 @@ namespace PublicSafetyAPI
                     return badreq;
                 }
 
+                //Is it "all"? If the ID is "all", clear all
+                if (subid.ToLower().Trim() == "all")
+                {
+                    MockDatabase dbc = new MockDatabase();
+                    await dbc.ClearWebhookSubscriptionsAsync();
+
+                    HttpResponseData respc = req.CreateResponse();
+                    respc.StatusCode = System.Net.HttpStatusCode.OK;
+                    return respc;
+                }
+
                 //Check that there IS one with this
                 MockDatabase db = new MockDatabase();
                 WebhookSubscription[] subs = await db.DownloadWebhookSubscriptionsAsync();
