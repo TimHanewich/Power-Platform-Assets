@@ -44,13 +44,23 @@ Example response:
 **Tip: You can also extend the URL with `/clear` to delete all public safety records in the database (GET request to `https://publicsafetyalerts.azurewebsites.net/alerts/clear`).**
 
 ### Create a new (random) Public Safety Record
-This endpoint will create a new random public safety alert record. This is meant to be an internal-only endpoint, meaning it only exists for the purposes of the demonstration. After subscribing your endpoint service (Power Automate workflow) to the webhook service below, you can make a request to this endpoint to 1) have a new Public Safety Record created with random data, 2) have this new PSA record saved to the database, and 3) alert every subscribed endpoint service of this new Public Safety Alert record.
+You can also send a `POST` request to the `/alerts` endpoint to create a new Public Safety Record. This service exists, both to demonstrate the use of **action parameters** in Power Automate **and** to demonstrate the triggering of workflows subscribed to the webhook service below. After subscribing your endpoint service (Power Automate workflow) to the webhook service below, you can make a request to this endpoint to 1) have a new Public Safety Record created, 2) have this new PSA record saved to the database, and 3) alert every subscribed endpoint service of this new Public Safety Alert record.
 
 Example request:
 
 ```
-GET https://publicsafetyalerts.azurewebsites.net/newpsa
+POST https://publicsafetyalerts.azurewebsites.net/alerts
+
+{
+    "IssuingAuthority": "Federal Safety Commission (FSC)",
+    "AlertType": "Bear on the loose",
+    "AffectedRegions": "Everywhere"
+}
 ```
+
+The request above will create a new Public Safety Alert record with the supplied data above. The `Id` and `UtcTime` properties of the Public Safety Alert will be filled in appropriately.
+
+Please keep in mind that you do **not have to** specify any of the three properties above. If one is ommitted, the Public Safety Alert record that was created will be filled in with random data. So, even if a `POST` request is made to that endpoint with an empty JSON body or even *no body at all*, a random record will still be made and the subscribed endpoints will still be notified of this new record.
 
 Example response (this response body is purely for informational purposes):
 ```
@@ -78,8 +88,6 @@ Example response (this response body is purely for informational purposes):
 }
 ```
 You can see in the response above, it shows the new record that was made and saved to the DB, a count of how many subscribed endpoints were notified of this new Public Safety Alert record, and each "notified" subscribed endpoint listed (both the endpoint itself and the ID of that particular webhook subscription). 
-
-Again, this endpoint is *only* mean to be used for demo purposes. This is *not* an endpoint that is supposed to be registered with a custom connector. Simply make a GET request to this endpoint *after* your Power Automate endpoint to demonstrate the Power Automate "trigger" functionality.
 
 ### Webhook Service: Subscribe
 This endpoint allows you to *subscribe* your own web service to get updates on the addition of new Public Safety Alert records. This is the endpoint that Power Automate will call to to subscribe a workflow to these updates.
