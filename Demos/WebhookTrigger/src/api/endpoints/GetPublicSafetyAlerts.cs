@@ -87,7 +87,7 @@ namespace PublicSafetyAPI
                     JProperty? prop_AffectedRegions = jo.Property("AffectedRegions");
 
                     //Create a random PSA and plug in accordingly
-                    PublicSafetyAlert psa = new PublicSafetyAlert();
+                    PublicSafetyAlert psa = PublicSafetyAlert.Random();
                     if (prop_IssuingAuthority != null)
                     {
                         psa.IssuingAuthority = prop_IssuingAuthority.Value.ToString();
