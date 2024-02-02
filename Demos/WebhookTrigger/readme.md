@@ -3,13 +3,6 @@
 
 This is a webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
 
-## Endpoints Needed to support this POC
-- Get Public Safety Alerts (action)
-- Webhook service: Subscribe (API response with `Location` header)
-- Webhook service: DELETE webhook
-- "Background" endpoints - just for me to use during demo
-    - **create** public safety alert endpoint (just makes a random one, saved it, and then alerts subscribed webhooks of it)
-
 ## Endpoint Services, Documented
 The [Azure Functions-based API](./src/api/) has several endpoints that are described below:
 
