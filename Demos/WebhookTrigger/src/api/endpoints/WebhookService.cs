@@ -40,7 +40,7 @@ namespace PublicSafetyAPI
                     //Return success
                     HttpResponseData success = req.CreateResponse();
                     success.StatusCode = System.Net.HttpStatusCode.Created;
-                    success.Headers.Add("Location", "https://myapi.com/unsub/" + sub.Id); //NEED TO ADD UNSUBSCRIBE ENDPOINT HERE!
+                    success.Headers.Add("Location", "https://publicsafetyalerts.azurewebsites.net/unsubscribe/" + sub.Id);
                     return success;
                 }
                 else
