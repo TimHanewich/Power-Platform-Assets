@@ -148,6 +148,17 @@ Example response:
 0.1.0
 ```
 
+## VS Code to Azure Functions Deployment Bug Found on February 2, 2024
+Just leaving this here as a note in case it is encountered again:
+
+I noticed a bug when deploying this [API](./src/api/) to Azure Functions in Azure via VS Code. When I created a new Windows-based Azure Function app in Azure and tried deploying, it would indicate the deployment was successful in the output window in VS Code, but no HTTP functions would actually be registered and visible under the Azure Function in the Azure portal. Depsite them working perfectly during testing locally.
+
+I tried many different things. Finally, after creating a *new* Azure Function deployment in Azure, this time a **linux-based Azure Function** deployment, and then trying to deploy again to the function app via VS Code, it *did* work. Seems there may be a bug with deploying to Windows-based Azure Functions at the moment.
+
+Further context on when this was discovered:
+- Using Azure Functions Core Tools version 4.0.5455
+- .NET 7.0 (Isolated)
+
 ## Appendix Resources
 - Full PSA Graphic: https://i.imgur.com/QrTUJnQ.png
 - Safety Shield Graphic: https://i.imgur.com/SlSyzgw.png
