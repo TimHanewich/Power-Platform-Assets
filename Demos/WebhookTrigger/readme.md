@@ -54,6 +54,8 @@ GET https://ExampleService.com/newpsa
 
 Example response (this response body is purely for informational purposes):
 ```
+200 OK
+
 {
     "newRecord": {
         "Id": "F3C3FD",
@@ -90,7 +92,7 @@ The request above will subscribe the endpoint `https://MyCoolWorkflow.com/exampl
 
 The response to the request above will look like the following:
 ```
-201 Created
+201 CREATED
 Location https://ExampleService.com/unsubscribe/4BE194C820
 ```
 
@@ -130,6 +132,21 @@ So what happens if, for whatever reason, the unsubscribe process did not work? A
 ![workflow has been deleted and thus has been unsubscribed](https://i.imgur.com/aGYMmaw.png)
 
 This is Power Automate's way of reminding your webhook service that this flow has previously asked to be unsubscribed, so it no longer wants updates.
+
+### Version
+Gets the version of the API you are using (in case you want to verify a update you deployed is now live, increment this before deploying).
+
+Example request:
+```
+GET https://ExampleService.com/version
+```
+
+Example response:
+```
+200 OK
+
+0.1.0
+```
 
 ## Appendix Resources
 - Full PSA Graphic: https://i.imgur.com/QrTUJnQ.png
