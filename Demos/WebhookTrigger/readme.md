@@ -58,16 +58,22 @@ Example response (this response body is purely for informational purposes):
 
 {
     "newRecord": {
-        "Id": "F3C3FD",
-        "UtcTime": "2024-02-01T15:57:17.1914522Z",
-        "IssuingAuthority": "State Safety Commission (SSC)",
-        "AlertType": "Severe Weather Warning",
-        "AffectedRegions": "Hillcrest Parish"
+        "Id": "885C70",
+        "UtcTime": "2024-02-02T19:50:00.7421949Z",
+        "IssuingAuthority": "Citizen Welfare and Security Office (CWSO)",
+        "AlertType": "Evacuation Order",
+        "AffectedRegions": "Crestwood Municipality"
     },
     "webhookSubscribersNotifiedCount": 2,
     "webhookSubscribersNotified": [
-        "https://myurl.com/hitme",
-        "https://sfklsdjknasf.com/fjdkkjaf"
+        {
+            "Id": "C0C9119598",
+            "Endpoint": "https://webhook.site/db35115b-5330-4635-80b4-1786776ee54b"
+        },
+        {
+            "Id": "C400E1A4B0",
+            "Endpoint": "https://powerautomate.com/trigger_me_here_example"
+        }
     ]
 }
 ```
