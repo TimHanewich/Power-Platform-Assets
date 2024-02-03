@@ -3,6 +3,9 @@
 
 This is a webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
 
+## Completed Resources
+- The Swagger definition for the completed connector can be found [here](./Public-Safety-Alerts.swagger.json). To import this definition as a custom connector and start using it right away in Power Apps and Power Automate, simply navigate to **Custom Connectors** in Power Automate, click on **New custom connector** at the top, and select **Import an OpenAPI file**, and then select [this file](./Public-Safety-Alerts.swagger.json), like [how this image shows](https://i.imgur.com/cNFkzYs.png).
+
 ## Endpoint Services, Documented
 The [Azure Functions-based API](./src/api/) has several endpoints that are described below. Please note that the endpoints provided below are **live**. You are welcome to use them for testing purposes. Please do not abuse them.
 
@@ -154,6 +157,12 @@ So what happens if, for whatever reason, the unsubscribe process did not work? A
 
 This is Power Automate's way of reminding your webhook service that this flow has previously asked to be unsubscribed, so it no longer wants updates.
 
+**In Power Automate, for the workflow that was previously subscribed to be successfully unsubscribed when the flow is deleted or turned off, this `/unsubscribe` endpoint needs to be registered as an "internal" action**. Example image below: 
+
+![internal action](https://i.imgur.com/dwMEgG6.png)
+
+Please also note the URL in the image above. For Power Automate to recognize a portion of the path as a parameter, you must pass it in within curly brackets!
+
 ### Version
 Gets the version of the API you are using (in case you want to verify a update you deployed is now live, increment this before deploying).
 
@@ -183,3 +192,4 @@ Further context on when this was discovered:
 ## Appendix Resources
 - Full PSA Graphic: https://i.imgur.com/QrTUJnQ.png
 - Safety Shield Graphic: https://i.imgur.com/SlSyzgw.png
+    - Against white background (use for custom connector icon): https://i.imgur.com/5UcTjop.png
