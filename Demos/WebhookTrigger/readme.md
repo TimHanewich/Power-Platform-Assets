@@ -4,7 +4,15 @@
 This is a webhook service that serves to demonstrate the use of Power Platform's custom connector's actions & triggers against a fictitious public safety alert system.
 
 ## Completed Resources
-- The Swagger definition for the completed connector can be found [here](./Public-Safety-Alerts.swagger.json). To import this definition as a custom connector and start using it right away in Power Apps and Power Automate, simply navigate to **Custom Connectors** in Power Automate, click on **New custom connector** at the top, and select **Import an OpenAPI file**, and then select [this file](./Public-Safety-Alerts.swagger.json), like [how this image shows](https://i.imgur.com/cNFkzYs.png).
+- The Swagger definition for the completed connector can be found [here](./Public-Safety-Alerts.swagger.json). 
+    - To import this definition as a custom connector and start using it right away in Power Apps and Power Automate, simply navigate to **Custom Connectors** in Power Automate, click on **New custom connector** at the top, and select **Import an OpenAPI file**, and then select [this file](./Public-Safety-Alerts.swagger.json), like [how this image shows](https://i.imgur.com/cNFkzYs.png).
+- The `.msapp` file for the completed Canvas App can be downloaded [here](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/14/Citizen.Safety.Command.Center.msapp).
+
+If deploying the finished solution using the completed resources above, be sure to import the custom connector first, *and then* the canvas app. When you are opening the canvas app file, you will see that it is unable to find the custom connector it references. This is because it hasn't found the **exact** custom connector (it references an old custom connector GUID). Simply click "Don't Allow" to insist it does not try to connect to the custom connector. This will break the references, but then you can go ahead and set them back up against your new connector.
+
+**Tip on deployment**: If you name the new custom connector you import to "Public Safety Alerts" or "PublicSafetyAlerts" (the same name as the one I named and developed against), you will not need to do any re-references as the pre-built app above is already set up to use a custom connector with this name!
+
+For demo purposes, I am [also providing this stripped version of the canvas app](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/15/Citizen.Safety.Command.Center.Incomplete.msapp). This version of the app has the structure and assets of the first app, but is completely stripped of all references to any connectors. This is a great place to start from in a demonstration. You'll see, in the [gallery](./gallery.md), that it also specifically notes with comments where those custom connector actions should take place.
 
 ## Endpoint Services, Documented
 The [Azure Functions-based API](./src/api/) has several endpoints that are described below. Please note that the endpoints provided below are **live**. You are welcome to use them for testing purposes. Please do not abuse them.
