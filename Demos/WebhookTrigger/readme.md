@@ -123,7 +123,7 @@ Location https://publicsafetyalerts.azurewebsites.net/unsubscribe/4BE194C820
 
 The `Location` header above is crucial - this is the *exact* endpoint that the subscribed webhook service (Power Automate in the case of this demo) will send a `DELETE` HTTP request to, requesting it be unsubscribed from the webhook service. **Thus, it is vital that this service provides a `Location` endpoint that is *unique* to the newly subscribed service (from this request).**
 
-Once subscribed, once new Public Safety Alerts are created via the `/newpsa` endpoint above, this is what the HTTP request delivered to the subscribed service will look like:
+Once subscribed, once new Public Safety Alerts are created via the `POST /alerts` endpoint above, this is what the HTTP request delivered to the subscribed service will look like:
 ```
 POST https://MyCoolWorkflow.com/example_workflow_trigger
 
