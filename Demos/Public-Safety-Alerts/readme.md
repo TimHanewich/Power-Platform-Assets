@@ -27,6 +27,8 @@ GET https://publicsafetyalerts.azurewebsites.net/alerts/
 
 Example response:
 ```
+200 OK
+
 [
     {
         "Id": "B32C83",
