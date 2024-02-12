@@ -24,7 +24,7 @@ Click on the links below to download the solution packages.
 
 ## Solution Packages, V2
 - [This](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/16/TimeOffRequest_1_0_0_4.zip) is a completed leave request app (full solution) that is truly *fully* accessible. A lot of stuff was tweaked from V1 above and it is now fully responsive, so can be used at high magnification levels with screen readers.
-- [This](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/17/Submit.Leave.Request.msapp) is only the standalone Power App, not a solution. This app is the same app that appears in the solution package above, but with any ties to Tables/Options severed. Thus, this app does not actually save any data, it is meant only for front-end UI demonstration purposes.
+- [This](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/18/Submit.Leave.Request.msapp) is only the standalone Power App, not a solution. This app is the same app that appears in the solution package above, but with any ties to Tables/Options severed. Thus, this app does not actually save any data, it is meant only for front-end UI demonstration purposes.
 
 ## Session Recordings
 - Tim Hanewich, New Mexico, August 2022: https://youtu.be/HNLGUca_uGE
