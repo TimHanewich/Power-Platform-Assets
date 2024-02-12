@@ -22,5 +22,9 @@ Click on the links below to download the solution packages.
     - I recommend installing this in a separate environment and using this as a guideline on a second monitor while performing the live build demonsration
 - [Finished app, but without accessibility features](https://timhmsft.blob.core.windows.net/downloadable/TimeOffRequestWithoutAccessibilityFeaturesAdded_1_0_0_4.zip?sp=r&st=2023-01-23T17:53:10Z&se=2099-01-24T01:53:10Z&sv=2021-06-08&sr=b&sig=RF2QO2rejDvPZNo0WyQam5J5dgVctVfmH%2FO3wA2fpjY%3D) - If you wish to provide only a short demo, from the finished app state but **without** the Accessibility features added yet, use this build.
 
+## Solution Packages, V2
+- [This](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/16/TimeOffRequest_1_0_0_4.zip) is a completed leave request app (full solution) that is truly *fully* accessible. A lot of stuff was tweaked from V1 above and it is now fully responsive, so can be used at high magnification levels with screen readers.
+- [This](https://github.com/TimHanewich/Power-Platform-Assets/releases/download/17/Submit.Leave.Request.msapp) is only the standalone Power App, not a solution. This app is the same app that appears in the solution package above, but with any ties to Tables/Options severed. Thus, this app does not actually save any data, it is meant only for front-end UI demonstration purposes.
+
 ## Session Recordings
 - Tim Hanewich, New Mexico, August 2022: https://youtu.be/HNLGUca_uGE
