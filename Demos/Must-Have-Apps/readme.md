@@ -1,12 +1,12 @@
 # Power Platform Must-Have-Apps
 
 ## Inspection Start Kit Framework
-For demo of solution, skip to 11:20 in [this video]().
+For demo of solution, skip to 11:20 in [this video](https://youtu.be/7pA6yEFDmOY?t=680).
 
 For demo of install and basic configuration, see [this video](https://youtu.be/r8H1tqzAZG8).
 
 ## HR Onboarding/Offboarding Start Kit Framework
-For demo of solution, skip to 34:00 in [this video]().
+For demo of solution, skip to 34:00 in [this video](https://youtu.be/7pA6yEFDmOY?t=2040).
 
 For demo of install and basic configuration, see [this video](https://youtu.be/Ao3YfQ0E8Cc).
 
